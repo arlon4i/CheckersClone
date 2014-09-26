@@ -1,0 +1,8 @@
+/.locale_interfaces
+/.preprocessed
+/deliverables
+/bin
+
+*.class
+local.properties
+.settings/

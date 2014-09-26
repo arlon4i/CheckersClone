@@ -10,7 +10,7 @@ import net.rim.device.api.ui.Font;
 import net.rim.device.api.ui.Graphics;
 import net.rim.device.api.ui.Ui;
 import net.rim.device.api.ui.component.ObjectChoiceField;
-
+import fi.bb.checkers.helpers.ResourceHelper;
 import fi.bb.checkers.utils.BitmapTools;
 
 public class DateChoiceField extends ObjectChoiceField
@@ -113,7 +113,8 @@ public class DateChoiceField extends ObjectChoiceField
 
 		if (hasFocus)
 		{
-			g.setColor(0x00a9a1);
+			//g.setColor(0x00a9a1);
+			g.setColor(ResourceHelper.color_primary);
 			g.drawRect(0, 0, width, getPreferredHeight());
 
 			// g.setColor(0x00a9a1);

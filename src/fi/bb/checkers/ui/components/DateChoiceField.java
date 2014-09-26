@@ -114,7 +114,7 @@ public class DateChoiceField extends ObjectChoiceField
 		if (hasFocus)
 		{
 			//g.setColor(0x00a9a1);
-			g.setColor(ResourceHelper.color_primary);
+			g.setColor(ResourceHelper.color_primary_same_as_android);
 			g.drawRect(0, 0, width, getPreferredHeight());
 
 			// g.setColor(0x00a9a1);

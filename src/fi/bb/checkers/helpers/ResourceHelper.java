@@ -32,6 +32,8 @@ public class ResourceHelper
 	public static final int color_drawer_grey = DeviceInfo.getSoftwareVersion().startsWith("6") ? 0xf0f0e8 : 0xf6f5f5;
 	// public static final int color_drawer_grey = 0xf6f5f5;
 
+	public static final int color_primary_same_as_android = 0x00a9a1;
+	
 	private static FontFamily HelveticaLight;
 	private static FontFamily HelveticaMed;
 	private static Hashtable ResourceCache = new Hashtable();

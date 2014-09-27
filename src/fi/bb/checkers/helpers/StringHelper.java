@@ -62,7 +62,7 @@ public class StringHelper
 	public static final String help_title_2 = "How do EeziCoupons work?";
 	public static final String help_title_3 = "What is an EeziCoupon WiCode?";
 	public static final String help_title_4 = "How long does my EeziCoupon WiCode last?";
-	//public static final String help_title_5 = "How do I refresh my EeziCoupon WiCode?";
+	public static final String help_title_5 = "How do I refresh my EeziCoupon WiCode?";
 	public static final String help_title_6 = "What can I do if an error occurs with my EeziCoupon WiCode?";
 	public static final String help_title_7 = "What is My List?";
 	public static final String help_title_8 = "How do I clear or delete items from My List?";
@@ -73,7 +73,9 @@ public class StringHelper
 	public static final String help_title_13 = "What happens when I deny Checkers permission to use my current location?";
 	public static final String help_title_14 = "If I did not grant Checkers access to use my location initially, how do I change that?";
 	public static final String help_title_15 = "I am a Cell C customer who is experiencing app issues at times, what can I do?";
-
+	public static final String help_title_16 = "Why am I getting an error message when I have the Checkers app open on two or more devices?";
+	
+	
     public static final String terms_title_1 = "Checkers Terms";
 	public static final String terms_title_2 = "Customer Consent";
 	public static final String terms_title_3 = "Info Processing Policy";

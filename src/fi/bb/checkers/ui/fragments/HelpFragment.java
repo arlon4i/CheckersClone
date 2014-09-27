@@ -17,7 +17,7 @@ public class HelpFragment extends Fragment implements FieldChangeListener
 	ToggleSelectionField q2Button = new ToggleSelectionField(StringHelper.help_title_2,3);
 	ToggleSelectionField q3Button = new ToggleSelectionField(StringHelper.help_title_3,3);
 	ToggleSelectionField q4Button = new ToggleSelectionField(StringHelper.help_title_4,3);
-	//ToggleSelectionField q5Button = new ToggleSelectionField(StringHelper.help_title_5,3);
+	ToggleSelectionField q5Button = new ToggleSelectionField(StringHelper.help_title_5,3);
 	ToggleSelectionField q6Button = new ToggleSelectionField(StringHelper.help_title_6,3);
 	ToggleSelectionField q7Button = new ToggleSelectionField(StringHelper.help_title_7,3);
 	ToggleSelectionField q8Button = new ToggleSelectionField(StringHelper.help_title_8,3);
@@ -28,6 +28,7 @@ public class HelpFragment extends Fragment implements FieldChangeListener
 	ToggleSelectionField q13Button = new ToggleSelectionField(StringHelper.help_title_13,3);
 	ToggleSelectionField q14Button = new ToggleSelectionField(StringHelper.help_title_14,3);
 	ToggleSelectionField q15Button = new ToggleSelectionField(StringHelper.help_title_15,3);
+	ToggleSelectionField q16Button = new ToggleSelectionField(StringHelper.help_title_16,3);
 
 	public HelpFragment()
 	{
@@ -39,6 +40,7 @@ public class HelpFragment extends Fragment implements FieldChangeListener
 		q2Button.setTag(2);
 		q3Button.setTag(3);
 		q4Button.setTag(4);
+		q5Button.setTag(5);
 		q6Button.setTag(6);
 		q7Button.setTag(7);
 		q8Button.setTag(8);
@@ -49,12 +51,13 @@ public class HelpFragment extends Fragment implements FieldChangeListener
 		q13Button.setTag(13);
 		q14Button.setTag(14);
 		q15Button.setTag(15);
+		q16Button.setTag(16);
 		
 		q1Button.setChangeListener(this);
 		q2Button.setChangeListener(this);
 		q3Button.setChangeListener(this);
 		q4Button.setChangeListener(this);
-		//q5Button.setChangeListener(this);
+		q5Button.setChangeListener(this);
 		q6Button.setChangeListener(this);
 		q7Button.setChangeListener(this);
 		q8Button.setChangeListener(this);
@@ -65,12 +68,13 @@ public class HelpFragment extends Fragment implements FieldChangeListener
 		q13Button.setChangeListener(this);
 		q14Button.setChangeListener(this);
 		q15Button.setChangeListener(this);
+		q16Button.setChangeListener(this);
 
 		add(q1Button);
 		add(q2Button);
 		add(q3Button);
 		add(q4Button);
-		//add(q5Button);
+		add(q5Button);
 		add(q6Button);
 		add(q7Button);
 		add(q8Button);
@@ -81,6 +85,7 @@ public class HelpFragment extends Fragment implements FieldChangeListener
 		add(q13Button);
 		add(q14Button);
 		add(q15Button);
+		add(q16Button);
 	}
 
 	public void fieldChanged(Field field, int context)

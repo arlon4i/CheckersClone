@@ -33,7 +33,7 @@ public class SplashScreen extends MainScreen
 	public SplashScreen()
 	{
 		super(NO_VERTICAL_SCROLL | NO_HORIZONTAL_SCROLL);
-		getMainManager().setBackground(BackgroundFactory.createSolidBackground(ResourceHelper.color_checkers_splash_teal));
+		getMainManager().setBackground(BackgroundFactory.createSolidBackground(ResourceHelper.color_checkers_splash));
 
 		BitmapField splash_logo = new BitmapField(ResourceHelper.getImage("splash"), Field.FIELD_HCENTER);
 		splash_logo.setMargin((Display.getHeight() - splash_logo.getBitmapHeight())/2, 0, 0, 0);

@@ -20,7 +20,7 @@ public class ResourceHelper
 	public static final int color_background_inputfields = 0xffffff;
 	public static final int color_shoprite_red = 0xda001a;
 	public static final int color_checkers_teal = 0x00a19a;
-	public static final int color_checkers_splash_teal = 0x039999;
+	public static final int color_checkers_splash = 0x039999;
 	public static final int color_primary = color_checkers_teal;
 	public static final int color_white = 0xffffff;
 	public static final int color_black = 0x000000;

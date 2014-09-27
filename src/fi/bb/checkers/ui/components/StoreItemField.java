@@ -56,7 +56,7 @@ public class StoreItemField extends BaseButton
 		{
 			if (merchant.getBrand().equals("checkers"))
 			{
-				circleColor = ResourceHelper.color_primary;
+				circleColor = ResourceHelper.color_checkers_teal;
 			}
 			else
 			{

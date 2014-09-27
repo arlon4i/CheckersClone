@@ -10,6 +10,7 @@ import net.rim.device.api.ui.component.BitmapField;
 import net.rim.device.api.ui.component.RichTextField;
 import net.rim.device.api.ui.decor.BackgroundFactory;
 import fi.bb.checkers.helpers.ResourceHelper;
+import fi.bb.checkers.helpers.StringHelper;
 import fi.bb.checkers.prompts.ExternalUrlPrompt;
 import fi.bb.checkers.ui.components.HyperlinkButton;
 import fi.bb.checkers.ui.components.ListField;
@@ -22,8 +23,9 @@ public class AboutFragment extends Fragment implements FieldChangeListener
 
 	private RichTextField text_field;
 	private Font font;
-	private final String text_full = "At Checkers, we strive to give our customers an all-round better shopping experience.\n\nBetter Savings - There is no need to change your lifestyle when shopping at Checkers because customers save every time they shop at our stores.\n\nBetter Quality - We offer a wide range of quality products like restaurant quality Steakhouse Classic steaks, limited editions of famous wine brands in our Odd Bins range, hundreds of cheeses and the world's finest coffees at supermarket prices.\n\nBetter Services - We provide services in-store to allow our customers to get more done faster. For example, customers can pay bills, buy electricity, book tickets at Computicket, book flights and more at our Money Market counter.";
-	private final String text_reduced = "At Checkers, we strive to give our customers an all-round better shopping experience.";
+	private final String text_full = StringHelper.about_full_description;
+	
+	private final String text_reduced = StringHelper.about_reduced_description;
 	private HyperlinkButton button_read;
 
 	private ListField button_facebook;
@@ -89,11 +91,11 @@ public class AboutFragment extends Fragment implements FieldChangeListener
 		}
 		else if (arg0 == button_facebook)
 		{
-			ExternalUrlPrompt.prompt("http://facebook.com/checkerssa");
+			ExternalUrlPrompt.prompt(StringHelper.facebook_url);
 		}
 		else if (arg0 == button_twitter)
 		{
-			ExternalUrlPrompt.prompt("https://twitter.com/checkerssa");
+			ExternalUrlPrompt.prompt(StringHelper.twitter_url);
 		}
 	}
 }

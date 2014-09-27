@@ -7,18 +7,19 @@ import net.rim.device.api.ui.UiApplication;
 import net.rim.device.api.ui.container.VerticalFieldManager;
 import net.rim.device.api.ui.decor.BackgroundFactory;
 import fi.bb.checkers.helpers.ResourceHelper;
+import fi.bb.checkers.helpers.StringHelper;
 import fi.bb.checkers.ui.components.ToggleSelectionField;
 import fi.bb.checkers.ui.screens.ViewPagerScreen;
 
 public class TermsFragment extends Fragment implements FieldChangeListener
 {
 	public static final int FRAGMENT_ID = getUUID();
-	ToggleSelectionField q1Button = new ToggleSelectionField("Checkers Terms");
-	ToggleSelectionField q2Button = new ToggleSelectionField("Customer Consent");
-	ToggleSelectionField q3Button = new ToggleSelectionField("Info Processing Policy");
-	ToggleSelectionField q4Button = new ToggleSelectionField("Complaints and General");
-	ToggleSelectionField q5Button = new ToggleSelectionField("Coupon and Voucher Issue Conditions");
-	ToggleSelectionField q6Button = new ToggleSelectionField("End-User Licence Agreement");
+	ToggleSelectionField q1Button = new ToggleSelectionField(StringHelper.terms_title_1);
+	ToggleSelectionField q2Button = new ToggleSelectionField(StringHelper.terms_title_2);
+	ToggleSelectionField q3Button = new ToggleSelectionField(StringHelper.terms_title_3);
+	ToggleSelectionField q4Button = new ToggleSelectionField(StringHelper.terms_title_4);
+	ToggleSelectionField q5Button = new ToggleSelectionField(StringHelper.terms_title_5);
+	ToggleSelectionField q6Button = new ToggleSelectionField(StringHelper.terms_title_6);
 
 	public TermsFragment()
 	{
@@ -81,36 +82,36 @@ public class TermsFragment extends Fragment implements FieldChangeListener
 
 	public void displayQ1help()
 	{
-		((ViewPagerScreen) UiApplication.getUiApplication().getActiveScreen()).transition(InfoFragment.FRAGMENT_ID, new Object[]{"Checkers Terms", "checkersterms.html", new Boolean(true)});
+		((ViewPagerScreen) UiApplication.getUiApplication().getActiveScreen()).transition(InfoFragment.FRAGMENT_ID, new Object[]{StringHelper.terms_title_1, "checkersterms.html", new Boolean(true)});
 	}
 
 	public void displayQ2help()
 	{
-		((ViewPagerScreen) UiApplication.getUiApplication().getActiveScreen()).transition(InfoFragment.FRAGMENT_ID, new Object[]{"Customer Consent", "customerconsent.html", new Boolean(true)});
+		((ViewPagerScreen) UiApplication.getUiApplication().getActiveScreen()).transition(InfoFragment.FRAGMENT_ID, new Object[]{StringHelper.terms_title_2, "customerconsent.html", new Boolean(true)});
 	}
 
 	public void displayQ3help()
 	{
-		((ViewPagerScreen) UiApplication.getUiApplication().getActiveScreen()).transition(InfoFragment.FRAGMENT_ID, new Object[]{"Info Processing Policy", "infoprocessingpolicy.html",
+		((ViewPagerScreen) UiApplication.getUiApplication().getActiveScreen()).transition(InfoFragment.FRAGMENT_ID, new Object[]{StringHelper.terms_title_3, "infoprocessingpolicy.html",
 				new Boolean(true)});
 	}
 
 	public void displayQ4help()
 	{
-		((ViewPagerScreen) UiApplication.getUiApplication().getActiveScreen()).transition(InfoFragment.FRAGMENT_ID, new Object[]{"Complaints and General", "complaintsandgeneral.html",
+		((ViewPagerScreen) UiApplication.getUiApplication().getActiveScreen()).transition(InfoFragment.FRAGMENT_ID, new Object[]{StringHelper.terms_title_4, "complaintsandgeneral.html",
 				new Boolean(true)});
 	}
 
 	public void displayQ5help()
 	{
-		((ViewPagerScreen) UiApplication.getUiApplication().getActiveScreen()).transition(InfoFragment.FRAGMENT_ID, new Object[]{"Coupon and Voucher Issue Conditions", "voucherissueconditions.html",
+		((ViewPagerScreen) UiApplication.getUiApplication().getActiveScreen()).transition(InfoFragment.FRAGMENT_ID, new Object[]{StringHelper.terms_title_5, "voucherissueconditions.html",
 				new Boolean(true)});
 	}
 
 	public void displayQ6help()
 	{
 		((ViewPagerScreen) UiApplication.getUiApplication().getActiveScreen()).transition(InfoFragment.FRAGMENT_ID,
-				new Object[]{"End-User License Agreement", "enduserlicence.html", new Boolean(true)});
+				new Object[]{StringHelper.terms_title_6, "enduserlicence.html", new Boolean(true)});
 	}
 
 	protected boolean onSavePrompt()

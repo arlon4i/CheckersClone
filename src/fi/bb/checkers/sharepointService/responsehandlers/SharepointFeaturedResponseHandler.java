@@ -6,6 +6,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 import fi.bb.checkers.datatypes.FeaturedData;
+import fi.bb.checkers.helpers.StringHelper;
 
 public class SharepointFeaturedResponseHandler extends SharepointResponseHandler
 {
@@ -52,7 +53,7 @@ public class SharepointFeaturedResponseHandler extends SharepointResponseHandler
 		}
 		else if (tagName.equalsIgnoreCase("d:BrandValue"))
 		{
-			if (new String(ch, start, length).equalsIgnoreCase("CheckersBB"))
+			if (new String(ch, start, length).equalsIgnoreCase(StringHelper.sharepoint_app_identifier))
 			{
 				list.addElement(item);
 			}

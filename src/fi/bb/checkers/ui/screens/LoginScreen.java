@@ -22,6 +22,7 @@ import fi.bb.checkers.helpers.PersistentStoreHelper;
 import fi.bb.checkers.helpers.ResourceHelper;
 import fi.bb.checkers.helpers.RuntimeStoreHelper;
 import fi.bb.checkers.helpers.ServerHelper;
+import fi.bb.checkers.helpers.StringHelper;
 import fi.bb.checkers.logger.RemoteLogger;
 import fi.bb.checkers.prompts.InfoDialog;
 import fi.bb.checkers.prompts.LoadingDialog;
@@ -265,7 +266,7 @@ public class LoginScreen extends MainScreen implements FieldChangeListener
 
 		protected void onPreExecute()
 		{
-			loading = LoadingDialog.push("Sending your Checkers App Confirmation Code");
+			loading = LoadingDialog.push(StringHelper.sending_code_message);
 		}
 
 		protected void onPostExecute(Object result)

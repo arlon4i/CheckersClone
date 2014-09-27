@@ -23,6 +23,7 @@ import fi.bb.checkers.helpers.PersistentStoreHelper;
 import fi.bb.checkers.helpers.ResourceHelper;
 import fi.bb.checkers.helpers.RuntimeStoreHelper;
 import fi.bb.checkers.helpers.ServerHelper;
+import fi.bb.checkers.helpers.StringHelper;
 import fi.bb.checkers.logger.RemoteLogger;
 import fi.bb.checkers.prompts.InfoDialog;
 import fi.bb.checkers.prompts.LoadingDialog;
@@ -69,7 +70,7 @@ public class AccountValidationScreen extends MainScreen implements FieldChangeLi
 
 		//mainManager.add(new InputItemContainer("Enter your 4-digit Checkers App PIN", null, true));
 		
-		LabelField loginText = new LabelField("Account Validation:\nTo validate your account, enter your confirmation code which we have SMS'd to you.", ResourceHelper.color_black, 0, ResourceHelper.helveticaLight().getFont(Font.PLAIN, ResourceHelper.convert(17), Ui.UNITS_px));
+		LabelField loginText = new LabelField(StringHelper.acc_validation_message, ResourceHelper.color_black, 0, ResourceHelper.helveticaLight().getFont(Font.PLAIN, ResourceHelper.convert(17), Ui.UNITS_px));
 		loginText.setMargin(ResourceHelper.convert(5), 0, 0, ResourceHelper.convert(5));
 		mainManager.add(loginText);
 		mainManager.add(getSeperator());
@@ -162,7 +163,7 @@ public class AccountValidationScreen extends MainScreen implements FieldChangeLi
 			boolean interrupted = false;
 			public void run()
 			{
-				loading = LoadingDialog.push("Validating account");
+				loading = LoadingDialog.push(StringHelper.validating_account_text);
 				user.setPin(pin_field.getPIN());
 				try
 				{
@@ -263,7 +264,7 @@ public class AccountValidationScreen extends MainScreen implements FieldChangeLi
 
 		protected void onPreExecute()
 		{
-			loading = LoadingDialog.push("Resending your Checkers App Confirmation Code");
+			loading = LoadingDialog.push(StringHelper.resending_code_message);
 		}
 
 		protected void onPostExecute(Object result)
@@ -275,7 +276,7 @@ public class AccountValidationScreen extends MainScreen implements FieldChangeLi
 				WiAppResponseHandler response = (WiAppResponseHandler) result;
 				if (response.getResponseCode().equalsIgnoreCase("-1"))
 				{
-					InfoDialog.doModal("", "You will receive a SMS with your new confirmation code. Should you continue experiencing a problem, please contact 0800 33 33 85.", "Okay");
+					InfoDialog.doModal("",StringHelper.code_help_message, "Okay");
 				}
 				else
 				{

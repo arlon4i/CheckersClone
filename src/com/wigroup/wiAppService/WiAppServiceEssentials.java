@@ -15,6 +15,7 @@ import fi.bb.checkers.MainApplication;
 import fi.bb.checkers.datatypes.UserData;
 import fi.bb.checkers.helpers.PersistentStoreHelper;
 import fi.bb.checkers.helpers.RuntimeStoreHelper;
+import fi.bb.checkers.helpers.StringHelper;
 import fi.bb.checkers.logger.RemoteLogger;
 
 public class WiAppServiceEssentials
@@ -28,8 +29,8 @@ public class WiAppServiceEssentials
 	// CHECKERS LIVE
 
 	final static String apiver = "2.4";
-	final static String appId = "BLACKBERRY";
-	final static String password = "blackb3rry_int3rfac3_wiapp";
+	final static String appId = StringHelper.wigroup_appid;
+	final static String password = StringHelper.wigroup_apppassword;
 
 	// SHOPRITE
 	/*

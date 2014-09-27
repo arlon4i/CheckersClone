@@ -136,8 +136,10 @@ public class SharingHelper
 		case SharingDialog.SMS :
 			logShareCoupon("Message", coupon);
 			//if (RuntimeStoreHelper.getSessionID() == null)
-			sms("Check out this great EeziCoupon from Checkers! Save " + priceValueText + " on " + coupon.getName()
-						+ ". Get great savings, quality and service at Checkers. http://m.checkers.co.za..");
+			//sms("Check out this great EeziCoupon from Checkers! Save " + priceValueText + " on " + coupon.getName()
+			//			+ ". Get great savings, quality and service at Checkers. http://m.checkers.co.za..");
+			sms(StringHelper.share_coupon_sms_1 + priceValueText  + StringHelper.share_coupon_sms_2 + coupon.getName() + StringHelper.share_coupon_sms_3);
+			
 			/*else
 				sms(RuntimeStoreHelper.getUserData().getFirstname() + " wants you to check out this great EeziCoupon from Checkers! Save " + priceValueText + " on " + coupon.getName()
 						+ ". Get great savings, quality and service at Checkers. http://m.checkers.co.za.");*/
@@ -146,26 +148,38 @@ public class SharingHelper
 		case SharingDialog.EMAIL :
 			logShareCoupon("Email", coupon);
 			if (RuntimeStoreHelper.getSessionID() == null)
-				email("I want you to check out this great EeziCoupon saving from Checkers. Save " + priceValueText + " on " + coupon.getName()
-						+ ". Get great savings, quality and service at Checkers. http://m.checkers.co.za.");
+			{
+				email(StringHelper.share_coupon_email_1 + priceValueText + " on " + coupon.getName() + StringHelper.share_coupon_email_3);
+				
+				//email("I want you to check out this great EeziCoupon saving from Checkers. Save " + priceValueText + " on " + coupon.getName()
+				//		+ ". Get great savings, quality and service at Checkers. http://m.checkers.co.za.");
+			}
 			else
-				email(RuntimeStoreHelper.getUserData().getFirstname() + " wants you to check out this great EeziCoupon saving from Checkers. Save " + priceValueText + " on "
-						+ coupon.getName() + ". Get great savings, quality and service at Checkers. http://m.checkers.co.za.");
+			{
+				email(RuntimeStoreHelper.getUserData().getFirstname() + StringHelper.share_coupon_email_loggedin_1 + priceValueText + " on "
+								+ coupon.getName() + StringHelper.share_coupon_email_loggedin_3);
+						
+				//email(RuntimeStoreHelper.getUserData().getFirstname() + " wants you to check out this great EeziCoupon saving from Checkers. Save " + priceValueText + " on "
+				//		+ coupon.getName() + ". Get great savings, quality and service at Checkers. http://m.checkers.co.za.");
+			}
 			break;
 
 		case SharingDialog.BBM :
 			logShareCoupon("BBM", coupon);
-			bbm("Check out this great EeziCoupon from Checkers! Save " + priceValueText + " on " + coupon.getName() + ". Get great savings, quality and service at Checkers. http://m.checkers.co.za");
+			bbm(StringHelper.share_coupon_bbm_1+ priceValueText + " on " + coupon.getName() + StringHelper.share_coupon_bbm_3);
+			//bbm("Check out this great EeziCoupon from Checkers! Save " + priceValueText + " on " + coupon.getName() + ". Get great savings, quality and service at Checkers. http://m.checkers.co.za");
 			break;
 
 		case SharingDialog.FACEBOOK :
 			logShareCoupon("Facebook", coupon);
-			facebook("Get this great EeziCoupon from Checkers! Save " + priceValueText + " on " + coupon.getName() + ". Get great savings, quality and service at Checkers. http://m.checkers.co.za");
+			facebook(StringHelper.share_coupon_fb_1 + priceValueText + " on " + coupon.getName() + StringHelper.share_coupon_fb_3);
+			//facebook("Get this great EeziCoupon from Checkers! Save " + priceValueText + " on " + coupon.getName() + ". Get great savings, quality and service at Checkers. http://m.checkers.co.za");
 			break;
 
 		case SharingDialog.TWITTER :
 			logShareCoupon("Twitter", coupon);				
-			twitter("Save " + priceValueText + " on " + coupon.getName() + " at Checkers. http://m.checkers.co.za");
+			twitter(StringHelper.share_coupon_tw_1 + priceValueText + " on " + coupon.getName() + StringHelper.share_coupon_tw_3);
+			//twitter("Save " + priceValueText + " on " + coupon.getName() + " at Checkers. http://m.checkers.co.za");
 			break;
 		}
 	}
@@ -190,8 +204,12 @@ public class SharingHelper
 		case SharingDialog.SMS :
 			logShareSpecial("Message");
 			//if (RuntimeStoreHelper.getSessionID() == null)
-			sms("Check out this great deal from Checkers! " + special.getName() + " on special for " + priceValueText
-						+ ". Get great savings, quality and service at Checkers. http://m.checkers.co.za.");
+			
+			sms(StringHelper.share_special_sms_1 + special.getName() + StringHelper.share_special_sms_2 + priceValueText
+								+ StringHelper.share_special_sms_3);
+					
+			//sms("Check out this great deal from Checkers! " + special.getName() + " on special for " + priceValueText
+			//			+ ". Get great savings, quality and service at Checkers. http://m.checkers.co.za.");
 			/*else
 				sms(RuntimeStoreHelper.getUserData().getFirstname() + " recommends this great deal from Checkers. " + special.getName() + " on special for " + priceValueText
 						+ ". Get great savings, quality and service at Checkers. http://m.checkers.co.za.");*/
@@ -200,28 +218,41 @@ public class SharingHelper
 		case SharingDialog.EMAIL :
 			logShareSpecial("Email");
 			if (RuntimeStoreHelper.getSessionID() == null)
-				email("Check out this great deal from Checkers! " + special.getName() + " on special for " + priceValueText
-						+ ". Get great savings, quality and service at Checkers. http://m.checkers.co.za.");
+			{
+				email(StringHelper.share_special_email_1 + special.getName() + StringHelper.share_special_email_2 + priceValueText
+								+ StringHelper.share_special_email_3);
+						
+				//email("Check out this great deal from Checkers! " + special.getName() + " on special for " + priceValueText
+				//		+ ". Get great savings, quality and service at Checkers. http://m.checkers.co.za.");
+			}
 			else
-				email(RuntimeStoreHelper.getUserData().getFirstname() + " wants you to check out this great deal from Checkers. " + special.getName() + " on special for "
-						+ priceValueText + ". Get great savings, quality and service at Checkers. http://m.checkers.co.za.");
+			{
+				email(RuntimeStoreHelper.getUserData().getFirstname() + StringHelper.share_special_email_loggedin_1 + special.getName() + StringHelper.share_special_email_loggedin_2
+								+ priceValueText + StringHelper.share_special_email_loggedin_3);
+				//email(RuntimeStoreHelper.getUserData().getFirstname() + " wants you to check out this great deal from Checkers. " + special.getName() + " on special for "
+				//		+ priceValueText + ". Get great savings, quality and service at Checkers. http://m.checkers.co.za.");
+			}
 			break;
 
 		case SharingDialog.BBM :
 			logShareSpecial("BBM");
-			bbm("Check out this great deal from Checkers! " + special.getName() + " on special for " + priceValueText
-					+ ". Get great savings, quality and service at Checkers. http://m.checkers.co.za");
+			//bbm("Check out this great deal from Checkers! " + special.getName() + " on special for " + priceValueText
+			//		+ ". Get great savings, quality and service at Checkers. http://m.checkers.co.za");
+			bbm(StringHelper.share_special_bbm_1 + special.getName() + StringHelper.share_special_bbm_2 + priceValueText
+							+ StringHelper.share_special_bbm_3);
+					
 			break;
 
 		case SharingDialog.FACEBOOK :
 			logShareSpecial("Facebook");
-			facebook("Get this great deal from Checkers! " + special.getName() + " on special for " + priceValueText
-					+ ". Get great savings, quality and service at Checkers. http://m.checkers.co.za");
+			facebook(StringHelper.share_special_bbm_1 + special.getName() + StringHelper.share_special_bbm_2 + priceValueText
+					+ StringHelper.share_special_bbm_3);
 			break;
 
 		case SharingDialog.TWITTER :
 			logShareSpecial("Twitter");
-			twitter(special.getName() + " on special for " + priceValueText + " at Checkers. http://m.checkers.co.za");
+			twitter(special.getName() + StringHelper.share_special_tw_1 + priceValueText + StringHelper.share_special_tw_2);
+			//twitter(special.getName() + " on special for " + priceValueText + " at Checkers. http://m.checkers.co.za");
 			break;
 		}
 	}
@@ -233,31 +264,40 @@ public class SharingHelper
 		{
 		case SharingDialog.SMS :
 			logShareApp("Message");
-			sms("I'm using the Checkers Mobile App. It's free and you can get great savings from Checkers and Checkers Hyper stores. Check it out! http://m.checkers.co.za");
+			sms(StringHelper.share_app_sms_1);
+			//sms("I'm using the Checkers Mobile App. It's free and you can get great savings from Checkers and Checkers Hyper stores. Check it out! http://m.checkers.co.za");
 			break;
 
 		case SharingDialog.EMAIL :
 			logShareApp("Email");
 			if (RuntimeStoreHelper.getSessionID() == null)
-				email("I'm using the Checkers Mobile App. It's free and you can get great savings from Checkers and Checkers Hyper stores. Check it out! http://m.checkers.co.za");
+			{
+				email(StringHelper.share_app_email_1);
+				//email("I'm using the Checkers Mobile App. It's free and you can get great savings from Checkers and Checkers Hyper stores. Check it out! http://m.checkers.co.za");
+			}
 			else
-				email(RuntimeStoreHelper.getUserData().getFirstname()
-						+ " is using the Checkers Mobile App. It's free and you can get great savings from Checkers and Checkers Hyper stores. Check it out! http://m.checkers.co.za");
+			{
+				email(RuntimeStoreHelper.getUserData().getFirstname()+ StringHelper.share_app_email_loggedin_1);
+				//email(RuntimeStoreHelper.getUserData().getFirstname()+ " is using the Checkers Mobile App. It's free and you can get great savings from Checkers and Checkers Hyper stores. Check it out! http://m.checkers.co.za");
+			}
 			break;
 
 		case SharingDialog.BBM :
 			logShareApp("BBM");
-			bbm("I'm using the Checkers Mobile App. It's free and you can get great savings from Checkers and Checkers Hyper stores. Check it out! http://m.checkers.co.za");
+			//bbm("I'm using the Checkers Mobile App. It's free and you can get great savings from Checkers and Checkers Hyper stores. Check it out! http://m.checkers.co.za");
+			bbm(StringHelper.share_app_bbm_1);
 			break;
 
 		case SharingDialog.FACEBOOK :
 			logShareApp("Facebook");
-			facebook("I'm using the Checkers Mobile App. It's free and you can get great savings from Checkers and Checkers Hyper stores. Check it out! http://m.checkers.co.za");
+			facebook(StringHelper.share_app_fb_1);
+			//facebook("I'm using the Checkers Mobile App. It's free and you can get great savings from Checkers and Checkers Hyper stores. Check it out! http://m.checkers.co.za");
 			break;
 
 		case SharingDialog.TWITTER :
 			logShareApp("Twitter");
-			twitter("I'm using the Checkers Mobile App. It's free and you can get great savings. Check it out! http://m.checkers.co.za");
+			//twitter("I'm using the Checkers Mobile App. It's free and you can get great savings. Check it out! http://m.checkers.co.za");
+			twitter(StringHelper.share_app_tw_1);
 			break;
 		}
 	}
@@ -292,7 +332,7 @@ public class SharingHelper
 	// ------------------ facebook -------------------
 	private static boolean facebook(String message)
 	{
-		String url = "https://www.facebook.com/dialog/feed?app_id=1420743434866348&display=popup&caption=Checkers%20Blackberry%20App&link=http%3A%2F%2Fm.checkers.co.za%2Fhome.html&redirect_uri=https://www.facebook.com&name=Checkers&description=" + encode(message);
+		String url = StringHelper.fb_app_url + encode(message);
 		RemoteLogger.log("FB_URL", url);
 		try
 		{

@@ -28,6 +28,7 @@ import fi.bb.checkers.datatypes.Title;
 import fi.bb.checkers.datatypes.UserData;
 import fi.bb.checkers.helpers.PersistentStoreHelper;
 import fi.bb.checkers.helpers.ResourceHelper;
+import fi.bb.checkers.helpers.StringHelper;
 import fi.bb.checkers.prompts.CustomDialog;
 import fi.bb.checkers.prompts.InfoDialog;
 import fi.bb.checkers.prompts.LoadingDialog;
@@ -215,7 +216,7 @@ public class RegistrationScreen extends MainScreen implements FieldChangeListene
 				// terms and conditions
 				if (!checkBox.isChecked())
 				{
-					error = "Before you complete your registration you must agree to the Checkers Terms.";
+					error = StringHelper.error_agree_to_terms;
 				}
 			}
 
@@ -273,7 +274,7 @@ public class RegistrationScreen extends MainScreen implements FieldChangeListene
 
 	private void askTerms()
 	{
-		int choice = CustomDialog.doModal("Before you complete your registration you must agree to the Checkers Terms.", new String[]{"I Agree", "View the Terms", "I don't Agree"}, new int[]{
+		int choice = CustomDialog.doModal(StringHelper.error_agree_to_terms, new String[]{"I Agree", "View the Terms", "I don't Agree"}, new int[]{
 				Dialog.YES, Dialog.OK, Dialog.CANCEL});
 		if (choice == Dialog.YES)
 		{
@@ -434,37 +435,37 @@ public class RegistrationScreen extends MainScreen implements FieldChangeListene
 			public void displayQ1help()
 			{
 				InfoFragment info = new InfoFragment("checkersterms.html", true);
-				app.pushScreen(new FragmentContainerScreen("Checkers Terms", info));
+				app.pushScreen(new FragmentContainerScreen(StringHelper.terms_title_1, info));
 			}
 
 			public void displayQ2help()
 			{
 				InfoFragment info = new InfoFragment("customerconsent.html", true);
-				app.pushScreen(new FragmentContainerScreen("Customer Consent", info));
+				app.pushScreen(new FragmentContainerScreen(StringHelper.terms_title_2, info));
 			}
 
 			public void displayQ3help()
 			{
 				InfoFragment info = new InfoFragment("infoprocessingpolicy.html", true);
-				app.pushScreen(new FragmentContainerScreen("Info Processing Policy", info));
+				app.pushScreen(new FragmentContainerScreen(StringHelper.terms_title_3, info));
 			}
 
 			public void displayQ4help()
 			{
 				InfoFragment info = new InfoFragment("complaintsandgeneral.html", true);
-				app.pushScreen(new FragmentContainerScreen("Complaints and General", info));
+				app.pushScreen(new FragmentContainerScreen(StringHelper.terms_title_4, info));
 			}
 
 			public void displayQ5help()
 			{
 				InfoFragment info = new InfoFragment("voucherissueconditions.html", true);
-				app.pushScreen(new FragmentContainerScreen("Coupon and Voucher Issue Conditions", info));
+				app.pushScreen(new FragmentContainerScreen(StringHelper.terms_title_5, info));
 			}
 
 			public void displayQ6help()
 			{
 				InfoFragment info = new InfoFragment("enduserlicence.html", true);
-				app.pushScreen(new FragmentContainerScreen("End-User License Agreement", info));
+				app.pushScreen(new FragmentContainerScreen(StringHelper.terms_title_6, info));
 			}
 		};
 		app.pushScreen(new FragmentContainerScreen("Terms", terms));

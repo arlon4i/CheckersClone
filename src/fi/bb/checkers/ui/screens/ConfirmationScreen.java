@@ -20,6 +20,7 @@ import fi.bb.checkers.helpers.PersistentStoreHelper;
 import fi.bb.checkers.helpers.ResourceHelper;
 import fi.bb.checkers.helpers.RuntimeStoreHelper;
 import fi.bb.checkers.helpers.ServerHelper;
+import fi.bb.checkers.helpers.StringHelper;
 import fi.bb.checkers.logger.RemoteLogger;
 import fi.bb.checkers.prompts.InfoDialog;
 import fi.bb.checkers.prompts.LoadingDialog;
@@ -149,11 +150,11 @@ public class ConfirmationScreen extends MainScreen implements FieldChangeListene
 
 		if (username.equalsIgnoreCase(""))
 		{
-			error = "Please enter your Mobile Number\n";
+			error = StringHelper.error_mobile;
 		}
 		else if (pin.length() != 4)
 		{
-			error = "Please enter your 4-digit Checkers App PIN\n";
+			error = StringHelper.error_enter_code;
 		}
 
 		if (error.equals(""))
@@ -237,7 +238,7 @@ public class ConfirmationScreen extends MainScreen implements FieldChangeListene
 
 		protected void onPreExecute()
 		{
-			loading = LoadingDialog.push("Resending your Checkers App Confirmation Code");
+			loading = LoadingDialog.push(StringHelper.resending_code_message_2);
 		}
 
 		protected void onPostExecute(Object result)

@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Hashtable;
 import java.util.Vector;
 
+import fi.bb.checkers.helpers.StringHelper;
 import net.rim.device.api.util.Persistable;
 
 public class PersistentData implements Persistable
@@ -61,8 +62,10 @@ public class PersistentData implements Persistable
 	{
 		InboxMessage message = new InboxMessage();
 		message.message_id = 0;
-		message.title = "Welcome to your Checkers Inbox.";
-		message.description = "Get easy access to the best deals and save over R2000 with EeziCoupons plus much more from your favourite Checkers and Checkers Hyper stores."; //"Get all the latest Promotions, Competitions, News, Special offers and great savings from your favourite Checkers and Checkers Hyper.\n\nDon't miss out!";
+		//message.title = "Welcome to your Checkers Inbox.";
+		message.title = StringHelper.welcome_inbox_title;
+		//message.description = "Get easy access to the best deals and save over R2000 with EeziCoupons plus much more from your favourite Checkers and Checkers Hyper stores."; //"Get all the latest Promotions, Competitions, News, Special offers and great savings from your favourite Checkers and Checkers Hyper.\n\nDon't miss out!";
+		message.description = StringHelper.welcome_inbox_desc;
 		message.date_recieved = new Date().getTime();
 
 		inbox.addElement(message);

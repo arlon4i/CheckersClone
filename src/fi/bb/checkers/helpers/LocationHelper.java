@@ -45,7 +45,7 @@ public class LocationHelper
 			if (PersistentStoreHelper.showGPS())
 			{
 				int choice = CustomDialog.doModal(
-						"Thank you for using the Checkers Mobile App.\n\nWe would like to use your current location. This will allow us to provide you with the latest Specials and EeziCoupons so you can start saving.",
+						StringHelper.welcome_location_allow,
 						new String[]{"Skip", "Okay"}, new int[]{Dialog.CANCEL, Dialog.YES}, 1);
 
 				PersistentStoreHelper.setShowGPS(false);

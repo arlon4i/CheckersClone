@@ -5,6 +5,7 @@ import net.rim.device.api.ui.FieldChangeListener;
 import net.rim.device.api.ui.UiApplication;
 import net.rim.device.api.ui.decor.BackgroundFactory;
 import fi.bb.checkers.helpers.ResourceHelper;
+import fi.bb.checkers.helpers.StringHelper;
 import fi.bb.checkers.ui.components.ToggleSelectionField;
 import fi.bb.checkers.ui.screens.ViewPagerScreen;
 
@@ -12,21 +13,21 @@ public class HelpFragment extends Fragment implements FieldChangeListener
 {
 	public static final int FRAGMENT_ID = getUUID();
 
-	ToggleSelectionField q1Button = new ToggleSelectionField("How do I contact Checkers?",3);
-	ToggleSelectionField q2Button = new ToggleSelectionField("How do EeziCoupons work?",3);
-	ToggleSelectionField q3Button = new ToggleSelectionField("What is an EeziCoupon WiCode?",3);
-	ToggleSelectionField q4Button = new ToggleSelectionField("How long does my EeziCoupon WiCode last?",3);
-	//ToggleSelectionField q5Button = new ToggleSelectionField("How do I refresh my EeziCoupon WiCode?",3);
-	ToggleSelectionField q6Button = new ToggleSelectionField("What can I do if an error occurs with my EeziCoupon WiCode?",3);
-	ToggleSelectionField q7Button = new ToggleSelectionField("What is My List?",3);
-	ToggleSelectionField q8Button = new ToggleSelectionField("How do I clear or delete items from My List?",3);
-	ToggleSelectionField q9Button = new ToggleSelectionField("What if I have no data connection?",3);
-	ToggleSelectionField q10Button = new ToggleSelectionField("How can I share Checkers EeziCoupons and Specials with others?",3);
-	ToggleSelectionField q11Button = new ToggleSelectionField("How do I reset my confirmation code?",3);
-	ToggleSelectionField q12Button = new ToggleSelectionField("Why do I need to allow the app to use my current location?",3);
-	ToggleSelectionField q13Button = new ToggleSelectionField("What happens when I deny Checkers permission to use my current location?",3);
-	ToggleSelectionField q14Button = new ToggleSelectionField("If I did not grant Checkers access to use my location initially, how do I change that?",3);
-	ToggleSelectionField q15Button = new ToggleSelectionField("I am a Cell C customer who is experiencing app issues at times, what can I do?",3);
+	ToggleSelectionField q1Button = new ToggleSelectionField(StringHelper.help_title_1,3);
+	ToggleSelectionField q2Button = new ToggleSelectionField(StringHelper.help_title_2,3);
+	ToggleSelectionField q3Button = new ToggleSelectionField(StringHelper.help_title_3,3);
+	ToggleSelectionField q4Button = new ToggleSelectionField(StringHelper.help_title_4,3);
+	//ToggleSelectionField q5Button = new ToggleSelectionField(StringHelper.help_title_5,3);
+	ToggleSelectionField q6Button = new ToggleSelectionField(StringHelper.help_title_6,3);
+	ToggleSelectionField q7Button = new ToggleSelectionField(StringHelper.help_title_7,3);
+	ToggleSelectionField q8Button = new ToggleSelectionField(StringHelper.help_title_8,3);
+	ToggleSelectionField q9Button = new ToggleSelectionField(StringHelper.help_title_9,3);
+	ToggleSelectionField q10Button = new ToggleSelectionField(StringHelper.help_title_10,3);
+	ToggleSelectionField q11Button = new ToggleSelectionField(StringHelper.help_title_11,3);
+	ToggleSelectionField q12Button = new ToggleSelectionField(StringHelper.help_title_12,3);
+	ToggleSelectionField q13Button = new ToggleSelectionField(StringHelper.help_title_13,3);
+	ToggleSelectionField q14Button = new ToggleSelectionField(StringHelper.help_title_14,3);
+	ToggleSelectionField q15Button = new ToggleSelectionField(StringHelper.help_title_15,3);
 
 	public HelpFragment()
 	{

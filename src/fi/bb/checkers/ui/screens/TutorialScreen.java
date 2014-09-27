@@ -12,6 +12,7 @@ import net.rim.device.api.ui.container.FullScreen;
 import net.rim.device.api.ui.decor.BackgroundFactory;
 import fi.bb.checkers.MainApplication;
 import fi.bb.checkers.helpers.ResourceHelper;
+import fi.bb.checkers.helpers.StringHelper;
 import fi.bb.checkers.utils.StringUtil;
 
 public class TutorialScreen extends FullScreen
@@ -52,7 +53,7 @@ public class TutorialScreen extends FullScreen
 		{
 			case HOME :
 				heading = "Welcome to your Home Screen";
-				body = "Get easy access to all the best deals at Checkers. Save over R2000 with EeziCoupons, find your closest store and much more from Checkers.";
+				body = StringHelper.tut_home_description;
 
 				Bitmap square = ResourceHelper.getImage("icon_tutorial_menu");
 				int y = 0;
@@ -93,22 +94,22 @@ public class TutorialScreen extends FullScreen
 
 			case COUPONS :
 				heading = "Your EeziCoupon Screen";
-				body = "Save over R2000 with instant shopping discounts on your cell phone with the latest EeziCoupons available from Checkers. Use your WiCode number to redeem all available coupons, or select your favourites to add to your list. You have the option to turn on the images using your hard menu button.";
+				body = StringHelper.tut_coupons_description;
 				break;
 
 			case SPECIALS :
 				heading = "Your Specials Screen";
-				body = "Easy access to all the best deals currently available at Checkers. Start saving now. You have the option to turn on the images using your hard menu button.";
+				body = StringHelper.tut_specials_description;
 				break;
 
 			case LIST :
 				heading = "Your List";
-				body = "My List makes it easy to manage your personal selection of EeziCoupons.\n\nAdd, delete and share your EeziCoupons.\n\nRedeem your entire list of EeziCoupons by tapping on Redeem All.";//"My List makes it easy to manage your personal selection of EeziCoupons.\n\nAdd, delete, share or Redeem EeziCoupons.\n\nRedeem your entire list of EeziCoupons by tapping on Redeem All.";
+				body = StringHelper.tut_mylist_description;//"My List makes it easy to manage your personal selection of EeziCoupons.\n\nAdd, delete, share or Redeem EeziCoupons.\n\nRedeem your entire list of EeziCoupons by tapping on Redeem All.";
 				break;
 
 			case FINDSTORE :
 				heading = "Find a Store";
-				body = "Here you can locate all the Checkers and Shoprite Stores.";
+				body = StringHelper.tut_find_stores_description;
 				break;
 		}
 
@@ -136,20 +137,20 @@ public class TutorialScreen extends FullScreen
 
 		if (tutorial == FINDSTORE)
 		{
-			int x = (getWidth() - ResourceHelper.convert(20) - font_body.getAdvance("Checkers Stores")) / 2;
+			int x = (getWidth() - ResourceHelper.convert(20) - font_body.getAdvance(StringHelper.checkers_stores)) / 2;
 
 			graphics.setFont(font_body);
 			graphics.setColor(ResourceHelper.color_checkers_teal);
 			y += ResourceHelper.convert(15);
 			graphics.fillArc(x, y + (font_body.getHeight() - ResourceHelper.convert(8)) / 2, ResourceHelper.convert(8), ResourceHelper.convert(8), 0, 360);
 			graphics.setColor(ResourceHelper.color_black);
-			graphics.drawText("Checkers Stores", x + ResourceHelper.convert(20), y);
+			graphics.drawText(StringHelper.checkers_stores, x + ResourceHelper.convert(20), y);
 			y += font_body.getHeight();
 
 			graphics.setColor(ResourceHelper.color_shoprite_red);
 			graphics.fillArc(x, y + (font_body.getHeight() - ResourceHelper.convert(8)) / 2, ResourceHelper.convert(8), ResourceHelper.convert(8), 0, 360);
 			graphics.setColor(ResourceHelper.color_black);
-			graphics.drawText("Shoprite Stores", x + ResourceHelper.convert(20), y);
+			graphics.drawText(StringHelper.shoprite_stores, x + ResourceHelper.convert(20), y);
 			y += font_body.getHeight();
 
 			body = "Use the hard menu button to access key areas of the App as well as additional features.";

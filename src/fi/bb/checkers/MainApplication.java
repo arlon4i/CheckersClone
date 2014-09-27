@@ -20,6 +20,7 @@ import com.flurry.blackberry.FlurryAgent;
 import fi.bb.checkers.helpers.FlurryHelper;
 import fi.bb.checkers.helpers.PersistentStoreHelper;
 import fi.bb.checkers.helpers.SharingHelper;
+import fi.bb.checkers.helpers.StringHelper;
 import fi.bb.checkers.logger.RemoteLogger;
 import fi.bb.checkers.network.HttpInterface;
 import fi.bb.checkers.prompts.InfoDialog;
@@ -147,7 +148,9 @@ public class MainApplication extends UiApplication
 				{
 					try
 					{
-						InfoDialog.doModal("", "Insufficient Permissions to run Checkers. The application will now exit.", "Okay");
+						String errorMessage = StringHelper.app_permissions_warning;
+						
+						InfoDialog.doModal("", errorMessage, "Okay");
 					} catch (Exception e)
 					{
 					}

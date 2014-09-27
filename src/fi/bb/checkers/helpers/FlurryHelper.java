@@ -14,7 +14,7 @@ import fi.bb.checkers.logger.RemoteLogger;
 
 public class FlurryHelper {
 
-	public static final String FLURRY_KEY = "C29NWKVPD7F6KRYHYTYN";
+	public static final String FLURRY_KEY = StringHelper.flurry_key;
 	
 	public static final String FLURRY_DATE_FORMAT_STRING = "yyyy/MM/dd HH:mm:ss";
 	public static final SimpleDateFormat FLURRY_DATE_FORMAT = new SimpleDateFormat(FLURRY_DATE_FORMAT_STRING);

@@ -407,7 +407,7 @@ public class ServerHelper
 	public static Vector getSpecialList(String region_id) throws IOException
 	{
 
-		WiAppCampaignResponseHandler response = WiAppServiceCampaigns.getSpecialsList(region_id + "_SPECIAL");
+		WiAppCampaignResponseHandler response = WiAppServiceCampaigns.getSpecialsList(region_id + StringHelper.specials_channel_id);
 
 		if (response == null || response.getResponseCode() == null)
 		{
@@ -434,7 +434,7 @@ public class ServerHelper
 
 	public static String getDisclaimer(LocationData location) throws IOException
 	{
-		WiAppDisclaimerResponseHandler response = WiAppServiceCampaigns.getChannelDisclaimer(location.getId() + "_SPECIAL", location.getId());
+		WiAppDisclaimerResponseHandler response = WiAppServiceCampaigns.getChannelDisclaimer(location.getId() + StringHelper.specials_channel_id, location.getId());
 		return response.getDisclaimer();
 	}
 

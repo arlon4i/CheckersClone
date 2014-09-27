@@ -19,6 +19,7 @@ import fi.bb.checkers.helpers.FlurryHelper;
 import fi.bb.checkers.helpers.PersistentStoreHelper;
 import fi.bb.checkers.helpers.ResourceHelper;
 import fi.bb.checkers.helpers.RuntimeStoreHelper;
+import fi.bb.checkers.helpers.StringHelper;
 import fi.bb.checkers.interfaces.InterfaceCouponsFinishedLoading;
 import fi.bb.checkers.prompts.InfoDialog;
 import fi.bb.checkers.prompts.PhotoPrompt;
@@ -363,7 +364,7 @@ public class ProfileDrawer extends VerticalFieldManager implements InterfaceCoup
 				label = new LabelField("1. ", ResourceHelper.color_black, 0);
 				label.setFont(font);
 				bullet_manager.add(label);
-				label = new LabelField("Visit your nearest Checkers store.", ResourceHelper.color_black, 0);
+				label = new LabelField(StringHelper.visit_nearest_store, ResourceHelper.color_black, 0);
 				label.setFont(font);
 				bullet_manager.add(label);
 				manager.add(bullet_manager);
@@ -372,7 +373,7 @@ public class ProfileDrawer extends VerticalFieldManager implements InterfaceCoup
 				label = new LabelField("2. ", ResourceHelper.color_black, 0);
 				label.setFont(font);
 				bullet_manager.add(label);
-				label = new LabelField("Buy the items for which you have EeziCoupons.", ResourceHelper.color_black, 0);
+				label = new LabelField(StringHelper.buy_items_desc, ResourceHelper.color_black, 0);
 				label.setFont(font);
 				bullet_manager.add(label);
 				manager.add(bullet_manager);
@@ -381,7 +382,7 @@ public class ProfileDrawer extends VerticalFieldManager implements InterfaceCoup
 				label = new LabelField("3. ", ResourceHelper.color_black, 0);
 				label.setFont(font);
 				bullet_manager.add(label);
-				label = new LabelField("Enter your WiCode on the PIN pad at the till to receive your discount.", ResourceHelper.color_black, 0);
+				label = new LabelField(StringHelper.enter_your_wicode_desc, ResourceHelper.color_black, 0);
 				label.setFont(font);
 				bullet_manager.add(label);
 				manager.add(bullet_manager);

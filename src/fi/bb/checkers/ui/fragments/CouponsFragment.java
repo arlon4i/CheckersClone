@@ -27,6 +27,7 @@ import fi.bb.checkers.helpers.PersistentStoreHelper;
 import fi.bb.checkers.helpers.ResourceHelper;
 import fi.bb.checkers.helpers.RuntimeStoreHelper;
 import fi.bb.checkers.helpers.SharingHelper;
+import fi.bb.checkers.helpers.StringHelper;
 import fi.bb.checkers.interfaces.InterfaceCouponsFinishedLoading;
 import fi.bb.checkers.prompts.CustomDialog;
 import fi.bb.checkers.prompts.InfoDialog;
@@ -347,7 +348,7 @@ public class CouponsFragment extends Fragment implements FieldChangeListener, In
 				}
 				else
 				{
-					item = new MenuItem("Add to List", 0x00050000, 0)
+					item = new MenuItem(StringHelper.add_my_list_text, 0x00050000, 0)
 					{
 						public void run()
 						{

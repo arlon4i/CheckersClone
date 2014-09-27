@@ -99,6 +99,8 @@ public class StringHelper
     public static final String tut_mylist_description = "My List makes it easy to manage your personal selection of EeziCoupons.\n\nAdd, delete and share your EeziCoupons.\n\nRedeem your entire list of EeziCoupons by tapping on Redeem All.";
     public static final String tut_find_stores_description = "Here you can locate all the Checkers and Shoprite Stores.";
     
+    public static final String add_my_list_text ="Add to My List";
+    
     public static final String checkers_stores = "Checkers Stores";//dont change
     public static final String shoprite_stores = "Shoprite Stores";//dont change
     public static final String facebook_url = "http://facebook.com/checkerssa";
@@ -110,5 +112,6 @@ public class StringHelper
     public static final String coupons_channel_id_coupon = "COUPON";//not sure if this should change
     public static final String wigroup_appid = "BLACKBERRY";
     public static final String wigroup_apppassword = "blackb3rry_int3rfac3_wiapp";
+    
     
 }

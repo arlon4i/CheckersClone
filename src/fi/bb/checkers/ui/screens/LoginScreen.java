@@ -65,7 +65,7 @@ public class LoginScreen extends MainScreen implements FieldChangeListener
 		{
 			if (cellField.getText().equalsIgnoreCase("") || cellField.getText().length() < 10 || !cellField.getText().startsWith("0"))
 			{
-				InfoDialog.doModal("Error", "Enter your Mobile number in order to reset your Checkers App PIN", "Okay");
+				InfoDialog.doModal("Error", "Enter your Mobile number in order to reset your Checkers App Confirmation Code", "Okay");
 			}
 			else
 			{

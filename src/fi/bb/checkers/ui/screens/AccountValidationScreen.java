@@ -68,7 +68,7 @@ public class AccountValidationScreen extends MainScreen implements FieldChangeLi
 		cellNumberField.setFocusable(false);
 		mainManager.add(new InputItemContainer("Sent to:", cellNumberField, true));
 
-		//mainManager.add(new InputItemContainer("Enter your 4-digit Checkers App PIN", null, true));
+		//mainManager.add(new InputItemContainer("Enter your 4-digit Checkers App Confirmation Code", null, true));
 		
 		LabelField loginText = new LabelField(StringHelper.acc_validation_message, ResourceHelper.color_black, 0, ResourceHelper.helveticaLight().getFont(Font.PLAIN, ResourceHelper.convert(17), Ui.UNITS_px));
 		loginText.setMargin(ResourceHelper.convert(5), 0, 0, ResourceHelper.convert(5));
@@ -232,7 +232,7 @@ public class AccountValidationScreen extends MainScreen implements FieldChangeLi
 					{
 						RuntimeStoreHelper.setSessionID(null);
 						PersistentStoreHelper.setPIN("");
-						//InfoDialog.doModal("Oops!", "Something went wrong.\nYou can try and log in with your PIN received.", "Okay");
+						//InfoDialog.doModal("Oops!", "Something went wrong.\nYou can try and log in with your Confirmation Code received.", "Okay");
 
 						Screen screen;
 

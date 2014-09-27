@@ -250,7 +250,7 @@ public class ConfirmationScreen extends MainScreen implements FieldChangeListene
 				WiAppResponseHandler response = (WiAppResponseHandler) result;
 				if (response.getResponseCode().equalsIgnoreCase("-1"))
 				{
-					//InfoDialog.doModal("PIN Reset Success", "You will receive a SMS with your new PIN. Should you continue experiencing a problem, please contact 0800 33 33 85.", "Okay");
+					//InfoDialog.doModal("Confirmation Code Reset Success", "You will receive a SMS with your new Confirmation Code. Should you continue experiencing a problem, please contact 0800 33 33 85.", "Okay");
 					InfoDialog.doModal("", "You will receive a SMS with your new confirmation code. Should you continue experiencing a problem, please contact 0800 33 33 85.", "Okay");
 				}
 				else

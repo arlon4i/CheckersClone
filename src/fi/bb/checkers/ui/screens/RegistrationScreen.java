@@ -251,7 +251,7 @@ public class RegistrationScreen extends MainScreen implements FieldChangeListene
 		else if (field == pinButton)
 		{
 			InfoFragment info = new InfoFragment("whypin.html", true);
-			app.pushScreen(new FragmentContainerScreen("Why do I need a PIN?", info));
+			app.pushScreen(new FragmentContainerScreen("Why do I need a Confirmation Code?", info));
 		}
 		else if (field == whyButton)
 		{
@@ -321,7 +321,7 @@ public class RegistrationScreen extends MainScreen implements FieldChangeListene
 						loading.close();
 						PersistentStoreHelper.setSpecialsRegion(defaultProvince);
 						app.pushScreen(new AccountValidationScreen(user));
-						//InfoDialog.doModal("Account Validation", "To Validate your Account, enter your PIN which we have SMS'd to you.", "Okay");
+						//InfoDialog.doModal("Account Validation", "To Validate your Account, enter your Confirmation Code which we have SMS'd to you.", "Okay");
 					}
 
 					// doSignIn();

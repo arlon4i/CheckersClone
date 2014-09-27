@@ -74,11 +74,11 @@ public class FeedbackFragment extends Fragment implements FieldChangeListener
 		{
 			titleInputField = new TextButton("Select", FIELD_VCENTER);
 			titleInputField.setChangeListener(this);
-			firstnameField = new TextInputField("", false, false, ResourceHelper.color_checkers_teal, FIELD_VCENTER);
-			surnameField = new TextInputField("", false, false, ResourceHelper.color_checkers_teal, FIELD_VCENTER);
-			cellField = new TextInputField("", false, false, ResourceHelper.color_checkers_teal, FIELD_VCENTER);
-			emailField = new TextInputField("", false, false, ResourceHelper.color_checkers_teal, FIELD_VCENTER);
-			prefferedStoreField = new TextInputField("", false, false, ResourceHelper.color_checkers_teal, FIELD_VCENTER);
+			firstnameField = new TextInputField("", false, false, ResourceHelper.color_primary, FIELD_VCENTER);
+			surnameField = new TextInputField("", false, false, ResourceHelper.color_primary, FIELD_VCENTER);
+			cellField = new TextInputField("", false, false, ResourceHelper.color_primary, FIELD_VCENTER);
+			emailField = new TextInputField("", false, false, ResourceHelper.color_primary, FIELD_VCENTER);
+			prefferedStoreField = new TextInputField("", false, false, ResourceHelper.color_primary, FIELD_VCENTER);
 			provinceInputField = new TextButton("Select", FIELD_VCENTER);
 			provinceInputField.setChangeListener(this);
 
@@ -90,7 +90,7 @@ public class FeedbackFragment extends Fragment implements FieldChangeListener
 
 			Calendar cal = Calendar.getInstance();
 			dateField.setDate(cal);
-			dateField.setTextColor(ResourceHelper.color_checkers_teal);
+			dateField.setTextColor(ResourceHelper.color_primary);
 
 			add(new InputItemContainer("Title*", titleInputField));
 			add(new InputItemContainer("Name*", firstnameField));
@@ -107,7 +107,7 @@ public class FeedbackFragment extends Fragment implements FieldChangeListener
 		typeInputField.setChangeListener(this);
 
 		final int padding = ResourceHelper.convert(12);
-		message_area = new TextArea("Type your message here", ResourceHelper.color_checkers_teal)
+		message_area = new TextArea("Type your message here", ResourceHelper.color_primary)
 		{
 			public int getPreferredWidth()
 			{
@@ -180,7 +180,7 @@ public class FeedbackFragment extends Fragment implements FieldChangeListener
 					selected_province = (LocationData) choice.elementAt(0);
 
 					provinceInputField.setText(selected_province.getDesc());
-					provinceInputField.setTextColor(ResourceHelper.color_checkers_teal);
+					provinceInputField.setTextColor(ResourceHelper.color_primary);
 					updateLayout();// else the manager seems to shrink
 				}
 			}
@@ -198,7 +198,7 @@ public class FeedbackFragment extends Fragment implements FieldChangeListener
 					selected_title = (Title) choice.elementAt(0);
 
 					titleInputField.setText(selected_title.getDescription());
-					titleInputField.setTextColor(ResourceHelper.color_checkers_teal);
+					titleInputField.setTextColor(ResourceHelper.color_primary);
 					updateLayout();// else the manager seems to shrink
 				}
 			}
@@ -215,7 +215,7 @@ public class FeedbackFragment extends Fragment implements FieldChangeListener
 				if (choice != null)
 				{
 					typeInputField.setText((String) choice.elementAt(0));
-					typeInputField.setTextColor(ResourceHelper.color_checkers_teal);
+					typeInputField.setTextColor(ResourceHelper.color_primary);
 					updateLayout();// else the manager seems to shrink
 				}
 			}

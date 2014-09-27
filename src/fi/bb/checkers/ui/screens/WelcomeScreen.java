@@ -35,15 +35,15 @@ public class WelcomeScreen extends MainScreen implements FieldChangeListener
 		/*button_next = new TextImageButton("Next", "button_default", "button_hover",ResourceHelper.helveticaLight().getFont(Font.PLAIN, ResourceHelper.convert(15), Ui.UNITS_px));
 		button_skip = new TextImageButton("Start Saving!", "button_default", "button_hover",ResourceHelper.helveticaLight().getFont(Font.PLAIN, ResourceHelper.convert(15), Ui.UNITS_px));*/
 
-		button_next = new ColorButtonField(ResourceHelper.color_checkers_teal, ResourceHelper.color_white, ResourceHelper.convert(100),  ResourceHelper.convert(28));
-		button_next.setButtonOutlineStates(ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal);
+		button_next = new ColorButtonField(ResourceHelper.color_primary, ResourceHelper.color_white, ResourceHelper.convert(100),  ResourceHelper.convert(28));
+		button_next.setButtonOutlineStates(ResourceHelper.color_primary, ResourceHelper.color_primary, ResourceHelper.color_primary);
 		button_next.setButtonText("Next");
-		button_next.setTextStates(ResourceHelper.color_white, ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal);
+		button_next.setTextStates(ResourceHelper.color_white, ResourceHelper.color_primary, ResourceHelper.color_primary);
 
-		button_skip = new ColorButtonField(ResourceHelper.color_checkers_teal, ResourceHelper.color_white, ResourceHelper.convert(100),  ResourceHelper.convert(28));
-		button_skip.setButtonOutlineStates(ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal);
+		button_skip = new ColorButtonField(ResourceHelper.color_primary, ResourceHelper.color_white, ResourceHelper.convert(100),  ResourceHelper.convert(28));
+		button_skip.setButtonOutlineStates(ResourceHelper.color_primary, ResourceHelper.color_primary, ResourceHelper.color_primary);
 		button_skip.setButtonText("Start Saving!");
-		button_skip.setTextStates(ResourceHelper.color_white, ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal);
+		button_skip.setTextStates(ResourceHelper.color_white, ResourceHelper.color_primary, ResourceHelper.color_primary);
 
 		button_next.setMargin(0, ResourceHelper.convert(10), 0, 0);
 		button_manager = new HorizontalFieldManager(NO_VERTICAL_SCROLL | NO_HORIZONTAL_SCROLL | FIELD_HCENTER);

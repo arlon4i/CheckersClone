@@ -125,9 +125,9 @@ public class ProfileDrawer extends VerticalFieldManager implements InterfaceCoup
 				}
 			}
 		};
-		button_profile.setTextColor(ResourceHelper.color_checkers_teal);
-		button_profile.setTextColorHover(ResourceHelper.color_checkers_teal);
-		button_profile.setTextColorPressed(ResourceHelper.color_checkers_teal);
+		button_profile.setTextColor(ResourceHelper.color_primary);
+		button_profile.setTextColorHover(ResourceHelper.color_primary);
+		button_profile.setTextColorPressed(ResourceHelper.color_primary);
 
 		name_button = new BaseButton()
 		{

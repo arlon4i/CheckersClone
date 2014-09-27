@@ -27,7 +27,7 @@ public class PinField extends HorizontalFieldManager
 		final int char_width = font.getAdvance("0") + margin;
 		final int char_height = font.getHeight();
 
-		digit_1 = new TextInputField(String.valueOf('\u2022'), false, false, ResourceHelper.color_checkers_teal, 0)
+		digit_1 = new TextInputField(String.valueOf('\u2022'), false, false, ResourceHelper.color_primary, 0)
 		{
 
 			protected void onUnfocus()
@@ -54,7 +54,7 @@ public class PinField extends HorizontalFieldManager
 				}
 			}
 		};
-		digit_2 = new TextInputField(String.valueOf('\u2022'), false, false, ResourceHelper.color_checkers_teal, 0)
+		digit_2 = new TextInputField(String.valueOf('\u2022'), false, false, ResourceHelper.color_primary, 0)
 		{
 			protected void onUnfocus()
 			{
@@ -87,7 +87,7 @@ public class PinField extends HorizontalFieldManager
 
 			}
 		};
-		digit_3 = new TextInputField(String.valueOf('\u2022'), false, false, ResourceHelper.color_checkers_teal, 0)
+		digit_3 = new TextInputField(String.valueOf('\u2022'), false, false, ResourceHelper.color_primary, 0)
 		{
 			protected void onUnfocus()
 			{
@@ -120,7 +120,7 @@ public class PinField extends HorizontalFieldManager
 				}
 			}
 		};
-		digit_4 = new TextInputField(String.valueOf('\u2022'), false, false, ResourceHelper.color_checkers_teal, 0)
+		digit_4 = new TextInputField(String.valueOf('\u2022'), false, false, ResourceHelper.color_primary, 0)
 		{
 			protected void onUnfocus()
 			{

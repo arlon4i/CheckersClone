@@ -63,7 +63,7 @@ public class DatePickerField extends BaseButton
 
 		DateTimePicker picker = DateTimePicker.createInstance(date, "dd/MM/yyyy", null);
 		picker.doModal();
-		textColor = ResourceHelper.color_checkers_teal;
+		textColor = ResourceHelper.color_primary;
 		setDate(picker.getDateTime());
 	}
 }

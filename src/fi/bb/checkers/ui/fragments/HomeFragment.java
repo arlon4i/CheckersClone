@@ -192,7 +192,7 @@ public class HomeFragment extends Fragment
 				graphics.drawText(greetingPart1, x, y);
 
 				x = x + getFont().getAdvance(greetingPart1);
-				graphics.setColor(ResourceHelper.color_checkers_teal);
+				graphics.setColor(ResourceHelper.color_primary);
 				graphics.drawText(greetingPart2, x, y);	
 			}
 			else
@@ -347,7 +347,7 @@ public class HomeFragment extends Fragment
 
 		final int buttonHeight = ResourceHelper.convert(30);
 		
-		button = new ColorButtonField(ResourceHelper.color_checkers_teal, ResourceHelper.color_white, ResourceHelper.convert(144),  buttonHeight)
+		button = new ColorButtonField(ResourceHelper.color_primary, ResourceHelper.color_white, ResourceHelper.convert(144),  buttonHeight)
 		{
 			public void clickButton() {
 				super.clickButton();
@@ -355,9 +355,9 @@ public class HomeFragment extends Fragment
 				((ViewPagerScreen) UiApplication.getUiApplication().getActiveScreen()).profileClick();
 			}
 		};
-		button.setButtonOutlineStates(ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal);
+		button.setButtonOutlineStates(ResourceHelper.color_primary, ResourceHelper.color_primary, ResourceHelper.color_primary);
 		button.setButtonText("Redeem All");
-		button.setTextStates(ResourceHelper.color_white, ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal);
+		button.setTextStates(ResourceHelper.color_white, ResourceHelper.color_primary, ResourceHelper.color_primary);
 		
 		/*button = new TextImageButton("Redeem All", "btn_home_default", "btn_home_hover")//, buttonWidth)
 		{
@@ -383,13 +383,13 @@ public class HomeFragment extends Fragment
 			}
 		};
 		//vertical_manager.setBorder(BorderFactory.createSimpleBorder(new XYEdges(1, 1, 1, 1), new XYEdges(ResourceHelper.color_shoprite_red, ResourceHelper.color_shoprite_red, ResourceHelper.color_shoprite_red, ResourceHelper.color_shoprite_red), Border.STYLE_SOLID));
-		//button_manager.setBorder(BorderFactory.createSimpleBorder(new XYEdges(1, 1, 1, 1), new XYEdges(ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal), Border.STYLE_SOLID));
+		//button_manager.setBorder(BorderFactory.createSimpleBorder(new XYEdges(1, 1, 1, 1), new XYEdges(ResourceHelper.color_primary, ResourceHelper.color_primary, ResourceHelper.color_primary, ResourceHelper.color_primary), Border.STYLE_SOLID));
 
 		button_manager.add(button);
 		int margin = (Display.getWidth() - ResourceHelper.convert(144)*2)/3;
 		button.setMargin(ResourceHelper.convert(44-30)/2, 0, 0, margin);
 
-		button = new ColorButtonField(ResourceHelper.color_checkers_teal, ResourceHelper.color_white, ResourceHelper.convert(144),  buttonHeight)
+		button = new ColorButtonField(ResourceHelper.color_primary, ResourceHelper.color_white, ResourceHelper.convert(144),  buttonHeight)
 		{
 			public void clickButton() {
 				super.clickButton();
@@ -397,9 +397,9 @@ public class HomeFragment extends Fragment
 				((ViewPagerScreen) UiApplication.getUiApplication().getActiveScreen()).transition(CouponsFragment.FRAGMENT_ID, null);
 			}
 		};
-		button.setButtonOutlineStates(ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal);
+		button.setButtonOutlineStates(ResourceHelper.color_primary, ResourceHelper.color_primary, ResourceHelper.color_primary);
 		button.setButtonText("Browse All");
-		button.setTextStates(ResourceHelper.color_white, ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal);
+		button.setTextStates(ResourceHelper.color_white, ResourceHelper.color_primary, ResourceHelper.color_primary);
 		button.setMargin(ResourceHelper.convert(44-30)/2, 0, 0, margin);
 		button_manager.add(button);
 		/*button = new TextImageButton("Browse All", "btn_home_default", "btn_home_hover")//, buttonWidth)
@@ -526,7 +526,7 @@ public class HomeFragment extends Fragment
 			}
 		};
 		
-		//horizontal_manager.setBorder(BorderFactory.createSimpleBorder(new XYEdges(1, 1, 1, 1), new XYEdges(ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal), Border.STYLE_SOLID));
+		//horizontal_manager.setBorder(BorderFactory.createSimpleBorder(new XYEdges(1, 1, 1, 1), new XYEdges(ResourceHelper.color_primary, ResourceHelper.color_primary, ResourceHelper.color_primary, ResourceHelper.color_primary), Border.STYLE_SOLID));
 		
 		horizontal_manager.setMargin(backgroundimage.getHeight() - ResourceHelper.convert(44), 0, 0, 0);
 		
@@ -544,7 +544,7 @@ public class HomeFragment extends Fragment
 		label.setFont(labelFont);
 		horizontal_manager.add(label);
 
-		button = new ColorButtonField(ResourceHelper.color_checkers_teal, ResourceHelper.color_white, ResourceHelper.convert(144),  ResourceHelper.convert(30))
+		button = new ColorButtonField(ResourceHelper.color_primary, ResourceHelper.color_white, ResourceHelper.convert(144),  ResourceHelper.convert(30))
 		{
 			public void clickButton() {
 				super.clickButton();
@@ -553,9 +553,9 @@ public class HomeFragment extends Fragment
 				((ViewPagerScreen) UiApplication.getUiApplication().getActiveScreen()).transition(SpecialsFragment.FRAGMENT_ID, null);
 			}
 		};
-		button.setButtonOutlineStates(ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal);
+		button.setButtonOutlineStates(ResourceHelper.color_primary, ResourceHelper.color_primary, ResourceHelper.color_primary);
 		button.setButtonText("View All");
-		button.setTextStates(ResourceHelper.color_white, ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal);
+		button.setTextStates(ResourceHelper.color_white, ResourceHelper.color_primary, ResourceHelper.color_primary);
 		
 		/*button = new TextImageButton("View All", "btn_home_default", "btn_home_hover")
 		{
@@ -629,7 +629,7 @@ public class HomeFragment extends Fragment
 		label.setFont(labelFont);
 		horizontal_manager.add(label);
 
-		button = new ColorButtonField(ResourceHelper.color_checkers_teal, ResourceHelper.color_white, ResourceHelper.convert(144),  ResourceHelper.convert(30))
+		button = new ColorButtonField(ResourceHelper.color_primary, ResourceHelper.color_white, ResourceHelper.convert(144),  ResourceHelper.convert(30))
 		{
 			public void clickButton() {
 				super.clickButton();
@@ -637,9 +637,9 @@ public class HomeFragment extends Fragment
 				((ViewPagerScreen) UiApplication.getUiApplication().getActiveScreen()).transition(SelectProvinceFragment.FRAGMENT_ID, null);
 			}
 		};
-		button.setButtonOutlineStates(ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal);
+		button.setButtonOutlineStates(ResourceHelper.color_primary, ResourceHelper.color_primary, ResourceHelper.color_primary);
 		button.setButtonText("View Stores");
-		button.setTextStates(ResourceHelper.color_white, ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal);
+		button.setTextStates(ResourceHelper.color_white, ResourceHelper.color_primary, ResourceHelper.color_primary);
 		
 		/*button = new TextImageButton("View Stores", "btn_home_default", "btn_home_hover")
 		{

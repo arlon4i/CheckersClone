@@ -58,8 +58,8 @@ public class AccountValidationScreen extends MainScreen implements FieldChangeLi
 		setBanner(new Actionbar("Confirmation Code", false, false));
 
 		// prepopulated cell number
-		TextInputField cellNumberField = new TextInputField("", false, false, ResourceHelper.color_checkers_teal, 0);
-		cellNumberField.setDisabledColor(ResourceHelper.color_checkers_teal);
+		TextInputField cellNumberField = new TextInputField("", false, false, ResourceHelper.color_primary, 0);
+		cellNumberField.setDisabledColor(ResourceHelper.color_primary);
 		cellNumberField.setTextFont(ResourceHelper.helveticaLight().getFont(Font.BOLD, ResourceHelper.convert(17), Ui.UNITS_px));
 		cellNumberField.setText(user.getCellphone());
 		cellNumberField.setFilter(TextFilter.get(TextFilter.NUMERIC));
@@ -80,10 +80,10 @@ public class AccountValidationScreen extends MainScreen implements FieldChangeLi
 
 		// validate button
 		
-		validateButton = new ColorButtonField(ResourceHelper.color_checkers_teal, ResourceHelper.color_white, ResourceHelper.convert(100),  buttonHeight);
-		validateButton.setButtonOutlineStates(ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal);
+		validateButton = new ColorButtonField(ResourceHelper.color_primary, ResourceHelper.color_white, ResourceHelper.convert(100),  buttonHeight);
+		validateButton.setButtonOutlineStates(ResourceHelper.color_primary, ResourceHelper.color_primary, ResourceHelper.color_primary);
 		validateButton.setButtonText("Enter");
-		validateButton.setTextStates(ResourceHelper.color_white, ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal);
+		validateButton.setTextStates(ResourceHelper.color_white, ResourceHelper.color_primary, ResourceHelper.color_primary);
 		validateButton.setTextFont(ResourceHelper.helveticaLight().getFont(Font.PLAIN, ResourceHelper.convert(17), Ui.UNITS_px));
 		
 		/*validateButton= new TextImageButton("Enter", "btn_sml_default", "btn_sml_hover");
@@ -99,10 +99,10 @@ public class AccountValidationScreen extends MainScreen implements FieldChangeLi
 		resendHyperlink.setTextColorHover(ResourceHelper.color_primary);
 		resendHyperlink.setTextColorPressed(ResourceHelper.color_primary);*/
 		
-		resendHyperlink = new ColorButtonField(ResourceHelper.color_checkers_teal, ResourceHelper.color_white, ResourceHelper.convert(215),  buttonHeight);
-		resendHyperlink.setButtonOutlineStates(ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal);
+		resendHyperlink = new ColorButtonField(ResourceHelper.color_primary, ResourceHelper.color_white, ResourceHelper.convert(215),  buttonHeight);
+		resendHyperlink.setButtonOutlineStates(ResourceHelper.color_primary, ResourceHelper.color_primary, ResourceHelper.color_primary);
 		resendHyperlink.setButtonText("Resend Confirmation Code");
-		resendHyperlink.setTextStates(ResourceHelper.color_white, ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal);
+		resendHyperlink.setTextStates(ResourceHelper.color_white, ResourceHelper.color_primary, ResourceHelper.color_primary);
 		resendHyperlink.setTextFont(ResourceHelper.helveticaLight().getFont(Font.PLAIN, ResourceHelper.convert(17), Ui.UNITS_px));
 		
 		//resendHyperlink = new HyperlinkButton("Resend Confirmation Code", ResourceHelper.convert(17));

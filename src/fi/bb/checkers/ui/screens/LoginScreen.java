@@ -79,7 +79,7 @@ public class LoginScreen extends MainScreen implements FieldChangeListener
 
 		loginDetailsManager = new VerticalFieldManager();
 
-		cellField = new TextInputField("0821234567", false, false, ResourceHelper.color_checkers_teal, FIELD_VCENTER);
+		cellField = new TextInputField("0821234567", false, false, ResourceHelper.color_primary, FIELD_VCENTER);
 		cellField.setFilter(TextFilter.get(TextFilter.NUMERIC));
 		cellField.setMaxSize(10);
 
@@ -101,10 +101,10 @@ public class LoginScreen extends MainScreen implements FieldChangeListener
 		
 		loginDetailsManager.add(getSeperator());
 		
-		loginButton = new ColorButtonField(ResourceHelper.color_checkers_teal, ResourceHelper.color_white, ResourceHelper.convert(215),  buttonHeight);
-		loginButton.setButtonOutlineStates(ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal);
+		loginButton = new ColorButtonField(ResourceHelper.color_primary, ResourceHelper.color_white, ResourceHelper.convert(215),  buttonHeight);
+		loginButton.setButtonOutlineStates(ResourceHelper.color_primary, ResourceHelper.color_primary, ResourceHelper.color_primary);
 		loginButton.setButtonText("Send Confirmation Code");
-		loginButton.setTextStates(ResourceHelper.color_white, ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal);
+		loginButton.setTextStates(ResourceHelper.color_white, ResourceHelper.color_primary, ResourceHelper.color_primary);
 		loginButton.setTextFont(ResourceHelper.helveticaLight().getFont(Font.PLAIN, ResourceHelper.convert(17), Ui.UNITS_px));
 		loginButton.setChangeListener(this);
 		loginButton.setMargin(ResourceHelper.convert(10), 0, 0, ResourceHelper.convert(10));

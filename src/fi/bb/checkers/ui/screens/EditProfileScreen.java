@@ -77,10 +77,10 @@ public class EditProfileScreen extends MainScreen implements FieldChangeListener
 		final UserData profile = RuntimeStoreHelper.getUserData();
 
 		titleInputField = new TextButton("Select", FIELD_VCENTER);
-		firstnameField = new TextInputField("", false, false, ResourceHelper.color_checkers_teal, FIELD_VCENTER);
-		surnameField = new TextInputField("", false, false, ResourceHelper.color_checkers_teal, FIELD_VCENTER);
-		cellField = new LabelField(profile.getCellphone(), ResourceHelper.color_checkers_teal, DrawStyle.VCENTER, ResourceHelper.helveticaLight().getFont(Font.PLAIN, ResourceHelper.convert(17), Ui.UNITS_px));
-		emailField = new TextInputField("", false, false, ResourceHelper.color_checkers_teal, FIELD_VCENTER);
+		firstnameField = new TextInputField("", false, false, ResourceHelper.color_primary, FIELD_VCENTER);
+		surnameField = new TextInputField("", false, false, ResourceHelper.color_primary, FIELD_VCENTER);
+		cellField = new LabelField(profile.getCellphone(), ResourceHelper.color_primary, DrawStyle.VCENTER, ResourceHelper.helveticaLight().getFont(Font.PLAIN, ResourceHelper.convert(17), Ui.UNITS_px));
+		emailField = new TextInputField("", false, false, ResourceHelper.color_primary, FIELD_VCENTER);
 		dateField = new DatePickerField(Calendar.getInstance(), FIELD_VCENTER);
 		dateField.setFont(ResourceHelper.helveticaLight().getFont(Font.PLAIN, ResourceHelper.convert(17), Ui.UNITS_px));
 		provinceInputField = new TextButton("Select", FIELD_VCENTER);
@@ -157,15 +157,15 @@ public class EditProfileScreen extends MainScreen implements FieldChangeListener
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date(HttpDateParser.parse(httpparserformat)));
 		dateField.setDate(cal);
-		dateField.setTextColor(ResourceHelper.color_checkers_teal);
+		dateField.setTextColor(ResourceHelper.color_primary);
 		
 		provinceInputField.setText(selected_province.getDesc());
-		provinceInputField.setTextColor(ResourceHelper.color_checkers_teal);
+		provinceInputField.setTextColor(ResourceHelper.color_primary);
 
 		if (selected_title != null)
 		{
 			titleInputField.setText(selected_title.getDescription());
-			titleInputField.setTextColor(ResourceHelper.color_checkers_teal);
+			titleInputField.setTextColor(ResourceHelper.color_primary);
 		}
 
 		selected_store = RuntimeStoreHelper.getUserData().getPreferredStore();
@@ -173,7 +173,7 @@ public class EditProfileScreen extends MainScreen implements FieldChangeListener
 		if (selected_store != null) 
 		{
 			preferredstoreInputField.setText(selected_store.getName()); 
-			preferredstoreInputField.setTextColor(ResourceHelper.color_checkers_teal);
+			preferredstoreInputField.setTextColor(ResourceHelper.color_primary);
 		}
 	}
 
@@ -191,7 +191,7 @@ public class EditProfileScreen extends MainScreen implements FieldChangeListener
 				//selected_store = null;
 
 				provinceInputField.setText(selected_province.getDesc());
-				provinceInputField.setTextColor(ResourceHelper.color_checkers_teal);
+				provinceInputField.setTextColor(ResourceHelper.color_primary);
 
 				//preferredstoreInputField.setText("Select Preferred Store");
 				updateLayout();// else the manager seems to shrink
@@ -210,7 +210,7 @@ public class EditProfileScreen extends MainScreen implements FieldChangeListener
 					selected_title = (Title) choice.elementAt(0);
 
 					titleInputField.setText(selected_title.getDescription());
-					titleInputField.setTextColor(ResourceHelper.color_checkers_teal);
+					titleInputField.setTextColor(ResourceHelper.color_primary);
 					updateLayout();// else the manager seems to shrink
 				}
 			}

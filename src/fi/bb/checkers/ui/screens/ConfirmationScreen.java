@@ -89,10 +89,10 @@ public class ConfirmationScreen extends MainScreen implements FieldChangeListene
 		loginButton.setTextColor(ResourceHelper.color_white);
 		loginButton.setTextColorHover(ResourceHelper.color_primary);
 		loginButton.setTextColorPressed(ResourceHelper.color_primary);*/
-		loginButton = new ColorButtonField(ResourceHelper.color_checkers_teal, ResourceHelper.color_white, ResourceHelper.convert(100),  buttonHeight);
-		loginButton.setButtonOutlineStates(ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal);
+		loginButton = new ColorButtonField(ResourceHelper.color_primary, ResourceHelper.color_white, ResourceHelper.convert(100),  buttonHeight);
+		loginButton.setButtonOutlineStates(ResourceHelper.color_primary, ResourceHelper.color_primary, ResourceHelper.color_primary);
 		loginButton.setButtonText("Enter");
-		loginButton.setTextStates(ResourceHelper.color_white, ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal);
+		loginButton.setTextStates(ResourceHelper.color_white, ResourceHelper.color_primary, ResourceHelper.color_primary);
 		loginButton.setTextFont(ResourceHelper.helveticaLight().getFont(Font.PLAIN, ResourceHelper.convert(17), Ui.UNITS_px));
 		
 		loginButton.setChangeListener(this);
@@ -103,10 +103,10 @@ public class ConfirmationScreen extends MainScreen implements FieldChangeListene
 		forgotButton.setTextColor(ResourceHelper.color_primary);
 		forgotButton.setTextColorHover(ResourceHelper.color_primary);
 		forgotButton.setTextColorPressed(ResourceHelper.color_primary);*/
-		forgotButton = new ColorButtonField(ResourceHelper.color_checkers_teal, ResourceHelper.color_white, ResourceHelper.convert(215),  buttonHeight);
-		forgotButton.setButtonOutlineStates(ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal);
+		forgotButton = new ColorButtonField(ResourceHelper.color_primary, ResourceHelper.color_white, ResourceHelper.convert(215),  buttonHeight);
+		forgotButton.setButtonOutlineStates(ResourceHelper.color_primary, ResourceHelper.color_primary, ResourceHelper.color_primary);
 		forgotButton.setButtonText("Resend Confirmation Code");
-		forgotButton.setTextStates(ResourceHelper.color_white, ResourceHelper.color_checkers_teal, ResourceHelper.color_checkers_teal);
+		forgotButton.setTextStates(ResourceHelper.color_white, ResourceHelper.color_primary, ResourceHelper.color_primary);
 		forgotButton.setTextFont(ResourceHelper.helveticaLight().getFont(Font.PLAIN, ResourceHelper.convert(17), Ui.UNITS_px));
 		
 		//forgotButton = new HyperlinkButton("Resend Confirmation Code", ResourceHelper.convert(17));

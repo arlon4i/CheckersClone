@@ -140,7 +140,7 @@ public class TutorialScreen extends FullScreen
 			int x = (getWidth() - ResourceHelper.convert(20) - font_body.getAdvance(StringHelper.checkers_stores)) / 2;
 
 			graphics.setFont(font_body);
-			graphics.setColor(ResourceHelper.color_checkers_teal);
+			graphics.setColor(ResourceHelper.color_primary);
 			y += ResourceHelper.convert(15);
 			graphics.fillArc(x, y + (font_body.getHeight() - ResourceHelper.convert(8)) / 2, ResourceHelper.convert(8), ResourceHelper.convert(8), 0, 360);
 			graphics.setColor(ResourceHelper.color_black);

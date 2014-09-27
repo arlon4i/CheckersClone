@@ -118,7 +118,7 @@ public class RegistrationScreen extends MainScreen implements FieldChangeListene
 					selected_province = (LocationData) choice.elementAt(0);
 
 					provinceInputField.setText(selected_province.getDesc());
-					provinceInputField.setTextColor(ResourceHelper.color_checkers_teal);
+					provinceInputField.setTextColor(ResourceHelper.color_primary);
 					updateLayout();// else the manager seems to shrink
 				}
 			}
@@ -137,7 +137,7 @@ public class RegistrationScreen extends MainScreen implements FieldChangeListene
 					selected_title = (Title) choice.elementAt(0);
 
 					titleInputField.setText(selected_title.getDescription());
-					titleInputField.setTextColor(ResourceHelper.color_checkers_teal);
+					titleInputField.setTextColor(ResourceHelper.color_primary);
 					updateLayout();// else the manager seems to shrink
 				}
 			}
@@ -353,10 +353,10 @@ public class RegistrationScreen extends MainScreen implements FieldChangeListene
 	{
 		userDetailsManager = new VerticalFieldManager();
 
-		firstnameField = new TextInputField("", false, false, ResourceHelper.color_checkers_teal, FIELD_VCENTER);
-		surnameField = new TextInputField("", false, false, ResourceHelper.color_checkers_teal, FIELD_VCENTER);
-		cellField = new TextInputField("", false, false, ResourceHelper.color_checkers_teal, FIELD_VCENTER);
-		emailField = new TextInputField("", false, false, ResourceHelper.color_checkers_teal, FIELD_VCENTER);
+		firstnameField = new TextInputField("", false, false, ResourceHelper.color_primary, FIELD_VCENTER);
+		surnameField = new TextInputField("", false, false, ResourceHelper.color_primary, FIELD_VCENTER);
+		cellField = new TextInputField("", false, false, ResourceHelper.color_primary, FIELD_VCENTER);
+		emailField = new TextInputField("", false, false, ResourceHelper.color_primary, FIELD_VCENTER);
 		dateField = new DatePickerField(Calendar.getInstance(), FIELD_VCENTER);
 		dateField.setFont(ResourceHelper.helveticaLight().getFont(Font.PLAIN, ResourceHelper.convert(17), Ui.UNITS_px));
 		provinceInputField = new TextButton("Select", FIELD_VCENTER);

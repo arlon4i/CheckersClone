@@ -6,3 +6,4 @@
 *.class
 local.properties
 .settings/
+*.DS_Store

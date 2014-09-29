@@ -114,6 +114,7 @@ public class StringHelper
     public static final String coupons_channel_id_coupon = "COUPON";//not sure if this should change
     public static final String wigroup_appid = "BLACKBERRY";
     public static final String wigroup_apppassword = "blackb3rry_int3rfac3_wiapp";
+    public static final String wigroup_url = "http://196.37.63.100/shoprite/http-to-socket/checkers/index.php?";
     
     
 }

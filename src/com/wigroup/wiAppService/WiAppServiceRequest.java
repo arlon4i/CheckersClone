@@ -9,6 +9,7 @@ import net.rim.device.api.xml.parsers.SAXParserFactory;
 
 import com.wigroup.wiAppService.responsehandlers.WiAppResponseHandler;
 
+import fi.bb.checkers.helpers.StringHelper;
 import fi.bb.checkers.logger.RemoteLogger;
 import fi.bb.checkers.network.HttpInterface;
 
@@ -23,7 +24,7 @@ public class WiAppServiceRequest
 		{
 			RemoteLogger.log("WiAppServiceRequest", "Request request: " + request);
 			
-			String url = "http://196.37.63.100/shoprite/http-to-socket/checkers/index.php?" + encodeUrl(request);
+			String url = StringHelper.wigroup_url + encodeUrl(request);
 
 			RemoteLogger.log("WiAppServiceRequest", "Request url: " + url);
 			

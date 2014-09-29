@@ -161,7 +161,8 @@ public class ThemedSpecialsScreen extends MainScreen implements FieldChangeListe
 				}
 				else
 				{
-					selectProvinceForGuest();
+					//selectProvinceForGuest();
+					close();
 				}
 			}
 		});

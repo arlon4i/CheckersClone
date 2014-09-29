@@ -201,7 +201,8 @@ public class CouponsFragment extends Fragment implements FieldChangeListener, In
 				}
 				else
 				{
-					selectProvinceForGuest();
+					//selectProvinceForGuest();
+					close();
 				}
 			}
 		});

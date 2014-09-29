@@ -222,7 +222,8 @@ public class SpecialsFragment extends Fragment implements FieldChangeListener
 				}
 				else
 				{
-					selectProvinceForGuest();
+					//selectProvinceForGuest();
+					close();
 				}
 			}
 		});

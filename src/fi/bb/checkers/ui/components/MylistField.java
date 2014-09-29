@@ -65,8 +65,8 @@ public class MylistField extends HorizontalFieldManager
 	{
 		private final int height = ResourceHelper.convert(110);
 		private final int width = ResourceHelper.convert(40);
-		private final Bitmap tick = ResourceHelper.getImage("check-box_selected.jpg");
-		private final Bitmap untick = ResourceHelper.getImage("check-box_default.jpg");
+		private final Bitmap tick = ResourceHelper.getImage("check-box_selected.png");
+		private final Bitmap untick = ResourceHelper.getImage("check-box_default.png");
 		private final int separator_padding = ResourceHelper.convert(15);
 		private boolean checked = false;
 

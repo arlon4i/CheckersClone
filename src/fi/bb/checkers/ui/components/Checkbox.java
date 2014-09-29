@@ -18,7 +18,7 @@ public class Checkbox extends ImageButton
 
 	public Checkbox(boolean checked, long style)
 	{
-		super("check-box_default.jpg", "check-box_hover.jpg", ResourceHelper.convert(20), ResourceHelper.convert(20), style);
+		super("check-box_default.png", "check-box_hover.png", ResourceHelper.convert(20), ResourceHelper.convert(20), style);
 
 		setChecked(checked);
 	}
@@ -28,11 +28,11 @@ public class Checkbox extends ImageButton
 		this.checked = checked;
 		if (checked)
 		{
-			setImage("check-box_selected.jpg", "check-box_ticked_hover.jpg");
+			setImage("check-box_selected.png", "check-box_ticked_hover.png");
 		}
 		else
 		{
-			setImage("check-box_default.jpg", "check-box_hover.jpg");
+			setImage("check-box_default.png", "check-box_hover.png");
 		}
 	}
 

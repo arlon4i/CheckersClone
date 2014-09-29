@@ -62,7 +62,7 @@ public class CouponsFragment extends Fragment implements FieldChangeListener, In
 	private String refreshThreadTag = "REFRESH_THREAD_TOKEN";
 
 	private Font fontNoItemsForSearch = ResourceHelper.helveticaLight().getFont(Font.PLAIN, ResourceHelper.convert(16), Ui.UNITS_px);
-
+	private boolean closeImmediately = false;
 	String currentLocationId = "";;
 
 	public CouponsFragment()
@@ -202,6 +202,7 @@ public class CouponsFragment extends Fragment implements FieldChangeListener, In
 				else
 				{
 					//selectProvinceForGuest();
+					closeImmediately = true;
 					close();
 				}
 			}
@@ -210,7 +211,7 @@ public class CouponsFragment extends Fragment implements FieldChangeListener, In
 
 	protected void onVisibilityChange(boolean visible)
 	{
-		if (visible)
+		if (visible && closeImmediately == false)
 		{
 			if (PersistentStoreHelper.isShowTutorial3())
 			{

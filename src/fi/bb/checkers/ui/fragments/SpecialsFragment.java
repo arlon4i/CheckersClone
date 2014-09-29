@@ -57,7 +57,7 @@ public class SpecialsFragment extends Fragment implements FieldChangeListener
 	private int refreshCount;
 	private String refreshCountTag;
 	private String refreshThreadTag = "REFRESH_THREAD_TOKEN";
-
+	private boolean closeImmediately = false;
 	private Font fontNoItemsForSearch = ResourceHelper.helveticaLight().getFont(Font.PLAIN, ResourceHelper.convert(16), Ui.UNITS_px);
 
 	public SpecialsFragment()
@@ -223,6 +223,7 @@ public class SpecialsFragment extends Fragment implements FieldChangeListener
 				else
 				{
 					//selectProvinceForGuest();
+					closeImmediately = true;
 					close();
 				}
 			}
@@ -231,7 +232,7 @@ public class SpecialsFragment extends Fragment implements FieldChangeListener
 
 	protected void onVisibilityChange(boolean visible)
 	{
-		if (visible)
+		if (visible && closeImmediately == false)
 		{
 			if (PersistentStoreHelper.isShowTutorial4())
 			{

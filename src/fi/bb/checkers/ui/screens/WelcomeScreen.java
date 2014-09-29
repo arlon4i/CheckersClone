@@ -71,7 +71,7 @@ public class WelcomeScreen extends MainScreen implements FieldChangeListener
 
 		buildPage(1);
 
-		button_manager.setMargin(Display.getHeight() - progress_manager.getPreferredHeight() - button_manager.getPreferredHeight() - ResourceHelper.convert(10), 0, 0, 0);
+		button_manager.setMargin(Display.getHeight() - progress_manager.getPreferredHeight() - button_manager.getPreferredHeight() - ResourceHelper.convert(3), 0, 0, 0);
 
 		button_next.setChangeListener(this);
 		button_skip.setChangeListener(this);

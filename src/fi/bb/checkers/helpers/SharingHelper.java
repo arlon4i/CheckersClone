@@ -309,6 +309,7 @@ public class SharingHelper
 			MessageConnection mc = (MessageConnection) Connector.open("sms://");
 			TextMessage textMessage = (TextMessage) mc.newMessage(MessageConnection.TEXT_MESSAGE);
 			textMessage.setPayloadText(message);
+			textMessage.setAddress("sms://");
 			Invoke.invokeApplication(Invoke.APP_TYPE_MESSAGES, new MessageArguments(textMessage));
 
 		} catch (Exception e)

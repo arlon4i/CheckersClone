@@ -12,6 +12,7 @@ import net.rim.device.api.ui.Ui;
 import fi.bb.checkers.datatypes.CampaignData;
 import fi.bb.checkers.helpers.PersistentStoreHelper;
 import fi.bb.checkers.helpers.ResourceHelper;
+import fi.bb.checkers.helpers.StringHelper;
 import fi.bb.checkers.imageloader.ImageLoader;
 import fi.bb.checkers.imageloader.ImageLoaderInterface;
 import fi.bb.checkers.utils.BitmapTools;
@@ -139,8 +140,8 @@ public class CouponField extends BaseButton implements ImageLoaderInterface
 		y += font_save.getBaseline() - font_rand.getLeading() + ResourceHelper.convert(5);
 		graphics.setFont(font_cent);
 		int x1 = x;
-		graphics.drawText("R", x1, y + font_rand.getLeading() - font_cent.getLeading());
-		x1 += graphics.getFont().getAdvance("R");
+		graphics.drawText(StringHelper.currency_symbol, x1, y + font_rand.getLeading() - font_cent.getLeading());
+		x1 += graphics.getFont().getAdvance(StringHelper.currency_symbol);
 		graphics.setFont(font_rand);
 		String[] pricetokens = StringUtil.split(price, ".");
 		graphics.drawText(pricetokens[0], x1, y);

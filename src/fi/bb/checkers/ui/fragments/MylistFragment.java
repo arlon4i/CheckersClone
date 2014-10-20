@@ -23,6 +23,7 @@ import fi.bb.checkers.datatypes.CampaignData;
 import fi.bb.checkers.helpers.FlurryHelper;
 import fi.bb.checkers.helpers.PersistentStoreHelper;
 import fi.bb.checkers.helpers.ResourceHelper;
+import fi.bb.checkers.helpers.StringHelper;
 import fi.bb.checkers.prompts.CustomDialog;
 import fi.bb.checkers.ui.components.LabelField;
 import fi.bb.checkers.ui.components.MylistField;
@@ -78,7 +79,7 @@ public class MylistFragment extends Fragment implements FieldChangeListener
 		label.setFont(ResourceHelper.helveticaLight().getFont(Font.PLAIN, ResourceHelper.convert(14), Ui.UNITS_px));
 		label.setMargin((banner_manager.getPreferredHeight() - label.getPreferredHeight()) / 2, 0, 0, ResourceHelper.convert(5));
 
-		label_savings = new LabelField("R0.00", ResourceHelper.color_black, 0);
+		label_savings = new LabelField(StringHelper.currency_symbol+"0.00", ResourceHelper.color_black, 0);
 		label_savings.setFont(ResourceHelper.helveticaMed().getFont(Font.PLAIN, ResourceHelper.convert(14), Ui.UNITS_px));
 		label_savings.setMargin((banner_manager.getPreferredHeight() - label_savings.getPreferredHeight()) / 2, ResourceHelper.convert(5), 0, ResourceHelper.convert(5));
 
@@ -214,7 +215,7 @@ public class MylistFragment extends Fragment implements FieldChangeListener
 								total += Double.parseDouble(coupon.getValue()) / 100;
 							}
 
-							label_savings.setText("R" + new Formatter().formatNumber(total, 2));
+							label_savings.setText(StringHelper.currency_symbol + new Formatter().formatNumber(total, 2));
 							button_redeem.setMargin((banner_manager.getPreferredHeight() - button_redeem.getPreferredHeight()) / 2, 0, 0,
 									Display.getWidth() - label.getPreferredWidth() - label_savings.getPreferredWidth() - button_redeem.getPreferredWidth() - ResourceHelper.convert(20));	
 						}
@@ -318,7 +319,7 @@ public class MylistFragment extends Fragment implements FieldChangeListener
 			total += Double.parseDouble(coupon.getValue()) / 100;
 		}
 
-		label_savings.setText("R" + new Formatter().formatNumber(total, 2));
+		label_savings.setText(StringHelper.currency_symbol + new Formatter().formatNumber(total, 2));
 		button_redeem.setMargin((banner_manager.getPreferredHeight() - button_redeem.getPreferredHeight()) / 2, 0, 0,
 				Display.getWidth() - label.getPreferredWidth() - label_savings.getPreferredWidth() - button_redeem.getPreferredWidth() - ResourceHelper.convert(20));
 	}

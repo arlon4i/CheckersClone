@@ -122,7 +122,7 @@ public class SharingHelper
 		try
 		{
 			double priceValue = Double.parseDouble(coupon.getValue())/100.0;
-			priceValueText = "R" + FormatHelper.getPriceFormattedHome(priceValue);
+			priceValueText = StringHelper.currency_symbol + FormatHelper.getPriceFormattedHome(priceValue);
 		}
 		catch (Exception e) 
 		{
@@ -191,7 +191,7 @@ public class SharingHelper
 		try
 		{
 			double priceValue = Double.parseDouble(special.getValue())/100.0;
-			priceValueText = "R" + FormatHelper.getPriceFormattedHome(priceValue);
+			priceValueText = StringHelper.currency_symbol + FormatHelper.getPriceFormattedHome(priceValue);
 		}
 		catch (Exception e) 
 		{

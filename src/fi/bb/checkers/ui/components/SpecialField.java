@@ -14,6 +14,7 @@ import net.rim.device.api.ui.Ui;
 import fi.bb.checkers.datatypes.CampaignData;
 import fi.bb.checkers.helpers.PersistentStoreHelper;
 import fi.bb.checkers.helpers.ResourceHelper;
+import fi.bb.checkers.helpers.StringHelper;
 import fi.bb.checkers.imageloader.ImageLoader;
 import fi.bb.checkers.imageloader.ImageLoaderInterface;
 import fi.bb.checkers.utils.BitmapTools;
@@ -174,11 +175,11 @@ public class SpecialField extends BaseButton implements ImageLoaderInterface
 
 		graphics.setColor(ResourceHelper.color_primary);
 		graphics.setFont(font_cent);
-		graphics.drawText("R", x, y + font_rand.getLeading() - font_cent.getLeading());
+		graphics.drawText(StringHelper.currency_symbol, x, y + font_rand.getLeading() - font_cent.getLeading());
 		graphics.setFont(font_rand);
-		graphics.drawText(price_rand, x + font_cent.getAdvance("R"), y);
+		graphics.drawText(price_rand, x + font_cent.getAdvance(StringHelper.currency_symbol), y);
 
-		x += font_rand.getAdvance(price_rand) + font_cent.getAdvance("R");
+		x += font_rand.getAdvance(price_rand) + font_cent.getAdvance(StringHelper.currency_symbol);
 		y += font_rand.getLeading() - font_cent.getLeading();
 		graphics.setFont(font_cent);
 		graphics.drawText(price_cent, x, y);

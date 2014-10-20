@@ -116,5 +116,6 @@ public class StringHelper
     public static final String wigroup_apppassword = "blackb3rry_int3rfac3_wiapp";
     public static final String wigroup_url = "http://196.37.63.100/shoprite/http-to-socket/checkers/index.php?";
     
+    public static final String currency_symbol = "R";
     
 }

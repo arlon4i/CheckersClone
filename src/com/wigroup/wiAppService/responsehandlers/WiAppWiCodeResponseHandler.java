@@ -3,6 +3,8 @@ package com.wigroup.wiAppService.responsehandlers;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
+import fi.bb.checkers.logger.RemoteLogger;
+
 public class WiAppWiCodeResponseHandler extends WiAppResponseHandler {
 
     private String wiCode;

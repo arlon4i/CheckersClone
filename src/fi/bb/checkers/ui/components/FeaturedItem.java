@@ -203,7 +203,7 @@ public class FeaturedItem extends BaseButton implements ImageLoaderInterface, Fi
 		Hashtable eventParams = new Hashtable();
 
 		eventParams.put(FlurryHelper.PARAM_TAPPED, "1");
-		eventParams.put(FlurryHelper.PARAM_TIME, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
+		eventParams.put(FlurryHelper.PARAM_TIMESTAMP, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
 		FlurryHelper.addProvinceParam(eventParams);
 		FlurryHelper.addLoginParams(eventParams);
 		eventParams.put(FlurryHelper.PARAM_THEME_ID, themeId);
@@ -218,7 +218,7 @@ public class FeaturedItem extends BaseButton implements ImageLoaderInterface, Fi
 		Hashtable eventParams = new Hashtable();
 
 		eventParams.put(FlurryHelper.PARAM_TAPPED, "1");
-		eventParams.put(FlurryHelper.PARAM_TIME, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
+		eventParams.put(FlurryHelper.PARAM_TIMESTAMP, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
 		FlurryHelper.addLoginParams(eventParams);	
 		FlurryHelper.addProvinceParam(eventParams);
 		eventParams.put(FlurryHelper.PARAM_CAMPAIGN_ID, item.getAction() + " || " +item.getActionDetail() + " || " + item.getImageURL());

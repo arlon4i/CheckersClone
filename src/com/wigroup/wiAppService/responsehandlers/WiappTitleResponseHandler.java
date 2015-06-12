@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+
 import fi.bb.checkers.datatypes.Title;
 
 public class WiappTitleResponseHandler extends WiAppResponseHandler {

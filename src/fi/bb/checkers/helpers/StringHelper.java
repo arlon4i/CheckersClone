@@ -3,8 +3,10 @@ package fi.bb.checkers.helpers;
 
 public class StringHelper
 {
+	public static final String currency_symbol = "R";
+	
 	public static final String welcome_inbox_title = "Welcome to your Checkers Inbox.";
-	public static final String welcome_inbox_desc = "Get easy access to the best deals and save over R2000 with EeziCoupons plus much more from your favourite Checkers and Checkers Hyper stores.";
+	public static final String welcome_inbox_desc = "Get easy access to the best deals and save over " + currency_symbol + "2000 with EeziCoupons plus much more from your favourite Checkers and Checkers Hyper stores.";
     
 	public static final String welcome_location_allow = "Thank you for using the Checkers Mobile App.\n\nWe would like to use your current location. This will allow us to provide you with the latest Specials and EeziCoupons so you can start saving.";
     
@@ -51,9 +53,9 @@ public class StringHelper
     
     public static final String app_permissions_warning = "Insufficient Permissions to run Checkers. The application will now exit.";
     
-    public static final String visit_nearest_store = "Visit your nearest Checkers store.";
+    public static final String visit_nearest_store = "Visit your nearest store.";
     public static final String buy_items_desc = "Buy the items for which you have EeziCoupons.";
-    public static final String enter_your_wicode_desc = "Enter your WiCode on the PIN pad at the till to receive your discount.";
+    public static final String enter_your_wicode_desc = "Enter your WiCode or scan this QR code at the till before paying.";
     
     public static final String about_full_description = "At Checkers, we strive to give our customers an all-round better shopping experience.\n\nBetter Savings - There is no need to change your lifestyle when shopping at Checkers because customers save every time they shop at our stores.\n\nBetter Quality - We offer a wide range of quality products like restaurant quality Steakhouse Classic steaks, limited editions of famous wine brands in our Odd Bins range, hundreds of cheeses and the world's finest coffees at supermarket prices.\n\nBetter Services - We provide services in-store to allow our customers to get more done faster. For example, customers can pay bills, buy electricity, book tickets at Computicket, book flights and more at our Money Market counter.";
     public static final String about_reduced_description = "At Checkers, we strive to give our customers an all-round better shopping experience.";
@@ -94,8 +96,8 @@ public class StringHelper
     public static final String sending_code_message = "Sending your Checkers App Confirmation Code";
     public static final String error_agree_to_terms = "Before you complete your registration you must agree to the Checkers Terms.";
     
-    public static final String tut_home_description = "Get easy access to all the best deals at Checkers. Save over R2000 with EeziCoupons, find your closest store and much more from Checkers.";
-    public static final String tut_coupons_description = "Save over R2000 with instant shopping discounts on your cell phone with the latest EeziCoupons available from Checkers. Use your WiCode number to redeem all available coupons, or select your favourites to add to your list. You have the option to turn on the images using your hard menu button.";
+    public static final String tut_home_description = "Get easy access to all the best deals at Checkers. Save over " + currency_symbol + "2000 with EeziCoupons, find your closest store and much more from Checkers.";
+    public static final String tut_coupons_description = "Save over "+ currency_symbol + "2000 with instant shopping discounts on your cell phone with the latest EeziCoupons available from Checkers. Use your WiCode number to redeem all available coupons, or select your favourites to add to your list. You have the option to turn on the images using your hard menu button.";
     
     public static final String tut_specials_description = "Easy access to all the best deals currently available at Checkers. Start saving now. You have the option to turn on the images using your hard menu button.";
     public static final String tut_mylist_description = "My List makes it easy to manage your personal selection of EeziCoupons.\n\nAdd, delete and share your EeziCoupons.\n\nRedeem your entire list of EeziCoupons by tapping on Redeem All.";
@@ -108,7 +110,7 @@ public class StringHelper
     public static final String facebook_url = "http://facebook.com/checkerssa";
     public static final String twitter_url = "https://twitter.com/checkerssa";
     
-    public static final String flurry_key = "C29NWKVPD7F6KRYHYTYN";
+    public static final String flurry_key = "B4KXK3CR9RGHR7JM32WX";//"C29NWKVPD7F6KRYHYTYN";
     public static final String specials_channel_id = "_SPECIAL";//change for shop
     public static final String coupons_channel_id = "CHECKERS_BLACKBERRY";//change for shop
     public static final String coupons_channel_id_coupon = "COUPON";//not sure if this should change
@@ -116,6 +118,9 @@ public class StringHelper
     public static final String wigroup_apppassword = "blackb3rry_int3rfac3_wiapp";
     public static final String wigroup_url = "http://196.37.63.100/shoprite/http-to-socket/checkers/index.php?";
     
-    public static final String currency_symbol = "R";
+    public static final String country_id = "101";
+    public static final String req_id = "2";
+    
+    public static final String already_registered = "Seems like you have already registered.";
     
 }

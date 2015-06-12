@@ -69,7 +69,7 @@ public class HyperlinkButton extends BaseButton
 
 		g.setColor(ResourceHelper.color_primary);
 		g.setFont(font);
-		g.drawText(text, 3, 0);
+		g.drawText(text, 1, 0); //g.drawText(text, 3, 0);
 
 		if (underline) g.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
 	}

@@ -104,8 +104,18 @@ public class CouponField extends BaseButton implements ImageLoaderInterface
 		
 		if (PersistentStoreHelper.shouldLoadImages() == true)
 		{
-			ImageLoader.loadImage(coupon.getImageURL(), this);
+			turnOnImage(coupon);
 		}
+	}
+	
+	public void turnOnImage(CampaignData coupon)
+	{
+		ImageLoader.loadImage(coupon.getImageURL(), this);
+	}
+	
+	public void turnOfImage()
+	{
+		setImage(default_image);
 	}
 
 	public int getPreferredHeight()
@@ -218,7 +228,7 @@ public class CouponField extends BaseButton implements ImageLoaderInterface
 			imageWidth = 0;
 		}
 		
-		if (imageWidth>0 || imageHeight > 0)
+		if (imageWidth > 0 || imageHeight > 0)
 		{
 			image = BitmapTools.resizeTransparentBitmap(image, imageWidth, imageHeight, Bitmap.FILTER_BILINEAR, Bitmap.SCALE_STRETCH);
 		}

@@ -51,7 +51,7 @@ public class MainApplication extends UiApplication
 	public void exit(int status)
 	{
 		PersistentStoreHelper.setAppFirstLaunch(false);
-		RemoteLogger.log("MainApplication", "APP EXIT : status " + status);
+//		RemoteLogger.log("MainApplication", "APP EXIT : status " + status);
 		FlurryHelper.endTimedEvent(FlurryHelper.EVENT_OPEN_APP);//just to make sure it is ended, should have ended on homescreen i.e. viewpager.
 		FlurryAgent.onDestroyApp();
 		System.exit(status);
@@ -85,7 +85,7 @@ public class MainApplication extends UiApplication
 				file.close();
 			} catch (Exception e)
 			{
-				RemoteLogger.log("MainApplication", "Error creating file application folder");
+//				RemoteLogger.log("MainApplication", "Error creating file application folder");
 			}
 
 			FlurryAgent.appendToReportUrl(HttpInterface.getConnectionString());
@@ -160,21 +160,26 @@ public class MainApplication extends UiApplication
 			System.exit(0);
 		}
 	}
-
+	
 	public void slideScreen(Screen theScreen)
+	{
+		slideScreen(theScreen, TransitionContext.DIRECTION_LEFT, TransitionContext.DIRECTION_RIGHT, 200);
+	}
+
+	public void slideScreen(Screen theScreen, int push_direction, int pop_direction, int duration)
 	{
 		TransitionContext transition = new TransitionContext(TransitionContext.TRANSITION_SLIDE);
 
-		transition.setIntAttribute(TransitionContext.ATTR_DURATION, 200);
-		transition.setIntAttribute(TransitionContext.ATTR_DIRECTION, TransitionContext.DIRECTION_LEFT);
+		transition.setIntAttribute(TransitionContext.ATTR_DURATION, duration);
+		transition.setIntAttribute(TransitionContext.ATTR_DIRECTION, push_direction);
 		transition.setIntAttribute(TransitionContext.ATTR_STYLE, TransitionContext.STYLE_PUSH);
 
 		UiEngineInstance engine = Ui.getUiEngineInstance();
 		engine.setTransition(null, theScreen, UiEngineInstance.TRIGGER_PUSH, transition);
 
 		transition = new TransitionContext(TransitionContext.TRANSITION_SLIDE);
-		transition.setIntAttribute(TransitionContext.ATTR_DURATION, 200);
-		transition.setIntAttribute(TransitionContext.ATTR_DIRECTION, TransitionContext.DIRECTION_RIGHT);
+		transition.setIntAttribute(TransitionContext.ATTR_DURATION, duration);
+		transition.setIntAttribute(TransitionContext.ATTR_DIRECTION, pop_direction);
 		transition.setIntAttribute(TransitionContext.ATTR_STYLE, TransitionContext.STYLE_PUSH);
 
 		engine.setTransition(theScreen, null, UiEngineInstance.TRIGGER_POP, transition);
@@ -253,7 +258,7 @@ public class MainApplication extends UiApplication
 	{
 		try
 		{
-			RemoteLogger.log("PushWhoosh", "handleNotification: " + arg0);
+//			RemoteLogger.log("PushWhoosh", "handleNotification: " + arg0);
 		} catch (Exception e)
 		{
 		}
@@ -263,7 +268,7 @@ public class MainApplication extends UiApplication
 	{
 		try
 		{
-			RemoteLogger.log("PushWhoosh", "onCustomDataReceive: " + arg0);
+//			RemoteLogger.log("PushWhoosh", "onCustomDataReceive: " + arg0);
 		} catch (Exception e)
 		{
 		}

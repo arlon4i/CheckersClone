@@ -286,7 +286,7 @@ public class ThemedSpecialsScreen extends MainScreen implements FieldChangeListe
 		eventParams.put(FlurryHelper.PARAM_TAPPED, "1");
 		eventParams.put(FlurryHelper.PARAM_THEME_ID, themedSpecialsCategoryId);
 		FlurryHelper.addLoginParams(eventParams);		
-		eventParams.put(FlurryHelper.PARAM_TIME, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
+		eventParams.put(FlurryHelper.PARAM_TIMESTAMP, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
 
 		FlurryHelper.logEvent(FlurryHelper.EVENT_THEME_VIEW_ALL_SPECIALS , eventParams, false);
 	}

@@ -20,7 +20,7 @@ import fi.bb.checkers.ui.components.ListField;
 public class AboutFragment extends Fragment implements FieldChangeListener
 {
 	public static final int FRAGMENT_ID = getUUID();
-
+	private String grer = "";
 	private RichTextField text_field;
 	private Font font;
 	private final String text_full = StringHelper.about_full_description;
@@ -75,7 +75,7 @@ public class AboutFragment extends Fragment implements FieldChangeListener
 		if (arg0 == button_read)
 		{
 			if (button_read.getText().equals("Read More..."))
-			{
+			{ 
 				Font[] fonts = new Font[]{font, font.derive(Font.BOLD)};
 				int[] offsets = new int[]{0, 85, 101, 229, 245, 478, 495, 708};
 				byte[] attributes = new byte[]{0, 1, 0, 1, 0, 1, 0};

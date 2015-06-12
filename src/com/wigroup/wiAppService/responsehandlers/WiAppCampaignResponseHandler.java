@@ -7,7 +7,6 @@ import org.xml.sax.SAXException;
 
 import fi.bb.checkers.datatypes.CampaignData;
 import fi.bb.checkers.datatypes.CouponCategory;
-import fi.bb.socialsharing.logger.RemoteLogger;
 
 public class WiAppCampaignResponseHandler extends WiAppResponseHandler {
 
@@ -87,14 +86,19 @@ public class WiAppCampaignResponseHandler extends WiAppResponseHandler {
 
 	} else if (tagName.equalsIgnoreCase("amount")) {
 	    campaign.setValue(new String(ch, start, length));
-	}
-	
+	}	
 	else if(tagName.equalsIgnoreCase("id") && isCategory){
 		couponCategory.setId(new String(ch, start, length));
 	}
 	else if(tagName.equalsIgnoreCase("name") && isCategory){
-		couponCategory.setName(new String(ch, start, length));
-		
+		couponCategory.setName(new String(ch, start, length));		
+	}
+	else if(tagName.equalsIgnoreCase("rank") && isCategory){
+		try {
+			campaign.setRank(Integer.parseInt(new String(ch, start, length)));
+		} catch(Exception e) {
+			campaign.setRank(0);
+		}
 	}
   }
 

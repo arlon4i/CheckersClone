@@ -161,7 +161,7 @@ public class ChecklineFragment extends Fragment implements FieldChangeListener
 
 					} catch (Exception e)
 					{
-						RemoteLogger.log("ChecklineFragment", e.toString());
+//						RemoteLogger.log("ChecklineFragment", e.toString());
 						InfoDialog.doModal("Error", e.getMessage(), "Okay");
 					}
 				}

@@ -72,7 +72,7 @@ public class InboxFragment extends Fragment
 		{
 			Hashtable eventParams = new Hashtable();
 
-			eventParams.put(FlurryHelper.PARAM_TIME, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
+			eventParams.put(FlurryHelper.PARAM_TIMESTAMP, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
 			FlurryHelper.addProvinceParam(eventParams);
 
 			FlurryHelper.logEvent(FlurryHelper.EVENT_READ_MESSAGE, eventParams, true);

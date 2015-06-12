@@ -20,22 +20,35 @@ public class FlurryHelper {
 	public static final SimpleDateFormat FLURRY_DATE_FORMAT = new SimpleDateFormat(FLURRY_DATE_FORMAT_STRING);
 
 	//events
+	//********************Welcome screen***************************//
+	public static final String EVENT_TUT_SCREEN_1_DISPLAYED = "Tutorial screen 1_displayed";
+	public static final String EVENT_TUT_SCREEN_2_DISPLAYED = "Tutorial screen 2_displayed";
+	public static final String EVENT_TUT_SCREEN_3_DISPLAYED = "Tutorial screen 3_displayed";
+	public static final String EVENT_TUT_SCREEN_4_DISPLAYED = "Tutorial screen 4_displayed";
+	public static final String EVENT_WELCOME_SIGN_UP_NOW = "Welcome_sign up now";
+	public static final String EVENT_WELCOME_SIGN_UP_LATER = "Welcome_sign up later";
+	public static final String EVENT_WELCOME_LOGIN = "Welcome_login";
+	
 	//********************Home screen******************************//
+	public static final String EVENT_HOME_DISPLAYED = "Home page view";
+	public static final String EVENT_HOME_THEME = "The user taps on the specials theme block to view specials.";
+	public static final String EVENT_HOME_VIEW_ALL_SPECIALS = "Home View All Specials";
+//	public static final String EVENT_HOME_THEME = "Theme Viewed";
 	public static final String EVENT_THEME_VIEWED = "Theme Viewed";
 	public static final String EVENT_THEME_VIEW_ALL_SPECIALS = "Theme View All Specials";
 	public static final String EVENT_HOME_SCREEN = "Home Screen";
 	public static final String EVENT_EEZI_COUPON_BLOCK = "EeziCoupon Block";
-	public static final String EVENT_EEZI_COUPON_REDEEM_ALL_BUTTON = "EeziCoupon Redeem All button";
-	public static final String EVENT_EEZI_COUPON_VIEW_ALL_BUTTON = "EeziCoupon View All button";
+	public static final String EVENT_EEZI_COUPON_REDEEM_ALL_BUTTON = "Home_redeem all"; //"EeziCoupon Redeem All button";
+	public static final String EVENT_EEZI_COUPON_VIEW_ALL_BUTTON = "Home_view all coupons"; //"EeziCoupon View All button";
 	public static final String EVENT_SPECIALS_BLOCK = "Specials Block";
-	public static final String EVENT_SPECIALS_VIEW_ALL = "Specials View All button";
-	public static final String EVENT_FIND_A_STORE_BLOCK = "Find a Store Block";
+	public static final String EVENT_SPECIALS_VIEW_ALL = "Home View All Specials"; //"Specials View All button";
+	public static final String EVENT_FIND_A_STORE_BLOCK = "Home_find a store"; //"Find a Store Block";
 	public static final String EVENT_FIND_A_STORE_MAP = "Find a Store Map button";
 	public static final String EVENT_CONTENT_BLOCK_VIEW = "Content Block Viewed";
 
 	//********************Sharing******************************//
-	public static final String EVENT_SHARE_EEZI_COUPON = "Share EeziCoupon";
-	public static final String EVENT_SHARE_SPECIAL = "Share Special";
+	public static final String EVENT_SHARE_EEZI_COUPON = "EeziCoupons_share";
+	public static final String EVENT_SHARE_SPECIAL = "Special_share";
 	public static final String EVENT_SHARE_APP = "Share App";
 
 	//********************User Status******************************//
@@ -58,22 +71,24 @@ public class FlurryHelper {
 	public static final String EVENT_UNREAD_MESSAGE = "Unread Message";
 
 	//********************EeziCoupons******************************//
-	public static final String EVENT_FILTER_EEZI_COUPONS = "Filter (EeziCoupons)";
+	public static final String EVENT_EEZICOUPONS_DISPLAYED = "Eezicoupons_displayed";
+	public static final String EVENT_FILTER_EEZI_COUPONS = "Eezicoupons_filter"; //"Filter (EeziCoupons)";
 	public static final String EVENT_SORT_EEZI_COUPONS = "Sort (EeziCoupons)";
 	public static final String EVENT_BROWSE_EEZI_COUPONS = "Browse EeziCoupons";
-	public static final String EVENT_SEARCH_EEZI_COUPONS = "Search EeziCoupons";
+	public static final String EVENT_SEARCH_EEZI_COUPONS = "Eezicoupons_search"; //"Search EeziCoupons";
 	public static final String EVENT_SEARCH_RESULT_EEZI_COUPONS = "Search Result for EeziCoupons";
 	public static final String EVENT_SELECT_EEZI_COUPONS = "Select EeziCoupon";
-	public static final String EVENT_ADD_EEZI_COUPON_TO_LIST = "Add EeziCoupon to List";
+	public static final String EVENT_ADD_EEZI_COUPON_TO_LIST = "Eezicoupons_add to list"; //"Add EeziCoupon to List";
 	public static final String EVENT_SELECT_RELATED_PRODUCTS = "Select Related Products";
 	public static final String EVENT_ADD_RELATED_EEZI_COUPONS = "Add Related EeziCoupons";
-	public static final String EVENT_REDEEM_ALL_EEZI_COUPONS = "Redeem All (EeziCoupons)";
+	public static final String EVENT_REDEEM_ALL_EEZI_COUPONS = "Eezicoupons_redeem all"; //"Redeem All (Eezi
 
 	//********************Filter Specials******************************//
-	public static final String EVENT_FILTER_SPECIALS = "Filter (Specials)";
-	public static final String EVENT_SORT_SPECIALS = "Sort (Specials)";
+	public static final String EVENT_SPECIALS_DISPLAYED = "Specials_displayed";
+	public static final String EVENT_FILTER_SPECIALS = "Specials_filter"; //"Filter (Specials)";
+	public static final String EVENT_SORT_SPECIALS = "Specials_sort"; //"Sort (Specials)";
 	public static final String EVENT_BROWSE_SPECIALS = "Browse Specials";
-	public static final String EVENT_SEARCH_SPECIALS = "Search Specials";
+	public static final String EVENT_SEARCH_SPECIALS = "Specials_search";//"Search Specials";
 	public static final String EVENT_SEARCH_RESULT_SPECIALS = "Search Result Specials";
 
 	//*****************Find a Store**************************************//
@@ -112,9 +127,9 @@ public class FlurryHelper {
 
 	//params
 	public static final String PARAM_TAPPED = "Tapped";
-	public static final String PARAM_TIME = "Time";
+	public static final String PARAM_TIMESTAMP = "Timestamp";
 	public static final String PARAM_PROVINCE = "Province";
-	public static final String PARAM_LOGIN = "Login";
+	public static final String PARAM_USER_STATE = "User State";
 	public static final String PARAM_THEME_ID = "Theme ID";
 	public static final String PARAM_BLOCK_NUMBER = "Block Number";
 	public static final String PARAM_DURATION = "Duration";
@@ -151,6 +166,7 @@ public class FlurryHelper {
 	public static final String PARAM_MESSAGE_STATUS = "Message Status";
 	public static final String PARAM_CAMPAIGN_ID = "Campaign ID";
 	public static final String PARAM_TOTAL_SAVINGS_AVAILABLE = "Total Savings Available";
+	public static final String PARAM_COUPON_TAP_SOURCE = "Source";
 
 	private static Vector timedEvents;//<TimedEvent>
 
@@ -277,12 +293,17 @@ public class FlurryHelper {
 	{
 		if (RuntimeStoreHelper.getSessionID() != null)
 		{
-			eventParams.put(FlurryHelper.PARAM_LOGIN, "1");
+			eventParams.put(FlurryHelper.PARAM_USER_STATE, "1");
 		}
 		else
 		{
-			eventParams.put(FlurryHelper.PARAM_LOGIN, "0");
+			eventParams.put(FlurryHelper.PARAM_USER_STATE, "0");
 		}
+	}
+	
+	public static void addTimeStampParams(Hashtable eventParams)
+	{
+		eventParams.put(FlurryHelper.PARAM_TIMESTAMP, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
 	}
 
 	/*public static void startTimedEvent(String eventName, Hashtable eventParams, Calendar startTime)

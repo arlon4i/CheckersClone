@@ -3,16 +3,30 @@ package fi.bb.checkers.ui.components;
 import java.util.Calendar;
 import java.util.Hashtable;
 
+import net.rim.device.api.system.Application;
 import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.system.Display;
+import net.rim.device.api.ui.Color;
+import net.rim.device.api.ui.DrawStyle;
+import net.rim.device.api.ui.Field;
+import net.rim.device.api.ui.FieldChangeListener;
 import net.rim.device.api.ui.Font;
 import net.rim.device.api.ui.Graphics;
+import net.rim.device.api.ui.Keypad;
 import net.rim.device.api.ui.Ui;
 import net.rim.device.api.ui.UiApplication;
+import net.rim.device.api.ui.XYEdges;
+import net.rim.device.api.ui.component.BitmapField;
+import net.rim.device.api.ui.container.AbsoluteFieldManager;
+import net.rim.device.api.ui.container.FullScreen;
 import net.rim.device.api.ui.container.HorizontalFieldManager;
+import net.rim.device.api.ui.container.PopupScreen;
 import net.rim.device.api.ui.container.VerticalFieldManager;
 import net.rim.device.api.ui.decor.BackgroundFactory;
+import net.rim.device.api.ui.decor.Border;
+import net.rim.device.api.ui.decor.BorderFactory;
 import net.rim.device.api.ui.picker.FilePicker;
+import fi.bb.checkers.MainApplication;
 import fi.bb.checkers.datatypes.InboxMessage;
 import fi.bb.checkers.datatypes.UserData;
 import fi.bb.checkers.helpers.FlurryHelper;
@@ -20,41 +34,54 @@ import fi.bb.checkers.helpers.PersistentStoreHelper;
 import fi.bb.checkers.helpers.ResourceHelper;
 import fi.bb.checkers.helpers.RuntimeStoreHelper;
 import fi.bb.checkers.helpers.StringHelper;
+import fi.bb.checkers.helpers.ZebraCrossingHelper;
 import fi.bb.checkers.interfaces.InterfaceCouponsFinishedLoading;
+import fi.bb.checkers.logger.RemoteLogger;
 import fi.bb.checkers.prompts.InfoDialog;
 import fi.bb.checkers.prompts.PhotoPrompt;
 import fi.bb.checkers.ui.fragments.MylistFragment;
 import fi.bb.checkers.ui.screens.CameraScreen;
 import fi.bb.checkers.ui.screens.EditProfileScreen;
 import fi.bb.checkers.ui.screens.LoginScreen;
+import fi.bb.checkers.ui.screens.MagnifiedQRCodeScreen;
+import fi.bb.checkers.ui.screens.QRSelectedStoresScreen;
 import fi.bb.checkers.ui.screens.RegistrationScreen;
 import fi.bb.checkers.ui.screens.ViewPagerScreen;
 import fi.bb.checkers.utils.ApplicationInterface;
 import fi.bb.checkers.utils.BitmapTools;
 import fi.bb.checkers.utils.StringUtil;
 
-public class ProfileDrawer extends VerticalFieldManager implements InterfaceCouponsFinishedLoading
+public class ProfileDrawer extends VerticalFieldManager implements InterfaceCouponsFinishedLoading, FieldChangeListener
 {
 	private static final String EXTENTIONS = ".jpg:.jpeg:.png:.bmp";
 
 	private Bitmap shadow;
+	private Bitmap qrcode;
 	private BaseButton name_button;
 	private LabelField name_label;
 	private Bitmap profile_image;
 	private TextImageButton button_profile;
 	private VerticalFieldManager content;
+	private HorizontalFieldManager qrcode_heading_manager;
 	private int mylistsize = 0;
 	private int inboxsize = 0;
 	private LabelField label_wicode;
+	private LabelField qrcode_heading;
+	private LabelField wicode_heading;
+	private BitmapField qrcode_image;
+	private ImageButton button_lens;
+	private HyperlinkButton qrcode_message;
+//	private LabelField qrcode_message;
 
 	private HorizontalFieldManager manager;//profile button basically
+	AbsoluteFieldManager afm;
 
 	boolean buildDone;
 	boolean isVisible;
 
 	public ProfileDrawer()
 	{
-		super(VERTICAL_SCROLL | NO_VERTICAL_SCROLLBAR | NO_HORIZONTAL_SCROLL | USE_ALL_HEIGHT);
+		super(NO_VERTICAL_SCROLL | NO_VERTICAL_SCROLLBAR | NO_HORIZONTAL_SCROLL | USE_ALL_HEIGHT);
 		setBackground(BackgroundFactory.createSolidBackground(ResourceHelper.color_drawer_grey));
 		shadow = BitmapTools.resizeTransparentBitmap(ResourceHelper.getImage("left_gradient"), ResourceHelper.convert(5), getPreferredHeight(), Bitmap.FILTER_LANCZOS, Bitmap.SCALE_STRETCH);
 
@@ -128,10 +155,14 @@ public class ProfileDrawer extends VerticalFieldManager implements InterfaceCoup
 		button_profile.setTextColor(ResourceHelper.color_primary);
 		button_profile.setTextColorHover(ResourceHelper.color_primary);
 		button_profile.setTextColorPressed(ResourceHelper.color_primary);
+		button_profile.setMargin(0, ResourceHelper.convert(24), 0, ResourceHelper.convert(14));
+//		button_profile.setBorder(BorderFactory.createSimpleBorder(new XYEdges(1, 1, 1, 1)));
 
 		name_button = new BaseButton()
 		{
-			private final String name = userdata == null ? "" : userdata.getFirstname() + " " + userdata.getSurname();
+			private String firstname = (userdata == null) ? "----" : userdata.getFirstname();
+			private String surname = (userdata == null) ? "----" : userdata.getSurname();
+			private final String name = ((firstname == null) ? "----" : firstname) + " " + ((surname == null) ? "----" : surname);
 
 			public int getPreferredHeight()
 			{
@@ -140,13 +171,13 @@ public class ProfileDrawer extends VerticalFieldManager implements InterfaceCoup
 
 			public int getPreferredWidth()
 			{
-				return ProfileDrawer.this.getPreferredWidth() - button_profile.getPreferredWidth() - ResourceHelper.convert(5);
+				return ProfileDrawer.this.getPreferredWidth() - button_profile.getPreferredWidth() - button_profile.getMarginLeft() - button_profile.getMarginRight() - ResourceHelper.convert(5);
 			}
 
 			protected void layout(int width, int height)
 			{
-				width = getPreferredWidth();
-				height = getPreferredHeight();
+				width = getPreferredWidth() - ResourceHelper.convert(2);
+				height = getPreferredHeight() - ResourceHelper.convert(2);
 				super.layout(width, height);
 				setExtent(width, height);
 			}
@@ -192,16 +223,19 @@ public class ProfileDrawer extends VerticalFieldManager implements InterfaceCoup
 			}
 		};
 		name_button.setFont(ResourceHelper.helveticaLight().getFont(Font.PLAIN, ResourceHelper.convert(20), Ui.UNITS_px));
+//		name_button.setBorder(BorderFactory.createSimpleBorder(new XYEdges(1, 1, 1, 1)));
 
 		name_label = new LabelField("Guest", ResourceHelper.color_black, 0);
-		name_label.setMargin((button_profile.getPreferredHeight() - name_label.getPreferredHeight()) / 2, 0, 0, ResourceHelper.convert(5));
-		name_label.setFont(ResourceHelper.helveticaLight().getFont(Font.PLAIN, ResourceHelper.convert(20), Ui.UNITS_px));
-
+		name_label.setMargin((((button_profile.getPreferredHeight() - name_label.getPreferredHeight()) / 2) + button_profile.getMarginTop()), 0, 0, ResourceHelper.convert(5));
+		name_label.setFont(ResourceHelper.helveticaLight().getFont(Font.PLAIN, ResourceHelper.convert(20), Ui.UNITS_px));		
+		
 		manager = new HorizontalFieldManager();
-		manager.setMargin(0, 0, ResourceHelper.convert(10), 0);
 		manager.add(button_profile);
 		add(manager);
-
+		
+		qrcode_heading_manager = new HorizontalFieldManager();
+		add(qrcode_heading_manager);
+		
 		content = new VerticalFieldManager(NO_HORIZONTAL_SCROLL);
 		add(content);
 
@@ -247,10 +281,21 @@ public class ProfileDrawer extends VerticalFieldManager implements InterfaceCoup
 
 					if (label_wicode != null)
 					{
+						String wicode = "";
+						
 						if (RuntimeStoreHelper.getUserData().getWicode() == null || RuntimeStoreHelper.getUserData().getWicode().equals(""))
-							label_wicode.setText(" -- -- ---");
+						{
+							wicode = " -- -- ---";
+						}
 						else
-							label_wicode.setText(" " + StringUtil.formatDivisions(2, RuntimeStoreHelper.getUserData().getWicode()));
+						{
+							wicode = " " + StringUtil.formatDivisions(2, RuntimeStoreHelper.getUserData().getWicode());
+						}
+						
+						label_wicode.setText(wicode);
+						
+						
+//						RemoteLogger.log("QRCode Debugging", (ZebraCrossingHelper.generateQRCode(wicode, 100, 100) == null) ? "Null" : "Something Returned");
 					}
 				}
 				else
@@ -314,7 +359,7 @@ public class ProfileDrawer extends VerticalFieldManager implements InterfaceCoup
 
 		name_button.set_visible(true);
 
-		HorizontalFieldManager manager = new HorizontalFieldManager(NO_VERTICAL_SCROLL | NO_HORIZONTAL_SCROLL)
+		HorizontalFieldManager wicode_manager = new HorizontalFieldManager(NO_VERTICAL_SCROLL | NO_HORIZONTAL_SCROLL)
 		{
 			protected void onFocus(int direction)
 			{
@@ -343,156 +388,56 @@ public class ProfileDrawer extends VerticalFieldManager implements InterfaceCoup
 				}
 			}
 		};
-		manager.setMargin(0, ResourceHelper.convert(10), 0, ResourceHelper.convert(10));
+//		wicode_manager.setBorder(BorderFactory.createSimpleBorder(new XYEdges(1, 1, 1, 1)));
+		
+		Font label_wicode_font = ResourceHelper.helveticaMed().getFont(Font.PLAIN, ResourceHelper.convert(26), Ui.UNITS_px);
+		int button_info_size = label_wicode_font.getHeight();
 
-		final ImageButton button_info = new ImageButton("icon_terms_default", "icon_terms_default", -1, FIELD_VCENTER)
+		final ImageButton button_info = new ImageButton("icon_terms_default", "icon_terms_default", button_info_size, button_info_size, FIELD_VCENTER)
 		{
 			public void clickButton()
 			{
-				// build bulleted text views. Html here breaks the terms fragment.
-				Font font = ResourceHelper.helveticaLight().getFont(Font.PLAIN, ResourceHelper.convert(17), Ui.UNITS_px);
-				VerticalFieldManager manager = new VerticalFieldManager(NO_VERTICAL_SCROLL | NO_HORIZONTAL_SCROLL | FIELD_LEFT);
-
-				LabelField label = new LabelField("Use this WiCode to redeem your EeziCoupons in three simple steps:", ResourceHelper.color_black, 0);
-				label.setMargin(ResourceHelper.convert(5), 0, 0, 0);
-				label.setFont(font);
-				manager.add(label);
-
-				HorizontalFieldManager bullet_manager = new HorizontalFieldManager(NO_VERTICAL_SCROLL | NO_HORIZONTAL_SCROLL | FIELD_LEFT);
-				bullet_manager.setMargin(ResourceHelper.convert(10), 0, 0, 0);
-
-				label = new LabelField("1. ", ResourceHelper.color_black, 0);
-				label.setFont(font);
-				bullet_manager.add(label);
-				label = new LabelField(StringHelper.visit_nearest_store, ResourceHelper.color_black, 0);
-				label.setFont(font);
-				bullet_manager.add(label);
-				manager.add(bullet_manager);
-
-				bullet_manager = new HorizontalFieldManager(NO_VERTICAL_SCROLL | NO_HORIZONTAL_SCROLL | FIELD_LEFT);
-				label = new LabelField("2. ", ResourceHelper.color_black, 0);
-				label.setFont(font);
-				bullet_manager.add(label);
-				label = new LabelField(StringHelper.buy_items_desc, ResourceHelper.color_black, 0);
-				label.setFont(font);
-				bullet_manager.add(label);
-				manager.add(bullet_manager);
-
-				bullet_manager = new HorizontalFieldManager(NO_VERTICAL_SCROLL | NO_HORIZONTAL_SCROLL | FIELD_LEFT);
-				label = new LabelField("3. ", ResourceHelper.color_black, 0);
-				label.setFont(font);
-				bullet_manager.add(label);
-				label = new LabelField(StringHelper.enter_your_wicode_desc, ResourceHelper.color_black, 0);
-				label.setFont(font);
-				bullet_manager.add(label);
-				manager.add(bullet_manager);
-
-				InfoDialog.doModal("", manager, "Got It");
+				ScrollableInfoDialog.doModal();
 			}
 		};
-		//button_info.setMargin(0, 0, 0, ResourceHelper.convert(10));
-		//button_info.setBorder(BorderFactory.createSimpleBorder(new XYEdges(1, 1, 1, 1)));//just for testing
+		button_info.setMargin(ResourceHelper.convert(2), ResourceHelper.convert(10), ResourceHelper.convert(2), 0);
+//		button_info.setBorder(BorderFactory.createSimpleBorder(new XYEdges(1, 1, 1, 1)));
 
-		label_wicode = new LabelField(" -- -- ---", ResourceHelper.color_dark_grey, 0, ResourceHelper.helveticaMed().getFont(Font.PLAIN, ResourceHelper.convert(48), Ui.UNITS_px))
+		label_wicode = new LabelField(" -- -- ---", ResourceHelper.color_dark_grey, 0, label_wicode_font)
 		{
 			protected void layout(int width, int height)
 			{
-				width = ProfileDrawer.this.getPreferredWidth() - button_info.getPreferredWidth() - ResourceHelper.convert(10*3);
+				width = ProfileDrawer.this.getPreferredWidth() - button_info.getPreferredWidth() - ResourceHelper.convert(10 * 3) - ResourceHelper.convert(92);
 				height = getPreferredHeight();
 				super.layout(width, height);
 				setExtent(width, height);
 			}
 		};
-		//label_wicode.setBorder(BorderFactory.createSimpleBorder(new XYEdges(1, 1, 1, 1)));//just for testing
-		label_wicode.setMargin(0, 0, 0, ResourceHelper.convert(10));
-
-		manager.add(label_wicode);
-		manager.add(button_info);
-
-		/*BaseButton button_inbox = new BaseButton()
-		{
-			private final int padding = ResourceHelper.convert(10);
-			private final Bitmap image = ResourceHelper.getImage("ic_inbox_default");
-			private final Bitmap image_hover = ResourceHelper.getImage("ic_inbox_hover");
-
-			protected void paint(Graphics graphics)
-			{
-				if (_focus)
-				{
-					graphics.setColor(ResourceHelper.color_primary);
-					graphics.fillRect(0, 0, getWidth(), getHeight());
-				}
-				else
-				{
-					graphics.setColor(ResourceHelper.color_white);
-					graphics.fillRect(0, 0, getWidth(), getHeight());
-				}
-
-				Bitmap img = _focus ? image_hover : image;
-				int y = (getHeight() - img.getHeight()) / 2;
-				graphics.drawBitmap(padding, y, img.getWidth(), img.getHeight(), img, 0, 0);
-
-				graphics.setColor(_focus ? ResourceHelper.color_white : ResourceHelper.color_black);
-				graphics.drawText("Inbox", padding * 2 + img.getWidth(), (getHeight() - getFont().getHeight()) / 2);
-
-				Font font = graphics.getFont();
-				if (inboxsize > 0)
-				{
-					Bitmap notification_image;
-
-					if (_focus)
-					{
-						graphics.setColor(ResourceHelper.color_primary);
-						notification_image = ResourceHelper.getImage("ic_inbox_notification_hover");
-					}
-					else
-					{
-						graphics.setColor(ResourceHelper.color_white);
-						notification_image = ResourceHelper.getImage("ic_inbox_notification_default");
-					}
-
-					graphics.drawBitmap(getWidth() - (padding * 2) - (notification_image.getWidth() / 2), (getHeight() - notification_image.getHeight()) / 2, notification_image.getWidth(),
-							notification_image.getHeight(), notification_image, 0, 0);
-
-
-					graphics.setFont(font.derive(Font.BOLD));
-
-					String text = "";
-
-					if (inboxsize > 9)
-					{
-						text = "9+";
-					}
-					else
-					{
-						text = String.valueOf(inboxsize);
-					}
-					graphics.drawText(text, getWidth() - (padding * 2) - (getFont().getAdvance(text) / 2), (getHeight() - getFont().getHeight()) / 2);
-				}
-				graphics.setFont(font);
-			}
-
-			public int getPreferredWidth()
-			{
-				return ProfileDrawer.this.getPreferredWidth();
-			}
-
-			public int getPreferredHeight()
-			{
-				return ResourceHelper.convert(40);
-			}
-
-			public void clickButton()
-			{
-				logInboxClicked();
-				((ViewPagerScreen) UiApplication.getUiApplication().getActiveScreen()).transition(InboxFragment.FRAGMENT_ID, null);
-			}
-		};
-		button_inbox.setFont(ResourceHelper.helveticaLight().getFont(Font.PLAIN, ResourceHelper.convert(15), Ui.UNITS_px));*/
+//		label_wicode.setBorder(BorderFactory.createSimpleBorder(new XYEdges(1, 1, 1, 1)));
+		
+		int label_wicode_margin = ResourceHelper.convert(2); //button_info.getHeight() - label_wicode.getFont().getHeight();
+//		label_wicode_margin /= 2;
+//		label_wicode_margin = (label_wicode_margin < 0) ? 0 : label_wicode_margin;
+		label_wicode.setMargin(label_wicode_margin, label_wicode.getMarginRight(), label_wicode_margin, label_wicode.getMarginLeft());
+		
+		wicode_manager.add(label_wicode);
+		wicode_manager.add(button_info);
+		
+		VerticalFieldManager vertical_container = new VerticalFieldManager();
+//		vertical_container.setBorder(BorderFactory.createSimpleBorder(new XYEdges(1, 1, 1, 1)));
+		vertical_container.add(wicode_manager);
+		
+		qrcode_message = new HyperlinkButton("QR Code only at selected stores", ResourceHelper.convert(12), true);
+		qrcode_message.setChangeListener(this);
+		vertical_container.add(qrcode_message);
+		
+		LabelField text_label_field = new LabelField("Click QR Code to enlarge", ResourceHelper.color_black, 0, ResourceHelper.helveticaMed().getFont(Font.PLAIN, ResourceHelper.convert(12), Ui.UNITS_px));
+//		text_label_field.setMargin(0, 0, 0, ResourceHelper.convert(2));
+		vertical_container.add(text_label_field);
 
 		BaseButton button_mylist = new BaseButton()
 		{
-			private final int padding = ResourceHelper.convert(10);
+			private final int padding = ResourceHelper.convert(2);
 			private final int paddingExtra = ResourceHelper.convert(2);
 			private final Bitmap image = ResourceHelper.getImage("icon_list_default");
 			private final Bitmap image_hover = ResourceHelper.getImage("icon_list_hover");
@@ -511,7 +456,7 @@ public class ProfileDrawer extends VerticalFieldManager implements InterfaceCoup
 				}
 
 				Bitmap img = _focus ? image_hover : image;
-				int y = (getHeight() - img.getHeight()) / 2;
+				int y = (int) Math.floor((double)((getHeight() - img.getHeight()) / 2));
 				graphics.drawBitmap(padding, y, img.getWidth(), img.getHeight(), img, 0, 0);
 
 				graphics.setColor(_focus ? ResourceHelper.color_white : ResourceHelper.color_black);
@@ -527,7 +472,6 @@ public class ProfileDrawer extends VerticalFieldManager implements InterfaceCoup
 				{
 					text = String.valueOf(mylistsize);
 					graphics.drawText(text, (getWidth() - padding*2 - paddingExtra - getFont().getAdvance(text)), (getHeight() - getFont().getHeight()) / 2);
-					//graphics.drawText(text, getWidth() - (padding * 2) - (getFont().getAdvance(text) / 2), (getHeight() - getFont().getHeight()) / 2);
 				}	
 				graphics.setFont(font);
 			}
@@ -539,7 +483,7 @@ public class ProfileDrawer extends VerticalFieldManager implements InterfaceCoup
 
 			public int getPreferredHeight()
 			{
-				return ResourceHelper.convert(40);
+				return ResourceHelper.convert(26);
 			}
 
 			public void clickButton()
@@ -550,15 +494,98 @@ public class ProfileDrawer extends VerticalFieldManager implements InterfaceCoup
 		};
 		button_mylist.setFont(ResourceHelper.helveticaLight().getFont(Font.PLAIN, ResourceHelper.convert(15), Ui.UNITS_px));
 
-		content.add(manager);
-		//content.add(button_inbox);
-		content.add(button_mylist);
-
 		if (RuntimeStoreHelper.getUserData().getWicode() == null || RuntimeStoreHelper.getUserData().getWicode().equals(""))
 			label_wicode.setText(" -- -- ---");
 		else
 			label_wicode.setText(" " + StringUtil.formatDivisions(2, RuntimeStoreHelper.getUserData().getWicode()));
+		
+		
+		qrcode = ZebraCrossingHelper.generateQRCode(RuntimeStoreHelper.getUserData().getWicode(), ResourceHelper.convert(92), ResourceHelper.convert(92));
+		Bitmap cropped_image = cropQRCode(qrcode);
+		
+		qrcode_image = new BitmapField(cropped_image, FOCUSABLE)
+		{
+			public void layout(int width, int height)
+			{
+				height = width = getPreferredWidth();
+				super.layout(width, height);
+				setExtent(width, height);
+			}
+			
+			public int getPreferredHeight()
+			{
+				return getBitmapHeight(); //button_profile.getWidth() + ResourceHelper.convert(24);
+			}
+			
+			public int getPreferredWidth()
+			{
+				return getPreferredHeight();
+			}
+		};	
 
+		final XYEdges afm_border_sizes = new XYEdges(ResourceHelper.convert(2), ResourceHelper.convert(2), ResourceHelper.convert(2), ResourceHelper.convert(2));
+		final XYEdges afm_border_colors = new XYEdges(ResourceHelper.color_primary, ResourceHelper.color_primary, ResourceHelper.color_primary, ResourceHelper.color_primary);
+		
+		afm = new AbsoluteFieldManager()
+		{
+			public void sublayout(int width, int height)
+			{
+				height = width = qrcode_image.getPreferredWidth();
+				super.sublayout(width, height);
+				setExtent(width, height);
+			}
+			
+			public void drawFocus(Graphics graphics, boolean on)
+			{
+				
+			}
+			
+			public void onFocus(int direction)
+			{
+				setBorder(BorderFactory.createSimpleBorder(afm_border_sizes, afm_border_colors, new XYEdges(4, 4, 4, 4)));
+			}
+			
+			public void onUnfocus()
+			{
+				setBorder(BorderFactory.createSimpleBorder(afm_border_sizes, afm_border_colors, new XYEdges(2, 2, 2, 2)));
+			}
+			
+			protected boolean navigationClick(int status, int time)
+			{
+				MagnifiedQRCodeScreen.push(qrcode);
+				return true;
+			}
+		};
+		afm.setBorder(BorderFactory.createSimpleBorder(afm_border_sizes, afm_border_colors, new XYEdges(2, 2, 2, 2)));
+		afm.setMargin(ResourceHelper.convert(8), ResourceHelper.convert(12), ResourceHelper.convert(6), ResourceHelper.convert(12));		
+		
+		afm.add(qrcode_image, 0, 0);
+		
+		button_lens = new ImageButton("icon_enlarge_default", "icon_enlarge_selected", -1, 0);	
+		int position = qrcode_image.getPreferredWidth() - button_lens.getPreferredWidth();
+		
+		afm.add(button_lens, position, position);
+		
+		int qrcode_message_margin = qrcode_image.getBitmapHeight() - (label_wicode.getFont().getHeight() + qrcode_message.getFont().getHeight() + (wicode_manager.getMarginTop() * 2));
+		qrcode_message_margin =  ResourceHelper.convert(6); //0;
+		qrcode_message.setMargin(ResourceHelper.convert(8), 0, qrcode_message_margin, label_wicode.getMarginLeft());
+		
+		addHeadings();
+		
+		HorizontalFieldManager hfm = new HorizontalFieldManager(HorizontalFieldManager.USE_ALL_WIDTH);
+		hfm.setMargin(0, 0, ResourceHelper.convert(11), 0);
+		
+		hfm.add(afm);		
+		hfm.add(vertical_container);
+		
+//		int margin = afm.getPreferredHeight() - (button_info.getPreferredHeight() + ResourceHelper.convert(14));
+		wicode_manager.setMargin(ResourceHelper.convert(6), 0, ResourceHelper.convert(2), 0);
+		
+		content.add(hfm);
+		content.add(button_mylist);
+		
+//		RemoteLogger.log("wiCode", ("" + RuntimeStoreHelper.getUserData().getWicode()));
+		
 		buildDone = true;
 	}
 
@@ -566,9 +593,9 @@ public class ProfileDrawer extends VerticalFieldManager implements InterfaceCoup
 	{
 		Hashtable eventParams = new Hashtable();
 
-		eventParams.put(FlurryHelper.PARAM_TIME, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
+		eventParams.put(FlurryHelper.PARAM_TIMESTAMP, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
 		eventParams.put(FlurryHelper.PARAM_LISTS, "1");//For bb it's currently only one list//TODO change when it changes for bb
-		eventParams.put(FlurryHelper.PARAM_ITEMS, ""+PersistentStoreHelper.getMylist().size());
+		eventParams.put(FlurryHelper.PARAM_ITEMS, "" + PersistentStoreHelper.getMylist().size());
 
 		FlurryHelper.logEvent(FlurryHelper.EVENT_MY_LIST, eventParams, true);
 	}
@@ -577,7 +604,7 @@ public class ProfileDrawer extends VerticalFieldManager implements InterfaceCoup
 	{
 		Hashtable eventParams = new Hashtable();
 
-		eventParams.put(FlurryHelper.PARAM_TIME, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
+		eventParams.put(FlurryHelper.PARAM_TIMESTAMP, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
 
 		int unreadNotificationsCount = 0;
 
@@ -598,7 +625,7 @@ public class ProfileDrawer extends VerticalFieldManager implements InterfaceCoup
 	{
 		Hashtable eventParams = new Hashtable();
 
-		eventParams.put(FlurryHelper.PARAM_TIME, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
+		eventParams.put(FlurryHelper.PARAM_TIMESTAMP, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
 
 		FlurryHelper.logEvent(FlurryHelper.EVENT_EDIT_PROFILE, eventParams, true);
 	}
@@ -658,6 +685,50 @@ public class ProfileDrawer extends VerticalFieldManager implements InterfaceCoup
 
 		buildDone = true;
 	}
+	
+	private void addHeadings()
+	{		
+		Font font = ResourceHelper.helveticaLight().getFont(Font.PLAIN, ResourceHelper.convert(18), Ui.UNITS_px);
+		
+		qrcode_heading = new LabelField("QR Code:", ResourceHelper.color_black, 0, font) {
+			public void layout(int width, int height)
+			{
+				width = getFont().getAdvance(getText()) + ResourceHelper.convert(2); //qrcode_image.getBitmapWidth();
+				height = getPreferredHeight();
+				super.layout(width, height);
+				setExtent(width, height);
+			}
+		};
+		qrcode_heading.setMargin(0, ResourceHelper.convert(6), 0, ResourceHelper.convert(12));
+//		qrcode_heading.setBorder(BorderFactory.createSimpleBorder(new XYEdges(1, 1, 1, 1)));
+		
+		wicode_heading = new LabelField("WiCode:", ResourceHelper.color_black, Field.FIELD_LEFT, font);		
+//		int margin = label_wicode.getFont().getAdvance(label_wicode.getText()) - wicode_heading.getFont().getAdvance(wicode_heading.getText());
+//		
+//		RemoteLogger.log(label_wicode.getText(), "" + label_wicode.getFont().getAdvance(label_wicode.getText()));
+//		RemoteLogger.log(wicode_heading.getText(), "" + wicode_heading.getFont().getAdvance(wicode_heading.getText()));
+		
+		int margin = label_wicode.getPreferredWidth() - wicode_heading.getPreferredWidth();
+		margin = (margin / 2) + (margin % 2);
+//		margin = ResourceHelper.convert(margin);
+		
+		RemoteLogger.log("Margin: ", "" + margin);
+		wicode_heading.setMargin(0, 0, 0, margin); //(name_button.getMarginLeft() + ResourceHelper.convert(4))
+//		wicode_heading.setBorder(BorderFactory.createSimpleBorder(new XYEdges(1, 1, 1, 1)));
+		
+		qrcode_heading_manager.add(qrcode_heading);
+		qrcode_heading_manager.add(wicode_heading);
+	}
+	
+	private Bitmap cropQRCode(Bitmap bitmap)
+	{
+		int size = (bitmap.getWidth() - ResourceHelper.convert(28));
+        Bitmap btmp = new Bitmap(size, size);
+	    Graphics g = new Graphics(btmp);
+	    g.drawBitmap(0, 0, size, size, bitmap, ResourceHelper.convert(14), ResourceHelper.convert(14));
+	    
+	    return btmp;
+	}
 
 	private String getFromGallery(String path)
 	{
@@ -678,10 +749,173 @@ public class ProfileDrawer extends VerticalFieldManager implements InterfaceCoup
 		return path;
 	}
 
-	public void onCouponsFinishedLoading(boolean success) {
+	public void onCouponsFinishedLoading(boolean success)
+	{
 		mylistsize = PersistentStoreHelper.mylistSize();
 		inboxsize = PersistentStoreHelper.inboxUnread();
 
 		build();
+	}
+
+	public void fieldChanged(Field field, int arg1)
+	{
+		if(field == qrcode_message)
+		{
+			QRSelectedStoresScreen.push();
+		}
+	}
+	
+	class CustomLabelField extends LabelField
+	{
+		public CustomLabelField(String text, int color, int style) 
+		{
+			super(text, color, style|FOCUSABLE);
+		}
+		
+		public void drawFocus(Graphics graphics, boolean on)
+		{
+			
+		}
+	}
+	
+	class CustomHorizontalFieldManager extends HorizontalFieldManager
+	{
+		public CustomHorizontalFieldManager()
+		{
+			super(NO_VERTICAL_SCROLL | NO_HORIZONTAL_SCROLL | FIELD_LEFT | FOCUSABLE);
+		}
+		
+		public void drawFocus(Graphics graphics, boolean on)
+		{
+			
+		}
+	}
+	
+	static class ScrollableInfoDialog extends PopupScreen implements FieldChangeListener {
+		
+		private ScrollableInfoDialog()
+		{
+			super(new VerticalFieldManager(FIELD_HCENTER | FIELD_VCENTER | VERTICAL_SCROLL | FOCUSABLE));
+			setBackground(BackgroundFactory.createSolidBackground(ResourceHelper.color_white));
+
+			addDetails();
+
+			TextImageButton okButton = new TextImageButton("Okay", "btn_sml_default", "btn_sml_hover", FIELD_HCENTER);
+			okButton.setTextColor(ResourceHelper.color_white);
+			okButton.setTextColorHover(ResourceHelper.color_primary);
+			okButton.setTextColorPressed(ResourceHelper.color_primary);
+			okButton.setChangeListener(this);
+			okButton.setMargin(ResourceHelper.convert(10), 0, 0, 0);
+
+			add(okButton);
+
+			Bitmap borderBitmap = Bitmap.getBitmapResource("rounded-border.png");
+			setBorder(BorderFactory.createBitmapBorder(new XYEdges(12, 12, 12, 12), borderBitmap));
+		}
+		
+		private void addDetails() {
+			Font font = ResourceHelper.helveticaLight().getFont(Font.PLAIN, ResourceHelper.convert(17), Ui.UNITS_px);
+			
+			LabelField label = new LabelField("Use this WiCode to redeem your EeziCoupons in three simple steps:", ResourceHelper.color_black, 0);
+			label.setMargin(ResourceHelper.convert(5), 0, 0, 0);
+			label.setFont(font);
+			add(label);
+
+			HorizontalFieldManager bullet_manager = new HorizontalFieldManager();
+			bullet_manager.setMargin(ResourceHelper.convert(10), 0, 0, 0);
+
+			label = new LabelField("1. ", ResourceHelper.color_black, 0);
+			label.setFont(font);
+			bullet_manager.add(label);
+			label = new LabelField(StringHelper.visit_nearest_store, ResourceHelper.color_black, 0);
+			label.setFont(font);
+			bullet_manager.add(label);
+			add(bullet_manager);
+
+			bullet_manager = new HorizontalFieldManager();
+			label = new LabelField("2. ", ResourceHelper.color_black, 0);
+			label.setFont(font);
+			bullet_manager.add(label);
+			label = new LabelField(StringHelper.buy_items_desc, ResourceHelper.color_black, 0);
+			label.setFont(font);
+			bullet_manager.add(label);
+			add(bullet_manager);
+
+			bullet_manager = new HorizontalFieldManager();
+			label = new LabelField("3. ", ResourceHelper.color_black, 0);
+			label.setFont(font);
+			bullet_manager.add(label);
+			label = new LabelField(StringHelper.enter_your_wicode_desc, ResourceHelper.color_black, 0);
+			label.setFont(font);
+			bullet_manager.add(label);
+			add(bullet_manager);
+			
+			/* label = new LabelField("QR Codes are only currently available at these selected stores:", ResourceHelper.color_black, 0);
+			label.setMargin(ResourceHelper.convert(10), 0, 0, 0);
+			label.setFont(font);
+			add(label);
+			
+			bullet_manager = new HorizontalFieldManager();
+			bullet_manager.setMargin(ResourceHelper.convert(10), 0, 0, 0);
+			label = new LabelField("1. ", ResourceHelper.color_black, 0);
+			label.setFont(font);
+			bullet_manager.add(label);
+			label = new LabelField("Checkers Hyper Fairbridge Mall, Brackenfell", ResourceHelper.color_black, 0);
+			label.setFont(font);
+			bullet_manager.add(label);
+			add(bullet_manager);
+
+			bullet_manager = new HorizontalFieldManager();
+			label = new LabelField("2. ", ResourceHelper.color_black, 0);
+			label.setFont(font);
+			bullet_manager.add(label);
+			label = new LabelField("Checkers Hyper Helderberg Mall, Somerset West", ResourceHelper.color_black, 0);
+			label.setFont(font);
+			bullet_manager.add(label);
+			add(bullet_manager); */
+		}
+		
+		public static void doModal()
+		{
+			if (Application.isEventDispatchThread())
+			{
+				push();
+			}
+			else
+			{
+				UiApplication.getUiApplication().invokeLater(new Runnable()
+				{
+					public void run()
+					{
+						push();
+					}
+				});
+			}
+		}
+	
+		private static void push()
+		{
+			FullScreen trans = new FullScreen();
+			trans.setBackground(BackgroundFactory.createSolidTransparentBackground(Color.BLACK, 200));
+			((MainApplication) UiApplication.getUiApplication()).fadeScreen(trans, false);
+	
+			ScrollableInfoDialog dialog = new ScrollableInfoDialog();
+			UiApplication.getUiApplication().pushModalScreen(dialog);
+			trans.close();
+		}
+
+		public void fieldChanged(Field field, int context)
+		{
+			this.close();
+		}
+
+		protected boolean keyDown(int keycode, int status)
+		{
+			if (Keypad.key(keycode) == Keypad.KEY_ESCAPE)
+			{
+				this.close();
+			}
+			return false;
+		}
 	}
 }

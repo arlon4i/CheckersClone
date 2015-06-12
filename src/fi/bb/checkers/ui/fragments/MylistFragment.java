@@ -342,7 +342,7 @@ public class MylistFragment extends Fragment implements FieldChangeListener
 		eventParams.put(FlurryHelper.PARAM_TOTAL_EEZI_COUPON_SAVINGS, label_savings.getText());
 		eventParams.put(FlurryHelper.PARAM_ITEMS, ""+content.getFieldCount());
 		eventParams.put(FlurryHelper.PARAM_NON_COUPON_ITEMS, "0");
-		eventParams.put(FlurryHelper.PARAM_TIME, FlurryHelper.getFlurryFormatDate(dateNow));
+		eventParams.put(FlurryHelper.PARAM_TIMESTAMP, FlurryHelper.getFlurryFormatDate(dateNow));
 		eventParams.put(FlurryHelper.PARAM_NUMBER_OF_EEZI_COUPONS, ""+content.getFieldCount());
 		FlurryHelper.addFirstLaunchParam(eventParams);
 

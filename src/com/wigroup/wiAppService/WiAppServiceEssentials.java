@@ -15,7 +15,6 @@ import fi.bb.checkers.MainApplication;
 import fi.bb.checkers.datatypes.UserData;
 import fi.bb.checkers.helpers.PersistentStoreHelper;
 import fi.bb.checkers.helpers.RuntimeStoreHelper;
-import fi.bb.checkers.helpers.StringHelper;
 import fi.bb.checkers.logger.RemoteLogger;
 
 public class WiAppServiceEssentials
@@ -29,8 +28,8 @@ public class WiAppServiceEssentials
 	// CHECKERS LIVE
 
 	final static String apiver = "2.4";
-	final static String appId = StringHelper.wigroup_appid;
-	final static String password = StringHelper.wigroup_apppassword;
+	final static String appId = "BLACKBERRY";
+	final static String password = "blackb3rry_int3rfac3_wiapp";
 
 	// SHOPRITE
 	/*
@@ -53,7 +52,7 @@ public class WiAppServiceEssentials
 		return response;
 		}
 		catch (Exception e) {
-			RemoteLogger.log("CHECKERS", "NULL NULL NULL: " + e.getMessage());
+//			RemoteLogger.log("CHECKERS", "NULL NULL NULL: " + e.getMessage());
 			return null;
 		}
 
@@ -161,7 +160,7 @@ public class WiAppServiceEssentials
 		request = request + "<debuginfo><device>Blackberry</device></debuginfo>";
 		request = request + "</customerfeedbackrx></wiapp>";
 		
-		RemoteLogger.log("ANJE", "request: " + request);
+//		RemoteLogger.log("ANJE", "request: " + request);
 
 		WiAppResponseHandler response = new WiAppResponseHandler();
 		WiAppServiceRequest.sendRequest(request, response);

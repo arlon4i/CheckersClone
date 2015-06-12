@@ -39,7 +39,7 @@ public class SharepointServiceRequest
 
 		} catch (Exception e)
 		{
-			RemoteLogger.log("WiAppServiceRequest", "Request: " + request+" | "  + e.toString());
+//			RemoteLogger.log("WiAppServiceRequest", "Request: " + request+" | "  + e.toString());
 			//REMOVED_OLD FlurryAgent.onError("99", e.toString(), "Socket");
 			response.setResponseDesc("Could not connect to Server.\nPlease try again later.");
 		}

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Vector;
-
 import net.rim.device.api.i18n.SimpleDateFormat;
 import net.rim.device.api.io.http.HttpDateParser;
 import net.rim.device.api.system.Characters;
@@ -30,6 +29,7 @@ import fi.bb.checkers.helpers.ResourceHelper;
 import fi.bb.checkers.helpers.RuntimeStoreHelper;
 import fi.bb.checkers.helpers.ServerHelper;
 import fi.bb.checkers.interfaces.InterfaceStoreChanged;
+import fi.bb.checkers.logger.RemoteLogger;
 import fi.bb.checkers.prompts.CustomDialog;
 import fi.bb.checkers.prompts.InfoDialog;
 import fi.bb.checkers.prompts.LoadingDialog;
@@ -63,7 +63,7 @@ public class EditProfileScreen extends MainScreen implements FieldChangeListener
 	MerchantData selected_store;
 	MerchantData changed_store;
 	private Title selected_title;
-	private Title selected_title_original;
+	//private Title selected_title_original;
 
 	// set whether the preferred store must be updated on visible
 	boolean perform_onresult = false;
@@ -127,54 +127,71 @@ public class EditProfileScreen extends MainScreen implements FieldChangeListener
 		button_save.setChangeListener(this);
 		button_logout.setChangeListener(this);
 
-
-
-		for (int i = 0; i < PersistentStoreHelper.getProvinces().size(); i++)//RuntimeStoreHelper.getProvinces()
+		if(PersistentStoreHelper.getProvinces() != null)
 		{
-			if (((LocationData) PersistentStoreHelper.getProvinces().elementAt(i)).getId().equals(profile.getProvinceLocationData()))
+			for (int i = 0; i < PersistentStoreHelper.getProvinces().size(); i++)//RuntimeStoreHelper.getProvinces()
 			{
-				selected_province = (LocationData) PersistentStoreHelper.getProvinces().elementAt(i);
-				break;
+				if (((LocationData) PersistentStoreHelper.getProvinces().elementAt(i)).getId().equals(profile.getProvinceLocationData()))
+				{
+					selected_province = (LocationData) PersistentStoreHelper.getProvinces().elementAt(i);
+					break;
+				}
 			}
 		}
 
-		for (int i = 0; i < PersistentStoreHelper.getTitles().size(); i++)//RuntimeStoreHelper.getProvinces()
+		if(PersistentStoreHelper.getTitles() != null)
 		{
-			if (((Title) PersistentStoreHelper.getTitles().elementAt(i)).getId().equals(profile.getTitleId()))
+			for (int i = 0; i < PersistentStoreHelper.getTitles().size(); i++)
 			{
-				selected_title_original = (Title) PersistentStoreHelper.getTitles().elementAt(i);
-				selected_title = (Title) PersistentStoreHelper.getTitles().elementAt(i);
-				break;
+				if (((Title) PersistentStoreHelper.getTitles().elementAt(i)).getId().equals(profile.getTitleId()))
+				{
+					//selected_title_original = (Title) PersistentStoreHelper.getTitles().elementAt(i);
+					selected_title = (Title) PersistentStoreHelper.getTitles().elementAt(i);
+					break;
+				}
 			}
 		}
 
-		firstnameField.setText(profile.getFirstname());
-		surnameField.setText(profile.getSurname());
-		emailField.setText(profile.getEmail());
+		RemoteLogger.log("Firstname", "" + profile.getFirstname());
+		//RemoteLogger.log("Title: ", "" + ((selected_title_original != null) ? selected_title_original.getDescription() : "Empty"));
+		
+		firstnameField.setText((profile.getFirstname() != null) ? profile.getFirstname() : "");
+		surnameField.setText((profile.getSurname() != null) ? profile.getSurname() : "");
+		emailField.setText((profile.getEmail() != null) ? profile.getEmail() : "");
 
-		String[] tokens = StringUtil.split(profile.getBirthdate(), "/");
-		String httpparserformat = tokens[2] + "-" + tokens[1] + "-" + tokens[0] + " 00:00:00.000";
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(new Date(HttpDateParser.parse(httpparserformat)));
-		dateField.setDate(cal);
+		try
+		{
+			String[] tokens = StringUtil.split(profile.getBirthdate(), "/");
+			String httpparserformat = tokens[2] + "-" + tokens[1] + "-" + tokens[0] + " 00:00:00.000";
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(new Date(HttpDateParser.parse(httpparserformat)));
+			dateField.setDate(cal);
+		}
+		catch(Exception e)
+		{
+			
+		}
 		dateField.setTextColor(ResourceHelper.color_primary);
 		
-		provinceInputField.setText(selected_province.getDesc());
+		provinceInputField.setText((selected_province != null) ? selected_province.getDesc() : "");
 		provinceInputField.setTextColor(ResourceHelper.color_primary);
 
-		if (selected_title != null)
-		{
-			titleInputField.setText(selected_title.getDescription());
-			titleInputField.setTextColor(ResourceHelper.color_primary);
-		}
+		titleInputField.setText((selected_title != null) ? selected_title.getDescription() : "");
+		titleInputField.setTextColor(ResourceHelper.color_primary);
 
 		selected_store = RuntimeStoreHelper.getUserData().getPreferredStore();
 		changed_store = selected_store;
-		if (selected_store != null) 
-		{
+		
+		if(selected_store != null) {
 			preferredstoreInputField.setText(selected_store.getName()); 
-			preferredstoreInputField.setTextColor(ResourceHelper.color_primary);
 		}
+		preferredstoreInputField.setTextColor(ResourceHelper.color_primary);
+		
+		//Little hack for USSD-registered users
+		/*if((profile.getCellphone() != null) && (profile.getFirstname() == null) && (profile.getSurname() == null) && (profile.getProvinceLocationData() == null) && (profile.getTitleId() == null))
+		{
+			selected_title_original = new Title();
+		}*/
 	}
 
 	public void fieldChanged(Field field, int context)
@@ -246,7 +263,7 @@ public class EditProfileScreen extends MainScreen implements FieldChangeListener
 			Calendar currentDate = Calendar.getInstance();
 
 			String error = null;
-			if ((titleInputField.getText().equalsIgnoreCase("")) && (selected_title_original != null))//for old users this field is not compulsory
+			if ((titleInputField.getText().equalsIgnoreCase("")) /*&& (selected_title_original != null)*/)//for old users this field is not compulsory
 			{
 				error = "Please select your title\n";
 			}
@@ -408,15 +425,18 @@ public class EditProfileScreen extends MainScreen implements FieldChangeListener
 		{
 			super.onPostExecute(result);
 			dialog.close();
+			
+			RemoteLogger.log("Log Post Execute", "Here");
 
 			if (result instanceof UserData)
 			{
+				RemoteLogger.log("UserData", "Data");
 				// so that the profile drawer gets updated
 				ViewPagerScreen.push();
 			}
 			else if (result instanceof String)
 			{
-				InfoDialog.doModal("Error", (String) result, "Okay");
+				InfoDialog.doModal("Error", (String) result, "Okay"); 
 			}
 			else if (result instanceof Exception)
 			{
@@ -438,6 +458,7 @@ public class EditProfileScreen extends MainScreen implements FieldChangeListener
 				return response;
 			} catch (Exception e)
 			{
+				RemoteLogger.log("Profile Update Exception: ", e.getMessage());  
 				return e;
 			}
 		}

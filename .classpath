@@ -6,7 +6,8 @@
 	<classpathentry exported="true" kind="lib" path="libs/Regexp-me.jar"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/net.rim.ejde.BlackBerryVMInstallType/BlackBerry JRE 5.0.0"/>
 	<classpathentry exported="true" kind="lib" path="libs/json-me.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/com.google.zxing.jar"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/BBMInterface"/>
-	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/SocialSharingLibrary"/>
+	<classpathentry exported="true" kind="lib" path="libs/AppMeasurement.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

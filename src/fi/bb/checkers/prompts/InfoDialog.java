@@ -25,7 +25,7 @@ public class InfoDialog extends PopupScreen implements FieldChangeListener
 {
 	private InfoDialog(String title, Field detail, String buttonText)
 	{
-		super(new VerticalFieldManager(FIELD_HCENTER | FIELD_VCENTER | VERTICAL_SCROLL));
+		super(new VerticalFieldManager(FIELD_HCENTER | FIELD_VCENTER | VERTICAL_SCROLL | FOCUSABLE));
 		setBackground(BackgroundFactory.createSolidBackground(ResourceHelper.color_white));
 
 		if (!title.equals(""))

@@ -1,12 +1,9 @@
 package fi.bb.checkers.ui.fragments;
 
-import java.util.Calendar;
 import java.util.Hashtable;
 import java.util.Vector;
-
 import net.rim.device.api.system.Characters;
 import net.rim.device.api.system.Display;
-import net.rim.device.api.system.RuntimeStore;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.FieldChangeListener;
 import net.rim.device.api.ui.Font;
@@ -18,6 +15,7 @@ import net.rim.device.api.ui.component.Menu;
 import net.rim.device.api.ui.container.HorizontalFieldManager;
 import net.rim.device.api.ui.container.VerticalFieldManager;
 import net.rim.device.api.ui.decor.BackgroundFactory;
+import net.rim.device.api.util.SimpleSortingVector;
 import fi.bb.checkers.datatypes.CampaignData;
 import fi.bb.checkers.datatypes.CouponCategory;
 import fi.bb.checkers.datatypes.LocationData;
@@ -63,7 +61,9 @@ public class CouponsFragment extends Fragment implements FieldChangeListener, In
 
 	private Font fontNoItemsForSearch = ResourceHelper.helveticaLight().getFont(Font.PLAIN, ResourceHelper.convert(16), Ui.UNITS_px);
 	private boolean closeImmediately = false;
-	String currentLocationId = "";;
+	String currentLocationId = "";
+	
+	SimpleSortingVector coupon_temp_list = new SimpleSortingVector();
 
 	public CouponsFragment()
 	{
@@ -403,7 +403,7 @@ public class CouponsFragment extends Fragment implements FieldChangeListener, In
 
 	private void logRedeemAll()
 	{
-		Calendar dateNow = Calendar.getInstance();
+		/* Calendar dateNow = Calendar.getInstance();
 		Hashtable eventParams = new Hashtable();
 
 		eventParams.put(FlurryHelper.PARAM_TAPPED, "1");
@@ -411,7 +411,7 @@ public class CouponsFragment extends Fragment implements FieldChangeListener, In
 		eventParams.put(FlurryHelper.PARAM_TIME, FlurryHelper.getFlurryFormatDate(dateNow));
 		FlurryHelper.addFirstLaunchParam(eventParams);
 
-		FlurryHelper.logEvent(FlurryHelper.EVENT_REDEEM_ALL_EEZI_COUPONS, eventParams, false);
+		FlurryHelper.logEvent(FlurryHelper.EVENT_REDEEM_ALL_EEZI_COUPONS, eventParams, false); */
 	}
 
 	private void search()
@@ -500,16 +500,16 @@ public class CouponsFragment extends Fragment implements FieldChangeListener, In
 			if (category_filter.contains(coupon.getCategoryList().elementAt(i))) return true;
 		}
 		return false;
-	}
+	} 
 
 	private void logFilter(Vector categories)
 	{
 		Hashtable eventParams = new Hashtable();
 
 		String categoriesS = "";
-		for (int i=0; i < categories.size(); i++)
+		for (int i = 0; i < categories.size(); i++)
 		{
-			if (i==0)
+			if (i == 0)
 			{
 				categoriesS += ((CouponCategory)categories.elementAt(i)).getId();
 			}
@@ -570,7 +570,7 @@ public class CouponsFragment extends Fragment implements FieldChangeListener, In
 				}
 			});
 
-			while(deletedAll==false && run==true)
+			while(deletedAll == false && run == true)
 			{
 				//wait
 			}

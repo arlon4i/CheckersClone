@@ -19,7 +19,6 @@ import fi.bb.checkers.imageloader.ImageLoader;
 import fi.bb.checkers.imageloader.ImageLoaderInterface;
 import fi.bb.checkers.utils.BitmapTools;
 import fi.bb.checkers.utils.StringUtil;
-import fi.bb.socialsharing.logger.RemoteLogger;
 
 /**
  * A container for a special.

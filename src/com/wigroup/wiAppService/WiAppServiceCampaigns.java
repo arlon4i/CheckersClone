@@ -24,6 +24,9 @@ public class WiAppServiceCampaigns
 	final static String apiver = "2.4";
 	final static String appId = StringHelper.wigroup_appid;
 	final static String password = StringHelper.wigroup_apppassword;
+	final static String countryId = StringHelper.country_id;
+	final static String reqId = StringHelper.req_id;
+	final static String channelId = StringHelper.coupons_channel_id;
 	
 	// SHOPRITE
 	/*
@@ -41,32 +44,33 @@ public class WiAppServiceCampaigns
 	public static WiappGetTotalsavingsResponseHandler getTotalSavings(String username, String cvsRegionId, String vouchertype)
 	{
 		String request;
-
+		cvsRegionId = null;
+		
 		if (RuntimeStoreHelper.getSessionID() == null)
 		{
 			if (cvsRegionId != null)
 			{
-				request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"2\">" + "<cvgettotalsavingsrx>"
-						+ "<channelid>" + StringHelper.coupons_channel_id + "</channelid>" + "<campaigntype>" + vouchertype + "</campaigntype><cvprovinceid>" + cvsRegionId + "</cvprovinceid>"
+				request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"" + reqId + "\">" + "<cvgettotalsavingsrx>"
+						+ "<channelid>" + channelId + "</channelid>" + "<campaigntype>" + vouchertype + "</campaigntype><cvprovinceid>" + cvsRegionId + "</cvprovinceid>"
 						+ "</cvgettotalsavingsrx></wiapp>";
 			}
 			else
 
-				request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"2\">" + "<cvgettotalsavingsrx>"
-						+ "<channelid>" + StringHelper.coupons_channel_id + "</channelid>" + "<campaigntype>" + vouchertype + "</campaigntype>" + "</cvgettotalsavingsrx>" + "</wiapp>";
+				request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"" + reqId + "\">" + "<cvgettotalsavingsrx>"
+						+ "<channelid>" + channelId + "</channelid>" + "<campaigntype>" + vouchertype + "</campaigntype>" + "</cvgettotalsavingsrx>" + "</wiapp>";
 		}
 		else
 		{
 			if (cvsRegionId != null)
 			{
-				request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"2\">" + "<cvgettotalsavingsrx>" + "<username>" + username
+				request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"" + reqId + "\">" + "<cvgettotalsavingsrx>" + "<username>" + username
 						+ "</username>" + "<sessionid>" + RuntimeStoreHelper.getSessionID() + "</sessionid>" + "<campaigntype>" + vouchertype + "</campaigntype>"
-						+ "<channelid>" + StringHelper.coupons_channel_id + "</channelid><cvprovinceid>" + cvsRegionId + "</cvprovinceid>" + "</cvgettotalsavingsrx>" + "</wiapp>";
+						+ "<channelid>" + channelId + "</channelid><cvprovinceid>" + cvsRegionId + "</cvprovinceid>" + "</cvgettotalsavingsrx>" + "</wiapp>";
 			}
 			else
-				request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"2\">" + "<cvgettotalsavingsrx>" + "<username>" + username
+				request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"" + reqId + "\">" + "<cvgettotalsavingsrx>" + "<username>" + username
 						+ "</username>" + "<sessionid>" + RuntimeStoreHelper.getSessionID() + "</sessionid>" + "<campaigntype>" + vouchertype + "</campaigntype>"
-						+ "<channelid>" + StringHelper.coupons_channel_id + "</channelid>" + "</cvgettotalsavingsrx>" + "</wiapp>";
+						+ "<channelid>" + channelId + "</channelid>" + "</cvgettotalsavingsrx>" + "</wiapp>";
 		}
 
 		WiappGetTotalsavingsResponseHandler response = new WiappGetTotalsavingsResponseHandler();
@@ -87,27 +91,27 @@ public class WiAppServiceCampaigns
 				{
 					if (cvsRegionId != null)
 					{
-						request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"2\">" + "<cvgettotalsavingsrx>"
-								+ "<channelid>" + StringHelper.coupons_channel_id + "</channelid>" + "<campaigntype>" + vouchertype + "</campaigntype><cvprovinceid>" + cvsRegionId + "</cvprovinceid>"
+						request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"" + reqId + "\">" + "<cvgettotalsavingsrx>"
+								+ "<channelid>" + channelId + "</channelid>" + "<campaigntype>" + vouchertype + "</campaigntype><cvprovinceid>" + cvsRegionId + "</cvprovinceid>"
 								+ "</cvgettotalsavingsrx></wiapp>";
 					}
 					else
 
-						request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"2\">" + "<cvgettotalsavingsrx>"
-								+ "<channelid>" + StringHelper.coupons_channel_id + "</channelid>" + "<campaigntype>" + vouchertype + "</campaigntype>" + "</cvgettotalsavingsrx>" + "</wiapp>";
+						request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"" + reqId + "\">" + "<cvgettotalsavingsrx>"
+								+ "<channelid>" + channelId + "</channelid>" + "<campaigntype>" + vouchertype + "</campaigntype>" + "</cvgettotalsavingsrx>" + "</wiapp>";
 				}
 				else
 				{
 					if (cvsRegionId != null)
 					{
-						request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"2\">" + "<cvgettotalsavingsrx>" + "<username>" + username
+						request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"" + reqId + "\">" + "<cvgettotalsavingsrx>" + "<username>" + username
 								+ "</username>" + "<sessionid>" + RuntimeStoreHelper.getSessionID() + "</sessionid>" + "<campaigntype>" + vouchertype + "</campaigntype>"
-								+ "<channelid>" + StringHelper.coupons_channel_id + "</channelid><cvprovinceid>" + cvsRegionId + "</cvprovinceid>" + "</cvgettotalsavingsrx>" + "</wiapp>";
+								+ "<channelid>" + channelId + "</channelid><cvprovinceid>" + cvsRegionId + "</cvprovinceid>" + "</cvgettotalsavingsrx>" + "</wiapp>";
 					}
 					else
-						request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"2\">" + "<cvgettotalsavingsrx>" + "<username>" + username
+						request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"" + reqId + "\">" + "<cvgettotalsavingsrx>" + "<username>" + username
 								+ "</username>" + "<sessionid>" + RuntimeStoreHelper.getSessionID() + "</sessionid>" + "<campaigntype>" + vouchertype + "</campaigntype>"
-								+ "<channelid>" + StringHelper.coupons_channel_id + "</channelid>" + "</cvgettotalsavingsrx>" + "</wiapp>";
+								+ "<channelid>" + channelId + "</channelid>" + "</cvgettotalsavingsrx>" + "</wiapp>";
 				}
 				WiAppServiceRequest.sendRequest(request, response);
 			}
@@ -127,31 +131,32 @@ public class WiAppServiceCampaigns
 	{
 
 		String request;
+		cvsRegionId = null;
 
 		if (RuntimeStoreHelper.getSessionID() == null)
 		{
 			if (cvsRegionId != null)
 			{
-				request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"2\">" + "<cvcampaignlistrx>"
-						+ "<channelid>" + StringHelper.coupons_channel_id + "</channelid>" + "<campaigntype>COUPON</campaigntype><cvprovinceid>" + cvsRegionId + "</cvprovinceid>" + "</cvcampaignlistrx></wiapp>";
+				request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"" + reqId + "\">" + "<cvcampaignlistrx>"
+						+ "<channelid>" + channelId + "</channelid>" + "<campaigntype>COUPON</campaigntype><cvprovinceid>" + cvsRegionId + "</cvprovinceid>" + "</cvcampaignlistrx></wiapp>";
 			}
 			else
 			{
-				request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"2\">" + "<cvcampaignlistrx>"
-						+ "<channelid>" + StringHelper.coupons_channel_id + "</channelid>" + "<campaigntype>COUPON</campaigntype>" + "</cvcampaignlistrx>" + "</wiapp>";
+				request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"" + reqId + "\">" + "<cvcampaignlistrx>"
+						+ "<channelid>" + channelId + "</channelid>" + "<campaigntype>COUPON</campaigntype>" + "</cvcampaignlistrx>" + "</wiapp>";
 			}
 		}
 		else
 		{
 			if (cvsRegionId != null)
 			{
-				request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"2\">" + "<cvcampaignlistrx>" + "<username>" + username
+				request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"" + reqId + "\">" + "<cvcampaignlistrx>" + "<username>" + username
 						+ "</username>" + "<sessionid>" + RuntimeStoreHelper.getSessionID() + "</sessionid>" + "<campaigntype>COUPON</campaigntype>"
-						+ "<channelid>" + StringHelper.coupons_channel_id + "</channelid><cvprovinceid>" + cvsRegionId + "</cvprovinceid>" + "</cvcampaignlistrx>" + "</wiapp>";
+						+ "<channelid>" + channelId + "</channelid><cvprovinceid>" + cvsRegionId + "</cvprovinceid>" + "</cvcampaignlistrx>" + "</wiapp>";
 			}
 			else
-				request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"2\">" + "<cvcampaignlistrx>" + "<username>" + username
-						+ "</username>" + "<sessionid>" + RuntimeStoreHelper.getSessionID() + "</sessionid>" + "<campaigntype>COUPON</campaigntype>" + "<channelid>" + StringHelper.coupons_channel_id + "</channelid>"
+				request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"" + reqId + "\">" + "<cvcampaignlistrx>" + "<username>" + username
+						+ "</username>" + "<sessionid>" + RuntimeStoreHelper.getSessionID() + "</sessionid>" + "<campaigntype>COUPON</campaigntype>" + "<channelid>" + channelId + "</channelid>"
 						+ "</cvcampaignlistrx>" + "</wiapp>";
 		}
 
@@ -169,8 +174,8 @@ public class WiAppServiceCampaigns
 			{
 				RuntimeStoreHelper.setSessionID(loginResponse.getSessionId().equals("0") ? null : loginResponse.getSessionId());
 
-				request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"2\">" + "<cvcampaignlistrx>" + "<username>" + username
-						+ "</username>" + "<sessionid>" + RuntimeStoreHelper.getSessionID() + "</sessionid>" + "<campaigntype>COUPON</campaigntype>" + "<channelid>" + StringHelper.coupons_channel_id + "</channelid>"
+				request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"" + reqId + "\">" + "<cvcampaignlistrx>" + "<username>" + username
+						+ "</username>" + "<sessionid>" + RuntimeStoreHelper.getSessionID() + "</sessionid>" + "<campaigntype>COUPON</campaigntype>" + "<channelid>" + channelId + "</channelid>"
 						+ "</cvcampaignlistrx>" + "</wiapp>";
 				WiAppServiceRequest.sendRequest(request, response);
 			}
@@ -181,7 +186,7 @@ public class WiAppServiceCampaigns
 
 	public static WiAppCampaignResponseHandler getSpecialsList(String channelid)
 	{
-		String request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"2\">" + "<cvcampaignlistrx>" + "<channelid>" + channelid
+		String request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"" + reqId + "\">" + "<cvcampaignlistrx>" + "<channelid>" + channelid
 				+ "</channelid>" + /*"<campaigntype>VOUCHER</campaigntype>" +*/ "</cvcampaignlistrx>" + "</wiapp>";
 
 		WiAppCampaignResponseHandler response = new WiAppCampaignResponseHandler();
@@ -206,12 +211,12 @@ public class WiAppServiceCampaigns
 
 		if (RuntimeStoreHelper.getSessionID() == null)
 		{
-			request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"2\">" + "<cvcampaignlistrx>" + "<username>" + username
+			request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"" + reqId + "\">" + "<cvcampaignlistrx>" + "<username>" + username
 					+ "</username>" + "<channelid>" + channelid + "</channelid>" + "<addwordlist>" + addwordsStr + "</addwordlist>" + "</cvcampaignlistrx>" + "</wiapp>";
 		}
 		else
 		{
-			request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"2\">" + "<cvcampaignlistrx>" + "<username>" + username
+			request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"" + reqId + "\">" + "<cvcampaignlistrx>" + "<username>" + username
 					+ "</username>" + "<sessionid>" + RuntimeStoreHelper.getSessionID() + "</sessionid>" + "<channelid>" + channelid + "</channelid>" + "<addwordlist>" + addwordsStr
 					+ "</addwordlist>" + "</cvcampaignlistrx>" + "</wiapp>";
 
@@ -232,7 +237,7 @@ public class WiAppServiceCampaigns
 				RuntimeStoreHelper.setSessionID(loginResponse.getSessionId().equals("0") ? null : loginResponse.getSessionId());
 				// refresh coupons
 
-				request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"2\">" + "<cvcampaignlistrx>" + "<username>" + username
+				request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"" + reqId + "\">" + "<cvcampaignlistrx>" + "<username>" + username
 						+ "</username>" + "<sessionid>" + RuntimeStoreHelper.getSessionID() + "</sessionid>" + "<channelid>" + channelid + "</channelid>" + "<addwordlist>" + addwordsStr
 						+ "</addwordlist>" + "</cvcampaignlistrx>" + "</wiapp>";
 				WiAppServiceRequest.sendRequest(request, response);
@@ -255,13 +260,13 @@ public class WiAppServiceCampaigns
 
 		if (RuntimeStoreHelper.getSessionID() == null)
 		{
-			request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"2\">" + "<cvcampaignlistrx>" + "<channelid>" + StringHelper.coupons_channel_id_coupon + "</channelid>"
+			request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"" + reqId + "\">" + "<cvcampaignlistrx>" + "<channelid>" + channelId + "</channelid>"
 					+ "<addwordlist>" + addwordsStr + "</addwordlist>" + "</cvcampaignlistrx>" + "</wiapp>";
 		}
 		else
 		{
-			request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"2\">" + "<cvcampaignlistrx>" + "<username>" + username
-					+ "</username>" + "<sessionid>" + RuntimeStoreHelper.getSessionID() + "</sessionid>" + "<campaigntype>COUPON</campaigntype>" + "<channelid>" + StringHelper.coupons_channel_id_coupon + "</channelid>" + "<addwordlist>"
+			request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"" + reqId + "\">" + "<cvcampaignlistrx>" + "<username>" + username
+					+ "</username>" + "<sessionid>" + RuntimeStoreHelper.getSessionID() + "</sessionid>" + "<campaigntype>COUPON</campaigntype>" + "<channelid>" + channelId + "</channelid>" + "<addwordlist>"
 					+ addwordsStr + "</addwordlist>" + "</cvcampaignlistrx>" + "</wiapp>";
 		}
 
@@ -280,8 +285,8 @@ public class WiAppServiceCampaigns
 				RuntimeStoreHelper.setSessionID(loginResponse.getSessionId().equals("0") ? null : loginResponse.getSessionId());
 				// refresh coupons
 
-				request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"2\">" + "<cvcampaignlistrx>" + "<username>" + username
-						+ "</username>" + "<sessionid>" + RuntimeStoreHelper.getSessionID() + "</sessionid>" + "<campaigntype>COUPON</campaigntype>" + "<channelid>" + StringHelper.coupons_channel_id_coupon + "</channelid>"
+				request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"" + reqId + "\">" + "<cvcampaignlistrx>" + "<username>" + username
+						+ "</username>" + "<sessionid>" + RuntimeStoreHelper.getSessionID() + "</sessionid>" + "<campaigntype>COUPON</campaigntype>" + "<channelid>" + channelId + "</channelid>"
 						+ "<addwordlist>" + addwordsStr + "</addwordlist>" + "</cvcampaignlistrx>" + "</wiapp>";
 				WiAppServiceRequest.sendRequest(request, response);
 			}
@@ -295,12 +300,12 @@ public class WiAppServiceCampaigns
 		String request;
 		if (provinceId != null)
 		{
-			request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"2\">" + "<cvchanneldisclaimerrx>" + "<channelid>" + channelid
+			request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"" + reqId + "\">" + "<cvchanneldisclaimerrx>" + "<channelid>" + channelid
 					+ "</channelid>" + "<provinceid>" + provinceId + "</provinceid>" + "</cvchanneldisclaimerrx>" + "</wiapp>";
 		}
 		else
 		{
-			request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"2\">" + "<cvchanneldisclaimerrx>" + "<channelid>" + channelid
+			request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"" + reqId + "\">" + "<cvchanneldisclaimerrx>" + "<channelid>" + channelid
 					+ "</channelid>" + "</cvchanneldisclaimerrx>" + "</wiapp>";
 		}
 
@@ -314,8 +319,8 @@ public class WiAppServiceCampaigns
 	public static WiAppWiCodeResponseHandler issueCampaign(String username, String campaignID)
 	{
 
-		String request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"2\">" + "<cvissuerx>" + "<username>" + username + "</username>"
-				+ "<sessionid>" + RuntimeStoreHelper.getSessionID() + "</sessionid>" + "<campaignid>" + campaignID + "</campaignid>" + "<channelid>" + StringHelper.coupons_channel_id_coupon + "</channelid>" + "</cvissuerx>" + "</wiapp>";
+		String request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"" + reqId + "\">" + "<cvissuerx>" + "<username>" + username + "</username>"
+				+ "<sessionid>" + RuntimeStoreHelper.getSessionID() + "</sessionid>" + "<campaignid>" + campaignID + "</campaignid>" + "<channelid>" + channelId + "</channelid>" + "</cvissuerx>" + "</wiapp>";
 
 		WiAppWiCodeResponseHandler response = new WiAppWiCodeResponseHandler();
 
@@ -332,8 +337,8 @@ public class WiAppServiceCampaigns
 				RuntimeStoreHelper.setSessionID(loginResponse.getSessionId().equals("0") ? null : loginResponse.getSessionId());
 				// refresh coupons
 
-				request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"2\">" + "<cvissuerx>" + "<username>" + username + "</username>"
-						+ "<sessionid>" + RuntimeStoreHelper.getSessionID() + "</sessionid>" + "<campaignid>" + campaignID + "</campaignid>" + "<channelid>" + StringHelper.coupons_channel_id_coupon + "</channelid>" + "</cvissuerx>"
+				request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"" + reqId + "\">" + "<cvissuerx>" + "<username>" + username + "</username>"
+						+ "<sessionid>" + RuntimeStoreHelper.getSessionID() + "</sessionid>" + "<campaignid>" + campaignID + "</campaignid>" + "<channelid>" + channelId + "</channelid>" + "</cvissuerx>"
 						+ "</wiapp>";
 				WiAppServiceRequest.sendRequest(request, response);
 			}
@@ -345,8 +350,8 @@ public class WiAppServiceCampaigns
 	public static WiAppResponseHandler expireCampaign(String username, String wiCode)
 	{
 
-		String request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"2\">" + "<cvexpirerx>" + "<username>" + username + "</username>"
-				+ "<sessionid>" + RuntimeStoreHelper.getSessionID() + "</sessionid>" + "<wicode>" + wiCode + "</wicode>" + "<channelid>" + StringHelper.coupons_channel_id_coupon + "</channelid>" + "</cvexpirerx>" + "</wiapp>";
+		String request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"" + reqId + "\">" + "<cvexpirerx>" + "<username>" + username + "</username>"
+				+ "<sessionid>" + RuntimeStoreHelper.getSessionID() + "</sessionid>" + "<wicode>" + wiCode + "</wicode>" + "<channelid>" + channelId + "</channelid>" + "</cvexpirerx>" + "</wiapp>";
 
 		WiAppResponseHandler response = new WiAppResponseHandler();
 
@@ -358,7 +363,7 @@ public class WiAppServiceCampaigns
 	public static WiAppWiCodeResponseHandler getWicode(String username)
 	{
 
-		String request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"2\">" + "<cvgetopenwicoderx>" + "<username>" + username
+		String request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"" + reqId + "\">" + "<cvgetopenwicoderx>" + "<username>" + username
 				+ "</username>" + "<sessionid>" + RuntimeStoreHelper.getSessionID() + "</sessionid>" + "<channelid>" + StringHelper.coupons_channel_id + "</channelid>" + "<campaigntype>COUPON</campaigntype>"
 				+ "</cvgetopenwicoderx>" + "</wiapp>";
 
@@ -377,7 +382,7 @@ public class WiAppServiceCampaigns
 				RuntimeStoreHelper.setSessionID(loginResponse.getSessionId().equals("0") ? null : loginResponse.getSessionId());
 				// refresh coupons
 
-				request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"2\">" + "<cvgetopenwicoderx>" + "<username>" + username
+				request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"" + reqId + "\">" + "<cvgetopenwicoderx>" + "<username>" + username
 						+ "</username>" + "<sessionid>" + RuntimeStoreHelper.getSessionID() + "</sessionid>" + "<channelid>" + StringHelper.coupons_channel_id + "</channelid>" + "<campaigntype>COUPON</campaigntype>"
 						+ "</cvgetopenwicoderx>" + "</wiapp>";
 				WiAppServiceRequest.sendRequest(request, response);
@@ -389,12 +394,12 @@ public class WiAppServiceCampaigns
 	
 	public static WiappCouponCategoriesResponseHandler getSpecialCategories()
 	{
-		return getCouponCategories("6"+StringHelper.specials_channel_id);
+		return getCouponCategories("6" + StringHelper.specials_channel_id);
 	}
 
 	public static WiappCouponCategoriesResponseHandler getCouponCategories(String channelId)
 	{
-		String request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"2\">" + "<cvcategorylistrx>" + "<channelid>" + channelId
+		String request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"" + reqId + "\">" + "<cvcategorylistrx>" + "<channelid>" + channelId
 				+ "</channelid>" + "</cvcategorylistrx>" + "</wiapp>";
 
 		WiappCouponCategoriesResponseHandler response = new WiappCouponCategoriesResponseHandler();

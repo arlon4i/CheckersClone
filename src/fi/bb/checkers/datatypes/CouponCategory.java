@@ -1,5 +1,6 @@
 package fi.bb.checkers.datatypes;
 
+import net.rim.device.api.util.Comparator;
 import net.rim.device.api.util.Persistable;
 
 
@@ -33,5 +34,18 @@ public class CouponCategory implements Persistable
 		}
 		return false;
 	}
-
+	
+	public int greaterThan(CouponCategory object)
+	{
+		if (object instanceof CouponCategory)
+		{
+			return getName().compareTo(((CouponCategory) object).getName());
+		}
+		
+		return -1;
+	}
+	
+	public String toString() {
+		return name;
+	}
 }

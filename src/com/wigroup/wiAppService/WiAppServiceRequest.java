@@ -22,11 +22,11 @@ public class WiAppServiceRequest
 		InputStream stream = null;
 		try
 		{
-			RemoteLogger.log("WiAppServiceRequest", "Request request: " + request);
+//			RemoteLogger.log("WiAppServiceRequest", "Request request: " + request);
 			
 			String url = StringHelper.wigroup_url + encodeUrl(request);
 
-			RemoteLogger.log("WiAppServiceRequest", "Request url: " + url);
+//			RemoteLogger.log("WiAppServiceRequest", "Request url: " + url);
 			
 			stream = HttpInterface.doGET(url, null);
 
@@ -36,10 +36,6 @@ public class WiAppServiceRequest
 			saxParser.parse(stream, response);
 		} catch (Exception e)
 		{
-			RemoteLogger.log("WiAppServiceRequest", "Request: " + request+"\n\n"  + e.toString());
-			
-			//REMOVED_OLD FlurryAgent.onError("99", e.toString(), "Socket");
-
 			response.setResponseCode("99");
 			response.setResponseMessage("Could not connect to Server.\nPlease try again later.");
 		}

@@ -1,5 +1,8 @@
 package fi.bb.checkers.prompts;
 
+import java.util.Calendar;
+import java.util.Hashtable;
+
 import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.ui.Color;
 import net.rim.device.api.ui.Keypad;
@@ -12,6 +15,9 @@ import net.rim.device.api.ui.container.VerticalFieldManager;
 import net.rim.device.api.ui.decor.BackgroundFactory;
 import net.rim.device.api.ui.decor.BorderFactory;
 import fi.bb.checkers.MainApplication;
+import fi.bb.checkers.datatypes.CampaignData;
+import fi.bb.checkers.datatypes.CouponCategory;
+import fi.bb.checkers.helpers.FlurryHelper;
 import fi.bb.checkers.helpers.ResourceHelper;
 import fi.bb.checkers.helpers.SharingHelper;
 import fi.bb.checkers.ui.components.ImageSubtitleButton;

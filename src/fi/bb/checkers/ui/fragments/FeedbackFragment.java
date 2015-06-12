@@ -306,7 +306,7 @@ public class FeedbackFragment extends Fragment implements FieldChangeListener
 				}
 			} catch (IOException e)
 			{
-				RemoteLogger.log("FeedbackFragment", e.toString());
+//				RemoteLogger.log("FeedbackFragment", e.toString());
 				return e;
 			}
 			return null;

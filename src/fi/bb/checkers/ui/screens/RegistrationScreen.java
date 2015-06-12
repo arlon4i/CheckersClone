@@ -29,6 +29,7 @@ import fi.bb.checkers.datatypes.UserData;
 import fi.bb.checkers.helpers.PersistentStoreHelper;
 import fi.bb.checkers.helpers.ResourceHelper;
 import fi.bb.checkers.helpers.StringHelper;
+import fi.bb.checkers.logger.RemoteLogger;
 import fi.bb.checkers.prompts.CustomDialog;
 import fi.bb.checkers.prompts.InfoDialog;
 import fi.bb.checkers.prompts.LoadingDialog;
@@ -303,6 +304,8 @@ public class RegistrationScreen extends MainScreen implements FieldChangeListene
 				loading = LoadingDialog.push("You will receive a SMS with your Confirmation Code.");//TODO change loading text
 
 				WiAppResponseHandler response = WiAppServiceEssentials.register(user);
+				
+				RemoteLogger.log("Server Response: ", "" + response.getResponseMessage());
 
 				if (response.getResponseCode().equalsIgnoreCase("-1"))
 				{
@@ -339,7 +342,18 @@ public class RegistrationScreen extends MainScreen implements FieldChangeListene
 							e.printStackTrace();
 						}
 						loading.close();
-						InfoDialog.doModal("Error", response.getResponseMessage(), "Okay");
+						
+						if(response.getResponseCode().equalsIgnoreCase("011") || response.getResponseCode().equalsIgnoreCase("012")
+							|| response.getResponseCode().equalsIgnoreCase("035") || response.getResponseCode().equalsIgnoreCase("275")	
+							)
+						{
+							app.pushScreen(new LoginScreen(user.getUsername(), true));
+						}
+						else
+						{
+							String error_message = response.getResponseMessage();
+							InfoDialog.doModal("Error", (error_message.trim().equals("")) ? "Unknown Error" : error_message, "Okay");
+						}
 					}
 				}
 			}

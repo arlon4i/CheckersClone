@@ -6,7 +6,9 @@ import java.util.Vector;
 import net.rim.device.api.system.Application;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.FieldChangeListener;
+import net.rim.device.api.ui.MenuItem;
 import net.rim.device.api.ui.UiApplication;
+import net.rim.device.api.ui.component.Menu;
 import net.rim.device.api.ui.container.VerticalFieldManager;
 import net.rim.device.api.ui.decor.BackgroundFactory;
 import net.rim.device.api.util.SimpleSortingVector;
@@ -34,6 +36,7 @@ public class SelectStoreFragment extends Fragment implements FieldChangeListener
 	private LoadThread load_stores;
 	private TextInputField search_field;
 	private VerticalFieldManager content;
+	private String filterString = "all";
 
 	private String startText;
 
@@ -149,7 +152,7 @@ public class SelectStoreFragment extends Fragment implements FieldChangeListener
 					((ViewPagerScreen) UiApplication.getUiApplication().getActiveScreen()).transition(StoreInfoFragment.FRAGMENT_ID, new Object[]{((StoreItemField) field).getObject()});
 				} catch (Throwable e)
 				{
-					RemoteLogger.log("SelectStoreFragment", e.toString());
+//					RemoteLogger.log("SelectStoreFragment", e.toString());
 				}
 			}
 			else
@@ -160,6 +163,45 @@ public class SelectStoreFragment extends Fragment implements FieldChangeListener
 				}
 			}			
 		}
+	}
+	
+	public void makeMenu(Menu menu)
+	{
+		MenuItem item = new MenuItem("All Stores", 0x00100000, 0)
+		{
+			public void run()
+			{
+				if(!filterString.equalsIgnoreCase("all")) {
+					filterString = "all";
+					refresh();
+				}
+			}
+		};
+		menu.add(item);
+		
+		item = new MenuItem("Checkers Only", 0x00110000, 0)
+		{
+			public void run()
+			{
+				if(!filterString.equalsIgnoreCase("checkers")) {
+					filterString = "checkers";
+					refresh();
+				}
+			}
+		};
+		menu.add(item);
+		
+		item = new MenuItem("Shoprite Only", 0x00120000, 0)
+		{
+			public void run()
+			{
+				if(!filterString.equalsIgnoreCase("shoprite")) {
+					filterString = "shoprite";
+					refresh();
+				}
+			}
+		};
+		menu.add(item);
 	}
 
 	private AsyncTask downloadTask = new AsyncTask()
@@ -270,6 +312,28 @@ public class SelectStoreFragment extends Fragment implements FieldChangeListener
 
 					if (search_term == null || store.getName().toLowerCase().indexOf(search_term) != -1)
 					{
+						if((filterString.equals("all")) || (filterString.equalsIgnoreCase(store.getBrand()))) {
+							StoreItemField field = new StoreItemField(store);
+							field.setChangeListener(SelectStoreFragment.this);
+
+							synchronized (Application.getEventLock())
+							{
+								if (!run) return;
+								content.add(field);
+							}
+						}
+					}
+					
+					if (!run) return;
+				}
+			}
+			else
+			{
+				for (int i = 0; i < stores.size(); i++)
+				{
+					MerchantData store = (MerchantData) stores.elementAt(i);
+					
+					if((filterString.equals("all")) || (filterString.equalsIgnoreCase(store.getBrand()))) {
 						StoreItemField field = new StoreItemField(store);
 						field.setChangeListener(SelectStoreFragment.this);
 
@@ -279,23 +343,7 @@ public class SelectStoreFragment extends Fragment implements FieldChangeListener
 							content.add(field);
 						}
 					}
-					if (!run) return;
-				}
-			}
-			else
-			{
-				for (int i = 0; i < stores.size(); i++)
-				{
-					MerchantData store = (MerchantData) stores.elementAt(i);
 
-					StoreItemField field = new StoreItemField(store);
-					field.setChangeListener(SelectStoreFragment.this);
-
-					synchronized (Application.getEventLock())
-					{
-						if (!run) return;
-						content.add(field);
-					}
 					if (!run) return;
 				}
 			}

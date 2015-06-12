@@ -5,8 +5,6 @@ import java.util.Hashtable;
 import java.util.Stack;
 import java.util.Vector;
 
-import com.samples.bbm.ForName.BBMInterface.BBMBridge;
-
 import net.rim.device.api.system.ApplicationDescriptor;
 import net.rim.device.api.system.Characters;
 import net.rim.device.api.system.DeviceInfo;
@@ -199,7 +197,9 @@ public class ViewPagerScreen extends MainScreen implements Actionbar.OnClickList
 			}
 		}).start();*/
 
-		logAppLaunchSuccess();		
+		logAppLaunchSuccess();	
+		
+//		com.omniture.AppMeasurement test = new com.omniture.AppMeasurement();
 	}
 
 	private void logAppLaunchSuccess()
@@ -208,7 +208,7 @@ public class ViewPagerScreen extends MainScreen implements Actionbar.OnClickList
 		Calendar dateNow = Calendar.getInstance();
 		eventParams.put(FlurryHelper.PARAM_OPEN_SUCCESS, "1");
 		FlurryHelper.addRegistrationStatusParam(eventParams);		
-		eventParams.put(FlurryHelper.PARAM_TIME, FlurryHelper.getFlurryFormatDate(dateNow));
+		eventParams.put(FlurryHelper.PARAM_TIMESTAMP, FlurryHelper.getFlurryFormatDate(dateNow));
 		FlurryHelper.addProvinceParam(eventParams);
 		eventParams.put(FlurryHelper.PARAM_VERSION, ApplicationDescriptor.currentApplicationDescriptor().getVersion());
 		eventParams.put(FlurryHelper.PARAM_OPERATING_SYSTEM, DeviceInfo.getPlatformVersion());
@@ -272,14 +272,23 @@ public class ViewPagerScreen extends MainScreen implements Actionbar.OnClickList
 	public static void push()
 	{
 		UiApplication app = UiApplication.getUiApplication();
-		for (int x = 0; x < app.getScreenCount() - 1; x++)
+		
+		int screenCount = app.getScreenCount();
+		
+		for (int x = 0; x < screenCount - 1; x++)
 		{
 			app.getActiveScreen().close();
+//			x--;
 		}
-
-		Screen screen = app.getActiveScreen();
-		app.pushScreen(new ViewPagerScreen());
-		screen.close();
+		
+		try {
+			Screen screen = app.getActiveScreen();
+			app.pushScreen(new ViewPagerScreen());
+			screen.close();
+			RemoteLogger.log("Some Point: ", "Here");
+		} catch(Exception e) {
+			RemoteLogger.log("ViewPager Exception: ", e + " " + e.getMessage());
+		}
 	}
 
 	public void pushThemedSpecialsScreen(String categoryId)

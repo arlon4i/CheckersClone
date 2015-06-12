@@ -61,14 +61,14 @@ public class RuntimeStoreHelper
 	
 	public static void setSpecialsForLocationId(Vector specials, String locationId)
 	{
-		RemoteLogger.log("TEST_SPECIALS_RUNTIME", "RuntimeStoreHelper.setSpecialsForLocationId: RuntimeStoreHelper.getLastLocationIdUsedForSpecialsSearch(): " + RuntimeStoreHelper.getLastLocationIdUsedForSpecialsSearch() + " new loc: " + locationId);
+//		RemoteLogger.log("TEST_SPECIALS_RUNTIME", "RuntimeStoreHelper.setSpecialsForLocationId: RuntimeStoreHelper.getLastLocationIdUsedForSpecialsSearch(): " + RuntimeStoreHelper.getLastLocationIdUsedForSpecialsSearch() + " new loc: " + locationId);
 		RuntimeStoreHelper.lastLocationIdUsedForSpecialsSearch = locationId;
 		RuntimeStoreHelper.specials = specials;
 	}
 	
 	public static void setCouponsForLocationId(Vector coupons, String locationId)
 	{
-		RemoteLogger.log("TEST_SPECIALS_RUNTIME", "RuntimeStoreHelper.setCouponsForLocationId: RuntimeStoreHelper.getCouponsForLocationId(): " + RuntimeStoreHelper.getLastLocationIdUsedForCouponsSearch() + " new loc: " + locationId);
+//		RemoteLogger.log("TEST_SPECIALS_RUNTIME", "RuntimeStoreHelper.setCouponsForLocationId: RuntimeStoreHelper.getCouponsForLocationId(): " + RuntimeStoreHelper.getLastLocationIdUsedForCouponsSearch() + " new loc: " + locationId);
 		RuntimeStoreHelper.lastLocationIdUsedForCouponsSearch = locationId;
 		RuntimeStoreHelper.coupons = coupons;
 	}
@@ -272,7 +272,14 @@ public class RuntimeStoreHelper
 
 				if (RuntimeStoreHelper.interfaceCouponsFinishedLoading!=null)
 				{
-					RuntimeStoreHelper.interfaceCouponsFinishedLoading.onCouponsFinishedLoading(true);
+					try
+					{
+						RuntimeStoreHelper.interfaceCouponsFinishedLoading.onCouponsFinishedLoading(true);
+					}
+					catch(Exception e)
+					{
+						
+					}
 				}
 			}
 			else
@@ -285,7 +292,14 @@ public class RuntimeStoreHelper
 
 				if (RuntimeStoreHelper.interfaceCouponsFinishedLoading!=null)
 				{
-					RuntimeStoreHelper.interfaceCouponsFinishedLoading.onCouponsFinishedLoading(false);
+					try
+					{
+						RuntimeStoreHelper.interfaceCouponsFinishedLoading.onCouponsFinishedLoading(false);
+					}
+					catch(Exception e)
+					{
+						
+					}
 				}
 			}
 

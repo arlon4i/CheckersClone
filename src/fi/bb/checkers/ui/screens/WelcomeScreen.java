@@ -1,6 +1,7 @@
 package fi.bb.checkers.ui.screens;
 
-import com.samples.bbm.ForName.BBMInterface.BBMBridge;
+import java.util.Calendar;
+import java.util.Hashtable;
 
 import net.rim.device.api.system.Characters;
 import net.rim.device.api.system.Display;
@@ -12,9 +13,9 @@ import net.rim.device.api.ui.container.HorizontalFieldManager;
 import net.rim.device.api.ui.container.MainScreen;
 import net.rim.device.api.ui.decor.BackgroundFactory;
 import fi.bb.checkers.MainApplication;
+import fi.bb.checkers.helpers.FlurryHelper;
 import fi.bb.checkers.helpers.PersistentStoreHelper;
 import fi.bb.checkers.helpers.ResourceHelper;
-import fi.bb.checkers.logger.RemoteLogger;
 import fi.bb.checkers.ui.components.ColorButtonField;
 
 public class WelcomeScreen extends MainScreen implements FieldChangeListener
@@ -76,6 +77,15 @@ public class WelcomeScreen extends MainScreen implements FieldChangeListener
 		button_next.setChangeListener(this);
 		button_skip.setChangeListener(this);
 	}
+	
+	private void logEvent(String flurry_event)
+	{
+		Hashtable eventParams = new Hashtable();
+
+		eventParams.put(FlurryHelper.PARAM_TIMESTAMP, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
+
+		FlurryHelper.logEvent(flurry_event, eventParams, true);
+	}
 
 	protected boolean keyChar(char c, int status, int time)
 	{
@@ -102,6 +112,8 @@ public class WelcomeScreen extends MainScreen implements FieldChangeListener
 	private void buildPage(int page)
 	{
 		current_page = page;
+		
+		String flurry_event = "";
 
 		getMainManager().setBackground(BackgroundFactory.createBitmapBackground(ResourceHelper.getImage("_welcome_" + page + ".jpg")));
 
@@ -112,23 +124,27 @@ public class WelcomeScreen extends MainScreen implements FieldChangeListener
 
 			button_manager.add(button_next);
 			button_manager.add(button_skip);
+			flurry_event = FlurryHelper.EVENT_TUT_SCREEN_1_DISPLAYED;
 			break;
 
 		case 2 :
 
 			button_manager.add(button_next);
 			button_manager.add(button_skip);
+			flurry_event = FlurryHelper.EVENT_TUT_SCREEN_2_DISPLAYED;
 			break;
 
 		case 3 :
 
 			button_manager.add(button_next);
 			button_manager.add(button_skip);
+			flurry_event = FlurryHelper.EVENT_TUT_SCREEN_3_DISPLAYED;
 			break;
 
 		case 4 :
 
 			button_manager.add(button_skip);
+			flurry_event = FlurryHelper.EVENT_TUT_SCREEN_4_DISPLAYED;
 			break;
 		}
 
@@ -148,6 +164,8 @@ public class WelcomeScreen extends MainScreen implements FieldChangeListener
 		}
 
 		progress_manager.invalidate();
+		
+		logEvent(flurry_event);
 	}
 
 	private static class Bullet extends Field

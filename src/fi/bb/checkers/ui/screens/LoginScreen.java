@@ -43,6 +43,18 @@ public class LoginScreen extends MainScreen implements FieldChangeListener
 	
 	private int buttonHeight = ResourceHelper.convert(25);
 
+	public LoginScreen(String username, boolean showAlreadyResgitered)
+	{
+		this();
+		
+		cellField.setText(username);
+		
+		if(showAlreadyResgitered)
+		{
+			InfoDialog.doModal("Info", StringHelper.already_registered, "Okay");
+		}
+	}
+	
 	public LoginScreen()
 	{
 		super(NO_SYSTEM_MENU_ITEMS);

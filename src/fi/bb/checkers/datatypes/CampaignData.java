@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import fi.bb.checkers.utils.StringUtil;
 
+import net.rim.device.api.util.Comparator;
 import net.rim.device.api.util.Persistable;
 
 public class CampaignData implements Persistable
@@ -11,6 +12,7 @@ public class CampaignData implements Persistable
 	private String id;
 	private String name;
 	private String value;
+	private int rank;
 	private String description;
 	private String terms;
 	private String expireDate;
@@ -165,6 +167,16 @@ public class CampaignData implements Persistable
 	{
 		CategoryList = categoryList;
 	}
+	
+	public int getRank()
+	{
+		return rank;
+	}
+	
+	public void setRank(int rank)
+	{
+		this.rank = rank;
+	}
 
 	public boolean equals(Object obj)
 	{
@@ -172,6 +184,36 @@ public class CampaignData implements Persistable
 		{
 			return id.equals(((CampaignData) obj).id);
 		}
+		return false;
+	}
+
+	public boolean greaterThan(Object obj)
+	{
+		if (obj != null && obj instanceof CampaignData)
+		{
+			try
+			{
+				CouponCategory category = (CouponCategory)getCategoryList().lastElement();
+				CouponCategory other_category = (CouponCategory)((CampaignData) obj).getCategoryList().lastElement();
+				
+				if(category.greaterThan(other_category) > 0)
+				{
+					return true;
+				}
+				else if(category.greaterThan(other_category) == 0)
+				{
+					if(getRank() > ((CampaignData)obj).getRank())
+					{
+						return true;
+					}
+				}
+			}
+			catch(Exception e)
+			{
+				return false;
+			}
+		}
+		
 		return false;
 	}
 

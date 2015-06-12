@@ -61,7 +61,7 @@ public class DetailedCouponFragment extends Fragment implements FieldChangeListe
 			build();
 		} catch (Throwable e)
 		{
-			RemoteLogger.log("ERROR", e.toString());
+//			RemoteLogger.log("ERROR", e.toString());
 		}
 	}
 
@@ -460,7 +460,7 @@ public class DetailedCouponFragment extends Fragment implements FieldChangeListe
 		eventParams.put(FlurryHelper.PARAM_COUPON_MONETARY_VALUE, coupon.getValue());
 		eventParams.put(FlurryHelper.PARAM_CATEGORY, ((CouponCategory)coupon.getCategoryList().elementAt(0)).getId());
 		FlurryHelper.addProvinceParam(eventParams);
-		eventParams.put(FlurryHelper.PARAM_TIME, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
+		eventParams.put(FlurryHelper.PARAM_TIMESTAMP, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
 		eventParams.put(FlurryHelper.PARAM_PRODUCT_NAME, coupon.getId());
 		FlurryHelper.addFirstLaunchParam(eventParams);
 

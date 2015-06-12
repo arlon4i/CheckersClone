@@ -20,7 +20,7 @@ public class RemoteLogger
 
 	//Logger constants
 	public static String channel = "default";
-	public static String host_filename = "Checkers.txt";
+	public static String host_filename = "CheckersQR.txt";
 	public static String remote_filename = "log.txt";
 	public static String host_url = "http://192.168.88.5/Logger/logger.php";
 	public static String remote_url = "http://demo.4imobile.co.za/Logger/logger.php";
@@ -30,7 +30,7 @@ public class RemoteLogger
 	//Settings
 	public static boolean logging_enabled = true;
 	public static boolean onlyKnownDevices = false;
-	public static boolean local_server = false;
+	public static boolean local_server = true;
 	
 	public static void logJson(String tag , String json_msg)
 	{

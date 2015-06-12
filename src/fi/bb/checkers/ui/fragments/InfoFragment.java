@@ -44,7 +44,7 @@ public class InfoFragment extends Fragment
 				text_field.displayContent(new String(data), "");
 			} catch (IOException e)
 			{
-				RemoteLogger.log("InfoFragment", e.toString());
+//				RemoteLogger.log("InfoFragment", e.toString());
 			}
 			finally
 			{

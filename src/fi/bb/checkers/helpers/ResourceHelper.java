@@ -30,6 +30,7 @@ public class ResourceHelper
 	public static final int color_lighter_grey = 0xd2d2d2;
 	// on OS6 there seems to be color noise when resizing images, so the profile pic mask doesn't match the drawer background
 	public static final int color_drawer_grey = DeviceInfo.getSoftwareVersion().startsWith("6") ? 0xf0f0e8 : 0xf6f5f5;
+	public static final int color_qrcode_drawer_grey = 0xaaaaaa;
 	// public static final int color_drawer_grey = 0xf6f5f5;
 
 	public static final int color_primary_same_as_android = 0x00a9a1;
@@ -46,7 +47,7 @@ public class ResourceHelper
 			net.rim.device.api.ui.FontManager.getInstance().load("HelveticaNeue_Med.ttf", "HelveticaMed", net.rim.device.api.ui.FontManager.APPLICATION_FONT);
 		} catch (Exception e)
 		{
-			RemoteLogger.log("ResourceHelper", "init: " + e.toString());
+//			RemoteLogger.log("ResourceHelper", "init: " + e.toString());
 		}
 	}
 
@@ -59,7 +60,7 @@ public class ResourceHelper
 				HelveticaLight = FontFamily.forName("HelveticaLight");
 			} catch (Exception e)
 			{
-				RemoteLogger.log("ResourceHelper", "helveticaLight: " + e.toString());
+//				RemoteLogger.log("ResourceHelper", "helveticaLight: " + e.toString());
 			}
 		}
 		return HelveticaLight;
@@ -74,7 +75,7 @@ public class ResourceHelper
 				HelveticaMed = FontFamily.forName("HelveticaMed");
 			} catch (Exception e)
 			{
-				RemoteLogger.log("ResourceHelper", "helveticaMed: " + e.toString());
+//				RemoteLogger.log("ResourceHelper", "helveticaMed: " + e.toString());
 			}
 		}
 		return HelveticaMed;

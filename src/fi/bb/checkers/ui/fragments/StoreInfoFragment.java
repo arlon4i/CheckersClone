@@ -69,11 +69,11 @@ public class StoreInfoFragment extends Fragment implements FieldChangeListener
 	{
 		deleteAll();
 
-		RemoteLogger.log("MERCHANT_DEBUG", "merchant"+merchant);
-		RemoteLogger.log("MERCHANT_DEBUG", "merchant.getName()"+merchant.getName());
-		RemoteLogger.log("MERCHANT_DEBUG", "merchant.getPhysicalAddress()"+merchant.getPhysicalAddress());
-		RemoteLogger.log("MERCHANT_DEBUG", "merchant.getContactDetails()"+merchant.getContactDetails());
-		RemoteLogger.log("MERCHANT_DEBUG", "merchant.getTradingHours()"+merchant.getTradingHours());
+//		RemoteLogger.log("MERCHANT_DEBUG", "merchant"+merchant);
+//		RemoteLogger.log("MERCHANT_DEBUG", "merchant.getName()"+merchant.getName());
+//		RemoteLogger.log("MERCHANT_DEBUG", "merchant.getPhysicalAddress()"+merchant.getPhysicalAddress());
+//		RemoteLogger.log("MERCHANT_DEBUG", "merchant.getContactDetails()"+merchant.getContactDetails());
+//		RemoteLogger.log("MERCHANT_DEBUG", "merchant.getTradingHours()"+merchant.getTradingHours());
 
 		Font font = ResourceHelper.helveticaLight().getFont(Font.PLAIN, ResourceHelper.convert(16), Ui.UNITS_px);
 		LabelField label;

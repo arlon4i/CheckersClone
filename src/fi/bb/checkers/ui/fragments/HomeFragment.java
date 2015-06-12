@@ -45,12 +45,13 @@ public class HomeFragment extends Fragment
 	public HomeFragment()
 	{
 		super(VERTICAL_SCROLL | NO_HORIZONTAL_SCROLL);
+		RemoteLogger.log("DEBUG_HOME", "Here");
 		setBackground(BackgroundFactory.createSolidBackground(ResourceHelper.color_background_app));
 
 		label_greeting = new WelcomeField();
 		if (initial && RuntimeStoreHelper.getSessionID() != null && PersistentStoreHelper.isPreviousUser(PersistentStoreHelper.getUsername()))
 		{
-			label_greeting.setGreeting("Welcome back, " + RuntimeStoreHelper.getUserData().getFirstname());
+			label_greeting.setGreeting("Welcome back" + ((RuntimeStoreHelper.getUserData().getFirstname() != null) ? (", " + RuntimeStoreHelper.getUserData().getFirstname()) : ""));
 			new Timer().schedule(new TimerTask()
 			{
 				public void run()
@@ -86,7 +87,8 @@ public class HomeFragment extends Fragment
 	{
 		if (visible)
 		{
-			logBrowseHomeScreen();
+//			logBrowseHomeScreen();
+			logHomeScreenDisplayed();
 			if (PersistentStoreHelper.isShowTutorial1())
 			{
 				TutorialScreen.push(TutorialScreen.HOME);
@@ -95,13 +97,15 @@ public class HomeFragment extends Fragment
 		}
 		else
 		{
-			FlurryHelper.endTimedEvent(FlurryHelper.EVENT_HOME_SCREEN);
+			FlurryHelper.endTimedEvent(FlurryHelper.EVENT_HOME_DISPLAYED);
 		}
 		super.onVisibilityChange(visible);
 	}
 
 	private void doWelcomeMessage()
 	{
+		RemoteLogger.log("Do Welcome: ", "Here");
+		
 		try
 		{
 			StringBuffer builder = new StringBuffer();
@@ -122,7 +126,9 @@ public class HomeFragment extends Fragment
 					builder.append("Good Evening");
 			}
 
-			if (RuntimeStoreHelper.getSessionID() != null)
+			RemoteLogger.log("Data: ", "Session ID: " + RuntimeStoreHelper.getSessionID() + ((RuntimeStoreHelper.getUserData() == null) ? "Null": ((RuntimeStoreHelper.getUserData().getFirstname() == null) ? "Null2" : RuntimeStoreHelper.getUserData().getFirstname())));
+			
+			if ((RuntimeStoreHelper.getSessionID() != null) && (RuntimeStoreHelper.getUserData() != null) && (RuntimeStoreHelper.getUserData().getFirstname() != null))
 			{
 				builder.append(", ");
 				builder.append(RuntimeStoreHelper.getUserData().getFirstname());
@@ -138,9 +144,23 @@ public class HomeFragment extends Fragment
 	private boolean isUserBirthday()
 	{
 		UserData userdata = RuntimeStoreHelper.getUserData();
-		Calendar current_date = Calendar.getInstance();
-		String[] tokens = StringUtil.split(userdata.getBirthdate(), "/");
-		return current_date.get(Calendar.DAY_OF_MONTH) == Integer.parseInt(tokens[0]) && (current_date.get(Calendar.MONTH)+1) == Integer.parseInt(tokens[1]);
+		
+		if(userdata != null)
+		{
+			Calendar current_date = Calendar.getInstance();
+			
+			if((userdata.getBirthdate() != null) && (!userdata.getBirthdate().equalsIgnoreCase("")))
+			{
+				String[] tokens = StringUtil.split(userdata.getBirthdate(), "/");
+				
+				if((tokens != null) && (tokens.length > 0))
+				{
+					return current_date.get(Calendar.DAY_OF_MONTH) == Integer.parseInt(tokens[0]) && (current_date.get(Calendar.MONTH)+1) == Integer.parseInt(tokens[1]);
+				}
+			}
+		}
+		
+		return false;
 	}
 
 	private class WelcomeField extends Field
@@ -243,7 +263,7 @@ public class HomeFragment extends Fragment
 					};
 					field.setMargin(ResourceHelper.convert(3), 0, 0, 0);
 
-					RemoteLogger.log("DEBUG_FEATURE", "action: " + data.getAction() + " action_detail: " +data.getActionDetail() + " url: " + data.getImageURL());
+//					RemoteLogger.log("DEBUG_FEATURE", "action: " + data.getAction() + " action_detail: " +data.getActionDetail() + " url: " + data.getImageURL());
 					((FeaturedItem)field).setTag((data.getAction().equals("THEME_SPECIALS") == true)?data.getActionDetail():null);//categoryId
 
 					synchronized (Application.getEventLock())
@@ -433,7 +453,7 @@ public class HomeFragment extends Fragment
 
 		eventParams.put(FlurryHelper.PARAM_TAPPED, "1");
 		eventParams.put(FlurryHelper.PARAM_BLOCK_NUMBER, "1");//Always one... and added this param, since it is the duplicate's extra param...see home screen section: EeziCoupon Redeem All button...
-		eventParams.put(FlurryHelper.PARAM_TIME, FlurryHelper.getFlurryFormatDate(dateNow));
+		eventParams.put(FlurryHelper.PARAM_TIMESTAMP, FlurryHelper.getFlurryFormatDate(dateNow));
 		FlurryHelper.addProvinceParam(eventParams);
 		FlurryHelper.addLoginParams(eventParams);	
 		FlurryHelper.addFirstLaunchParam(eventParams);
@@ -446,7 +466,7 @@ public class HomeFragment extends Fragment
 		Hashtable eventParams = new Hashtable();
 
 		eventParams.put(FlurryHelper.PARAM_TAPPED, "1");
-		eventParams.put(FlurryHelper.PARAM_TIME, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
+		eventParams.put(FlurryHelper.PARAM_TIMESTAMP, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
 		FlurryHelper.addProvinceParam(eventParams);
 		FlurryHelper.addLoginParams(eventParams);			
 
@@ -458,20 +478,31 @@ public class HomeFragment extends Fragment
 		Hashtable eventParams = new Hashtable();
 
 		eventParams.put(FlurryHelper.PARAM_TAPPED, "1");
-		eventParams.put(FlurryHelper.PARAM_TIME, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
+		eventParams.put(FlurryHelper.PARAM_TIMESTAMP, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
 		FlurryHelper.addProvinceParam(eventParams);
 		FlurryHelper.addLoginParams(eventParams);			
 
 		FlurryHelper.logEvent(FlurryHelper.EVENT_SPECIALS_VIEW_ALL, eventParams, true);
+	}
+	
+	private void logHomeScreenDisplayed()
+	{
+		Hashtable eventParams = new Hashtable();
+
+		FlurryHelper.addRegistrationStatusParam(eventParams);
+		eventParams.put(FlurryHelper.PARAM_TIMESTAMP, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
+		FlurryHelper.addProvinceParam(eventParams);
+		
+		FlurryHelper.logEvent(FlurryHelper.EVENT_HOME_DISPLAYED, eventParams, true);
 	}
 
 	private void logBrowseHomeScreen()
 	{
 		Hashtable eventParams = new Hashtable();
 
-		eventParams.put(FlurryHelper.PARAM_TIME, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
+		eventParams.put(FlurryHelper.PARAM_TIMESTAMP, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
 
-		FlurryHelper.logEvent(FlurryHelper.EVENT_HOME_SCREEN, eventParams, true);
+		FlurryHelper.logEvent(FlurryHelper.EVENT_HOME_DISPLAYED, eventParams, true);
 	}
 
 	private void logViewStores()
@@ -479,7 +510,7 @@ public class HomeFragment extends Fragment
 		Hashtable eventParams = new Hashtable();
 
 		eventParams.put(FlurryHelper.PARAM_TAPPED, "1");
-		eventParams.put(FlurryHelper.PARAM_TIME, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
+		eventParams.put(FlurryHelper.PARAM_TIMESTAMP, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
 		eventParams.put(FlurryHelper.PARAM_BLOCK_NUMBER, "3");
 		FlurryHelper.addProvinceParam(eventParams);
 		FlurryHelper.addLoginParams(eventParams);			
@@ -534,7 +565,7 @@ public class HomeFragment extends Fragment
 		
 		horizontal_manager.setMargin(backgroundimage.getHeight() - ResourceHelper.convert(44+2), 0, 0, 0);
 		icon = new BitmapField(ResourceHelper.getImage("icon_home_specials"), 0);
-		RemoteLogger.log("HOME_DEBUG","icon height: bitmaph|" + icon.getBitmapHeight()+"| height: |" + icon.getHeight() +"| prefHeight:|" + icon.getPreferredHeight() + "|");
+//		RemoteLogger.log("HOME_DEBUG","icon height: bitmaph|" + icon.getBitmapHeight()+"| height: |" + icon.getHeight() +"| prefHeight:|" + icon.getPreferredHeight() + "|");
 		icon.setMargin((ResourceHelper.convert(44) - icon.getBitmapHeight()) / 2, ResourceHelper.convert(5), 0, ResourceHelper.convert(10));
 		horizontal_manager.add(icon);
 
@@ -548,7 +579,7 @@ public class HomeFragment extends Fragment
 		{
 			public void clickButton() {
 				super.clickButton();
-				RemoteLogger.log("CATEGORY", "VIEW ALL! specials");
+//				RemoteLogger.log("CATEGORY", "VIEW ALL! specials");
 				logViewAllSpecials();
 				((ViewPagerScreen) UiApplication.getUiApplication().getActiveScreen()).transition(SpecialsFragment.FRAGMENT_ID, null);
 			}
@@ -562,7 +593,7 @@ public class HomeFragment extends Fragment
 			public void clickButton()
 			{
 				super.clickButton();
-				RemoteLogger.log("CATEGORY", "VIEW ALL! specials");
+//				RemoteLogger.log("CATEGORY", "VIEW ALL! specials");
 				logViewAllSpecials();
 				((ViewPagerScreen) UiApplication.getUiApplication().getActiveScreen()).transition(SpecialsFragment.FRAGMENT_ID, null);
 			}
@@ -570,7 +601,7 @@ public class HomeFragment extends Fragment
 		button.setTextColor(ResourceHelper.color_white);
 		button.setTextColorHover(ResourceHelper.color_primary);
 		button.setTextColorPressed(ResourceHelper.color_primary);*/
-		RemoteLogger.log("HOME_DEBUG","button margin: |" + (ResourceHelper.convert(44-30) / 2) + "|");
+//		RemoteLogger.log("HOME_DEBUG","button margin: |" + (ResourceHelper.convert(44-30) / 2) + "|");
 		button.setMargin(ResourceHelper.convert(44-30) / 2, 0, 0, Display.getWidth() - icon.getPreferredWidth() - label.getPreferredWidth() - button.getPreferredWidth()
 				- ResourceHelper.convert(25));
 		horizontal_manager.add(button);

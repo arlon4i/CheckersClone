@@ -3,8 +3,6 @@ package fi.bb.checkers.ui.screens;
 import java.util.Calendar;
 import java.util.Hashtable;
 
-import com.samples.bbm.ForName.BBMInterface.BBMBridge;
-
 import net.rim.device.api.system.Characters;
 import net.rim.device.api.system.Display;
 import net.rim.device.api.ui.Field;
@@ -15,13 +13,11 @@ import net.rim.device.api.ui.component.BitmapField;
 import net.rim.device.api.ui.container.MainScreen;
 import net.rim.device.api.ui.container.VerticalFieldManager;
 import net.rim.device.api.ui.decor.BackgroundFactory;
-
 import fi.bb.checkers.MainApplication;
 import fi.bb.checkers.datatypes.UserData;
 import fi.bb.checkers.helpers.FlurryHelper;
 import fi.bb.checkers.helpers.LocationHelper;
 import fi.bb.checkers.helpers.ResourceHelper;
-import fi.bb.checkers.logger.RemoteLogger;
 import fi.bb.checkers.prompts.LoadingDialog;
 import fi.bb.checkers.ui.components.TextImageButton;
 
@@ -143,7 +139,7 @@ public class LandingScreen extends MainScreen implements FieldChangeListener
 		Hashtable eventParams = new Hashtable();
 
 		eventParams.put(FlurryHelper.PARAM_SIGNUP_REGISTER, "1");		
-		eventParams.put(FlurryHelper.PARAM_TIME, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
+		eventParams.put(FlurryHelper.PARAM_TIMESTAMP, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
 
 		FlurryHelper.logEvent(FlurryHelper.EVENT_REGISTRATION, eventParams, true);
 
@@ -152,7 +148,7 @@ public class LandingScreen extends MainScreen implements FieldChangeListener
 
 		eventParams.put(FlurryHelper.PARAM_TAPPED, "1");
 		FlurryHelper.addProvinceParam(eventParams);
-		eventParams.put(FlurryHelper.PARAM_TIME, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
+		eventParams.put(FlurryHelper.PARAM_TIMESTAMP, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
 
 		FlurryHelper.logEvent(FlurryHelper.EVENT_SIGN_UP, eventParams, false);
 	}
@@ -160,9 +156,10 @@ public class LandingScreen extends MainScreen implements FieldChangeListener
 	private void logUserTapsSignUpLater()
 	{
 		Hashtable eventParams = new Hashtable();
-		eventParams.put(FlurryHelper.PARAM_TIME, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
+		eventParams.put(FlurryHelper.PARAM_TIMESTAMP, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
 	
-		FlurryHelper.logEvent(FlurryHelper.EVENT_VIEW_COUPONS, eventParams, false);
+//		FlurryHelper.logEvent(FlurryHelper.EVENT_VIEW_COUPONS, eventParams, false);
+		FlurryHelper.logEvent(FlurryHelper.EVENT_WELCOME_SIGN_UP_LATER, eventParams, false);
 	}
 
 	protected boolean onSavePrompt()

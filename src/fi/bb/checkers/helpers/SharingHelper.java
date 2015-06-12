@@ -16,9 +16,7 @@ import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.Font;
 import net.rim.device.api.ui.Ui;
 import net.rim.device.api.ui.UiApplication;
-import net.rim.device.api.ui.UiEngineInstance;
 import net.rim.device.api.ui.XYEdges;
-import net.rim.device.api.ui.component.Dialog;
 import net.rim.device.api.ui.container.VerticalFieldManager;
 import net.rim.device.api.ui.decor.BorderFactory;
 
@@ -34,8 +32,6 @@ import fi.bb.checkers.ui.components.AnimatedGIFField;
 import fi.bb.checkers.ui.components.LabelField;
 import fi.bb.checkers.ui.screens.WebViewScreen;
 import fi.bb.checkers.utils.StringUtil;
-import fi.bb.socialsharing.FacebookInterface;
-import fi.bb.socialsharing.TwitterInterface;
 
 public class SharingHelper
 {
@@ -133,54 +129,54 @@ public class SharingHelper
 
 		switch (choice)
 		{
-		case SharingDialog.SMS :
-			logShareCoupon("Message", coupon);
-			//if (RuntimeStoreHelper.getSessionID() == null)
-			//sms("Check out this great EeziCoupon from Checkers! Save " + priceValueText + " on " + coupon.getName()
-			//			+ ". Get great savings, quality and service at Checkers. http://m.checkers.co.za..");
-			sms(StringHelper.share_coupon_sms_1 + priceValueText  + StringHelper.share_coupon_sms_2 + coupon.getName() + StringHelper.share_coupon_sms_3);
-			
-			/*else
-				sms(RuntimeStoreHelper.getUserData().getFirstname() + " wants you to check out this great EeziCoupon from Checkers! Save " + priceValueText + " on " + coupon.getName()
-						+ ". Get great savings, quality and service at Checkers. http://m.checkers.co.za.");*/
-			break;
-
-		case SharingDialog.EMAIL :
-			logShareCoupon("Email", coupon);
-			if (RuntimeStoreHelper.getSessionID() == null)
-			{
-				email(StringHelper.share_coupon_email_1 + priceValueText + " on " + coupon.getName() + StringHelper.share_coupon_email_3);
+			case SharingDialog.SMS :
+				logShareCoupon("Message", coupon);
+				//if (RuntimeStoreHelper.getSessionID() == null)
+				//sms("Check out this great EeziCoupon from Checkers! Save " + priceValueText + " on " + coupon.getName()
+				//			+ ". Get great savings, quality and service at Checkers. http://m.checkers.co.za..");
+				sms(StringHelper.share_coupon_sms_1 + priceValueText  + StringHelper.share_coupon_sms_2 + coupon.getName() + StringHelper.share_coupon_sms_3);
 				
-				//email("I want you to check out this great EeziCoupon saving from Checkers. Save " + priceValueText + " on " + coupon.getName()
-				//		+ ". Get great savings, quality and service at Checkers. http://m.checkers.co.za.");
-			}
-			else
-			{
-				email(RuntimeStoreHelper.getUserData().getFirstname() + StringHelper.share_coupon_email_loggedin_1 + priceValueText + " on "
-								+ coupon.getName() + StringHelper.share_coupon_email_loggedin_3);
-						
-				//email(RuntimeStoreHelper.getUserData().getFirstname() + " wants you to check out this great EeziCoupon saving from Checkers. Save " + priceValueText + " on "
-				//		+ coupon.getName() + ". Get great savings, quality and service at Checkers. http://m.checkers.co.za.");
-			}
-			break;
-
-		case SharingDialog.BBM :
-			logShareCoupon("BBM", coupon);
-			bbm(StringHelper.share_coupon_bbm_1+ priceValueText + " on " + coupon.getName() + StringHelper.share_coupon_bbm_3);
-			//bbm("Check out this great EeziCoupon from Checkers! Save " + priceValueText + " on " + coupon.getName() + ". Get great savings, quality and service at Checkers. http://m.checkers.co.za");
-			break;
-
-		case SharingDialog.FACEBOOK :
-			logShareCoupon("Facebook", coupon);
-			facebook(StringHelper.share_coupon_fb_1 + priceValueText + " on " + coupon.getName() + StringHelper.share_coupon_fb_3);
-			//facebook("Get this great EeziCoupon from Checkers! Save " + priceValueText + " on " + coupon.getName() + ". Get great savings, quality and service at Checkers. http://m.checkers.co.za");
-			break;
-
-		case SharingDialog.TWITTER :
-			logShareCoupon("Twitter", coupon);				
-			twitter(StringHelper.share_coupon_tw_1 + priceValueText + " on " + coupon.getName() + StringHelper.share_coupon_tw_3);
-			//twitter("Save " + priceValueText + " on " + coupon.getName() + " at Checkers. http://m.checkers.co.za");
-			break;
+				/*else
+					sms(RuntimeStoreHelper.getUserData().getFirstname() + " wants you to check out this great EeziCoupon from Checkers! Save " + priceValueText + " on " + coupon.getName()
+							+ ". Get great savings, quality and service at Checkers. http://m.checkers.co.za.");*/
+				break;
+	
+			case SharingDialog.EMAIL :
+				logShareCoupon("Email", coupon);
+				if (RuntimeStoreHelper.getSessionID() == null)
+				{
+					email(StringHelper.share_coupon_email_1 + priceValueText + " on " + coupon.getName() + StringHelper.share_coupon_email_3);
+					
+					//email("I want you to check out this great EeziCoupon saving from Checkers. Save " + priceValueText + " on " + coupon.getName()
+					//		+ ". Get great savings, quality and service at Checkers. http://m.checkers.co.za.");
+				}
+				else
+				{
+					email(RuntimeStoreHelper.getUserData().getFirstname() + StringHelper.share_coupon_email_loggedin_1 + priceValueText + " on "
+									+ coupon.getName() + StringHelper.share_coupon_email_loggedin_3);
+							
+					//email(RuntimeStoreHelper.getUserData().getFirstname() + " wants you to check out this great EeziCoupon saving from Checkers. Save " + priceValueText + " on "
+					//		+ coupon.getName() + ". Get great savings, quality and service at Checkers. http://m.checkers.co.za.");
+				}
+				break;
+	
+			case SharingDialog.BBM :
+				logShareCoupon("BBM", coupon);
+				bbm(StringHelper.share_coupon_bbm_1+ priceValueText + " on " + coupon.getName() + StringHelper.share_coupon_bbm_3);
+				//bbm("Check out this great EeziCoupon from Checkers! Save " + priceValueText + " on " + coupon.getName() + ". Get great savings, quality and service at Checkers. http://m.checkers.co.za");
+				break;
+	
+			case SharingDialog.FACEBOOK :
+				logShareCoupon("Facebook", coupon);
+				facebook(StringHelper.share_coupon_fb_1 + priceValueText + " on " + coupon.getName() + StringHelper.share_coupon_fb_3);
+				//facebook("Get this great EeziCoupon from Checkers! Save " + priceValueText + " on " + coupon.getName() + ". Get great savings, quality and service at Checkers. http://m.checkers.co.za");
+				break;
+	
+			case SharingDialog.TWITTER :
+				logShareCoupon("Twitter", coupon);				
+				twitter(StringHelper.share_coupon_tw_1 + priceValueText + " on " + coupon.getName() + StringHelper.share_coupon_tw_3);
+				//twitter("Save " + priceValueText + " on " + coupon.getName() + " at Checkers. http://m.checkers.co.za");
+				break;
 		}
 	}
 
@@ -524,11 +520,11 @@ public class SharingHelper
 		Hashtable eventParams = new Hashtable();
 
 		eventParams.put(FlurryHelper.PARAM_COUPON_MONETARY_VALUE, coupon.getValue());
-		eventParams.put(FlurryHelper.PARAM_CATEGORY, ((CouponCategory)coupon.getCategoryList().elementAt(0)).getId());
+		eventParams.put(FlurryHelper.PARAM_CATEGORY, ((CouponCategory)coupon.getCategoryList().elementAt(0)).getName());
 		eventParams.put(FlurryHelper.PARAM_CHANNEL, channel);
 		FlurryHelper.addProvinceParam(eventParams);
 		FlurryHelper.addLoginParams(eventParams);
-		eventParams.put(FlurryHelper.PARAM_TIME, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
+		eventParams.put(FlurryHelper.PARAM_TIMESTAMP, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
 
 		FlurryHelper.logEvent(FlurryHelper.EVENT_SHARE_EEZI_COUPON, eventParams, false);
 	}
@@ -540,7 +536,7 @@ public class SharingHelper
 		eventParams.put(FlurryHelper.PARAM_CHANNEL, channel);
 		FlurryHelper.addProvinceParam(eventParams);
 		FlurryHelper.addLoginParams(eventParams);
-		eventParams.put(FlurryHelper.PARAM_TIME, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
+		eventParams.put(FlurryHelper.PARAM_TIMESTAMP, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
 
 		FlurryHelper.logEvent(FlurryHelper.EVENT_SHARE_SPECIAL, eventParams, false);
 	}
@@ -552,7 +548,7 @@ public class SharingHelper
 		eventParams.put(FlurryHelper.PARAM_CHANNEL, channel);
 		FlurryHelper.addProvinceParam(eventParams);
 		FlurryHelper.addLoginParams(eventParams);
-		eventParams.put(FlurryHelper.PARAM_TIME, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
+		eventParams.put(FlurryHelper.PARAM_TIMESTAMP, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
 		FlurryHelper.addFirstLaunchParam(eventParams);
 
 		FlurryHelper.logEvent(FlurryHelper.EVENT_SHARE_APP, eventParams, false);

@@ -18,7 +18,7 @@ public class TextImageButton extends ImageButton
 	public TextImageButton(String text, String imageStatic, String imageHover)
 	{
 		this(text, imageStatic, imageHover, 0);
-		setFont(ResourceHelper.helveticaLight().getFont(Font.PLAIN, ResourceHelper.convert(17), Ui.UNITS_px));
+		setFont(ResourceHelper.helveticaLight().getFont(Font.PLAIN, ResourceHelper.convert(14), Ui.UNITS_px));
 	}
 	
 	public TextImageButton(String text, String imageStatic, String imageHover, Font font)

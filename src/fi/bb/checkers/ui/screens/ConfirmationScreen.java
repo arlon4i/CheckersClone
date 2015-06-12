@@ -193,6 +193,7 @@ public class ConfirmationScreen extends MainScreen implements FieldChangeListene
 		protected void onPostExecute(Object result)
 		{
 			loading.close();
+			RemoteLogger.log("Login Sucessful", "Here");
 			if (!"success".equals(result))
 			{
 				InfoDialog.doModal("Error", (String) result, "Okay");
@@ -220,10 +221,20 @@ public class ConfirmationScreen extends MainScreen implements FieldChangeListene
 			{
 				ServerHelper.login((String) params[0], (String) params[1]);
 				
+				RemoteLogger.log("Login: ", "Successful!");
+				
 				ServerHelper.getUserDetails();
+				
+				RemoteLogger.log("User Details: ", "Successful!");
+				
+				RemoteLogger.log("Special Region: ", (PersistentStoreHelper.getSpecialsRegion() != null) ? ("" + PersistentStoreHelper.getSpecialsRegion().getId()) : "Special Region NULL");
+				
 				ServerHelper.getCouponList(PersistentStoreHelper.getSpecialsRegion().getId());//because you need it for myList
+				
+				RemoteLogger.log("Coupon List: ", "Successful!");
 			} catch (Exception e)
 			{
+				RemoteLogger.log("Error Message: ", e.getMessage());
 				RuntimeStoreHelper.setSessionID(null);
 				PersistentStoreHelper.setPIN("");
 				return e.getMessage();
@@ -248,6 +259,7 @@ public class ConfirmationScreen extends MainScreen implements FieldChangeListene
 			if (result instanceof WiAppResponseHandler)
 			{
 				WiAppResponseHandler response = (WiAppResponseHandler) result;
+				RemoteLogger.log("Confirmation Code: ", response.getResponseCode());
 				if (response.getResponseCode().equalsIgnoreCase("-1"))
 				{
 					//InfoDialog.doModal("Confirmation Code Reset Success", "You will receive a SMS with your new Confirmation Code. Should you continue experiencing a problem, please contact 0800 33 33 85.", "Okay");

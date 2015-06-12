@@ -1,5 +1,6 @@
 package fi.bb.checkers.ui.fragments;
 
+import java.util.Calendar;
 import java.util.Hashtable;
 import java.util.Vector;
 
@@ -65,7 +66,8 @@ public class SpecialsFragment extends Fragment implements FieldChangeListener
 		super(NO_VERTICAL_SCROLL | NO_HORIZONTAL_SCROLL);
 		setBackground(BackgroundFactory.createSolidBackground(ResourceHelper.color_background_app));
 
-		logBrowseSpecials();
+//		logBrowseSpecials();
+		logSpecialScreenDisplayed();
 
 		refreshCount = -1;
 
@@ -194,7 +196,7 @@ public class SpecialsFragment extends Fragment implements FieldChangeListener
 		previous_province = loc;
 		province_selection.addElement(loc);
 
-		RemoteLogger.log("TEST_SPECIALS_RUNTIME", "specials fragment: RuntimeStoreHelper.getLastLocationIdUsedForSpecialsSearch(): " + RuntimeStoreHelper.getLastLocationIdUsedForSpecialsSearch() + " loc: " + loc.getId() + ":" + loc.getDesc());
+//		RemoteLogger.log("TEST_SPECIALS_RUNTIME", "specials fragment: RuntimeStoreHelper.getLastLocationIdUsedForSpecialsSearch(): " + RuntimeStoreHelper.getLastLocationIdUsedForSpecialsSearch() + " loc: " + loc.getId() + ":" + loc.getDesc());
 
 		if ((RuntimeStoreHelper.getLastLocationIdUsedForSpecialsSearch() != null) && (RuntimeStoreHelper.getLastLocationIdUsedForSpecialsSearch().equals(loc.getId()) == true))
 		{
@@ -234,12 +236,15 @@ public class SpecialsFragment extends Fragment implements FieldChangeListener
 	{
 		if (visible && closeImmediately == false)
 		{
+			logSpecialScreenDisplayed();
+			
 			if (PersistentStoreHelper.isShowTutorial4())
 			{
 				TutorialScreen.push(TutorialScreen.SPECIALS);
 				PersistentStoreHelper.setShowTutorial4(false);
 			}
 		}
+		
 		super.onVisibilityChange(visible);
 	}
 
@@ -416,6 +421,29 @@ public class SpecialsFragment extends Fragment implements FieldChangeListener
 		}
 	}
 
+	private void logSpecialScreenDisplayed()
+	{
+		Hashtable eventParams = new Hashtable();
+
+		FlurryHelper.addRegistrationStatusParam(eventParams);
+		eventParams.put(FlurryHelper.PARAM_TIMESTAMP, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
+		FlurryHelper.addProvinceParam(eventParams);
+		
+		double totalSavings;
+		try
+		{
+			totalSavings = (Double.parseDouble(PersistentStoreHelper.getTotalSavings())/100.0);
+		}
+		catch (Exception e) 
+		{
+			totalSavings = 0.0;
+		}
+		
+		eventParams.put(FlurryHelper.PARAM_TOTAL_SAVINGS_AVAILABLE, "" + totalSavings);
+		
+		FlurryHelper.logEvent(FlurryHelper.EVENT_SPECIALS_DISPLAYED, eventParams, true);
+	}
+	
 	private void logBrowseSpecials()
 	{
 		Hashtable eventParams = new Hashtable();
@@ -430,8 +458,9 @@ public class SpecialsFragment extends Fragment implements FieldChangeListener
 	{
 		Hashtable eventParams = new Hashtable();
 
-		FlurryHelper.addLoginParams(eventParams);	
-		eventParams.put(FlurryHelper.PARAM_PROVINCE, loc.getId());
+		FlurryHelper.addProvinceParam(eventParams);
+		FlurryHelper.addLoginParams(eventParams);
+		eventParams.put(FlurryHelper.PARAM_TIMESTAMP, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
 
 		FlurryHelper.logEvent(FlurryHelper.EVENT_FILTER_SPECIALS, eventParams, false);
 	}
@@ -439,7 +468,8 @@ public class SpecialsFragment extends Fragment implements FieldChangeListener
 	private void logSearch()
 	{
 		Hashtable eventParams = new Hashtable();
-		eventParams.put(FlurryHelper.PARAM_TAPPED, "1");	
+//		eventParams.put(FlurryHelper.PARAM_TAPPED, "1");	
+		eventParams.put(FlurryHelper.PARAM_TIMESTAMP, FlurryHelper.getFlurryFormatDate(Calendar.getInstance()));
 
 		FlurryHelper.logEvent(FlurryHelper.EVENT_SEARCH_SPECIALS, eventParams, false);
 	}
@@ -688,7 +718,7 @@ public class SpecialsFragment extends Fragment implements FieldChangeListener
 
 			} catch (Exception e)
 			{
-				RemoteLogger.log("SpecialsFragment", "DownloadTask: " + e.toString());
+//				RemoteLogger.log("SpecialsFragment", "DownloadTask: " + e.toString());
 				return e;
 			}
 

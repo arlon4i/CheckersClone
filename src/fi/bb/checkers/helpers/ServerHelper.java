@@ -51,12 +51,12 @@ public class ServerHelper
 		WiAppLocationResponseHandler locationResponse = WiAppServiceEssentials.getProvinceList();
 		if (locationResponse == null || locationResponse.getResponseCode() == null)
 		{
-			RemoteLogger.log("ServerHelper", "getProvinces null");
+//			RemoteLogger.log("ServerHelper", "getProvinces null");
 			throw new IOException(ERROR_NULL);
 		}
 		else if (!locationResponse.getResponseCode().equals("-1"))
 		{
-			RemoteLogger.log("ServerHelper", "getProvinces " + locationResponse.getResponseMessage());
+//			RemoteLogger.log("ServerHelper", "getProvinces " + locationResponse.getResponseMessage());
 			throw new IOException(locationResponse.getResponseMessage());
 		}
 
@@ -128,12 +128,12 @@ public class ServerHelper
 		WiappCouponCategoriesResponseHandler categoriesResponse = WiAppServiceCampaigns.getCouponCategories("COUPON");
 		if (categoriesResponse == null || categoriesResponse.getResponseCode() == null)
 		{
-			RemoteLogger.log("getCategories", "getStores null");
+//			RemoteLogger.log("getCategories", "getStores null");
 			throw new IOException(ERROR_NULL);
 		}
 		else if (!categoriesResponse.getResponseCode().equals("-1"))
 		{
-			RemoteLogger.log("ServerHelper", "getCategories " + categoriesResponse.getResponseMessage());
+//			RemoteLogger.log("ServerHelper", "getCategories " + categoriesResponse.getResponseMessage());
 			throw new IOException(categoriesResponse.getResponseMessage());
 		}
 
@@ -154,12 +154,12 @@ public class ServerHelper
 		WiappTitleResponseHandler titleResponse = WiAppServiceEssentials.getTitles();
 		if (titleResponse == null || titleResponse.getResponseCode() == null)
 		{
-			RemoteLogger.log("getTitles", "getTitles null");
+//			RemoteLogger.log("getTitles", "getTitles null");
 			throw new IOException(ERROR_NULL);
 		}
 		else if (!titleResponse.getResponseCode().equals("-1"))
 		{
-			RemoteLogger.log("ServerHelper", "getTitles " + titleResponse.getResponseMessage());
+//			RemoteLogger.log("ServerHelper", "getTitles " + titleResponse.getResponseMessage());
 			throw new IOException(titleResponse.getResponseMessage());
 		}
 
@@ -169,7 +169,7 @@ public class ServerHelper
 		for (int i = 0; i < length; i++)
 		{
 			title = (Title) titleResponse.getTitles().elementAt(i);
-			RemoteLogger.log("titles", "title: " + title.getId() + " : " + title.getDescription());
+//			RemoteLogger.log("titles", "title: " + title.getId() + " : " + title.getDescription());
 			titles.addElement(title);
 		}
 		PersistentStoreHelper.setTitles(titles);
@@ -181,12 +181,12 @@ public class ServerHelper
 		WiappCouponCategoriesResponseHandler categoriesResponse = WiAppServiceCampaigns.getSpecialCategories();
 		if (categoriesResponse == null || categoriesResponse.getResponseCode() == null)
 		{
-			RemoteLogger.log("getSpecialCategories", "getSpecialCategories null");
+//			RemoteLogger.log("getSpecialCategories", "getSpecialCategories null");
 			throw new IOException(ERROR_NULL);
 		}
 		else if (!categoriesResponse.getResponseCode().equals("-1"))
 		{
-			RemoteLogger.log("ServerHelper", "getSpecialCategories " + categoriesResponse.getResponseMessage());
+//			RemoteLogger.log("ServerHelper", "getSpecialCategories " + categoriesResponse.getResponseMessage());
 			throw new IOException(categoriesResponse.getResponseMessage());
 		}
 
@@ -214,6 +214,8 @@ public class ServerHelper
 	{
 		// user -1 to get a response with update data from server, and its impossible for it to be an actual user
 		WiAppLoginResponseHandler response = WiAppServiceEssentials.login(username == null ? "-1" : username, pin == null ? "-1" : pin);
+		
+		RemoteLogger.log("Response Code: ", response.getResponseCode());
 
 		// if user or pin are null, this call is just to check for updates. so ignore the response messages
 		if (username != null && pin != null)
@@ -313,6 +315,14 @@ public class ServerHelper
 				break;
 			}
 		}
+		
+		if(PersistentStoreHelper.getSpecialsRegion() == null)
+		{
+			LocationData province = new LocationData();
+			province.setId("6");
+			province.setDesc("Western Cape");
+			PersistentStoreHelper.setSpecialsRegion(province);
+		}
 
 		getWicode();
 		if (userdetailsResponse.getPreferredStore() != null && !userdetailsResponse.getPreferredStore().equals(""))
@@ -383,12 +393,12 @@ public class ServerHelper
 
 		if (response == null || response.getResponseCode() == null)
 		{
-			RemoteLogger.log("ServerHelper", "getCouponList null");
+//			RemoteLogger.log("ServerHelper", "getCouponList null");
 			throw new IOException(ERROR_NULL);
 		}
 		else if (!response.getResponseCode().equalsIgnoreCase("-1"))
 		{
-			RemoteLogger.log("ServerHelper", "getCouponList " + response.getResponseMessage());
+//			RemoteLogger.log("ServerHelper", "getCouponList " + response.getResponseMessage());
 			throw new IOException(response.getResponseMessage());
 		}
 
@@ -411,12 +421,12 @@ public class ServerHelper
 
 		if (response == null || response.getResponseCode() == null)
 		{
-			RemoteLogger.log("ServerHelper", "getSpecialList null");
+//			RemoteLogger.log("ServerHelper", "getSpecialList null");
 			throw new IOException(ERROR_NULL);
 		}
 		else if (!response.getResponseCode().equalsIgnoreCase("-1"))
 		{
-			RemoteLogger.log("ServerHelper", "getSpecialList " + response.getResponseMessage());
+//			RemoteLogger.log("ServerHelper", "getSpecialList " + response.getResponseMessage());
 			throw new IOException(response.getResponseMessage());
 		}
 
@@ -457,12 +467,12 @@ public class ServerHelper
 
 		if (response == null || response.getResponseCode() == null)
 		{
-			RemoteLogger.log("ServerHelper", "sendFeedback null");
+//			RemoteLogger.log("ServerHelper", "sendFeedback null");
 			throw new IOException(ERROR_NULL);
 		}
 		else if (!response.getResponseCode().equalsIgnoreCase("-1"))
 		{
-			RemoteLogger.log("ServerHelper", "sendFeedback " + response.getResponseMessage());
+//			RemoteLogger.log("ServerHelper", "sendFeedback " + response.getResponseMessage());
 			throw new IOException(response.getResponseMessage());
 		}
 	}
@@ -474,12 +484,12 @@ public class ServerHelper
 
 		if (response == null || response.getResponseCode() == null)
 		{
-			RemoteLogger.log("ServerHelper", "sendFeedback null");
+//			RemoteLogger.log("ServerHelper", "sendFeedback null");
 			throw new IOException(ERROR_NULL);
 		}
 		else if (!response.getResponseCode().equalsIgnoreCase("-1"))
 		{
-			RemoteLogger.log("ServerHelper", "sendFeedback " + response.getResponseMessage());
+//			RemoteLogger.log("ServerHelper", "sendFeedback " + response.getResponseMessage());
 			throw new IOException(response.getResponseMessage());
 		}
 	}
@@ -568,14 +578,14 @@ public class ServerHelper
 			SharepointFeaturedResponseHandler response = SharepointServiceSpecials.getSpecials();
 			if (response == null)
 			{
-				RemoteLogger.log("ServerHelper", "getFeaturedData null");
+//				RemoteLogger.log("ServerHelper", "getFeaturedData null");
 				throw new IOException(ERROR_NULL);
 			}
 
 			RuntimeStoreHelper.setFeaturedList(response.getList());
 		} catch (ConnectionClosedException e)
 		{
-			RemoteLogger.log("ServerHelper", "getFeaturedData null");
+//			RemoteLogger.log("ServerHelper", "getFeaturedData null");
 			throw new IOException(ERROR_NULL);
 		}
 	}

@@ -12,6 +12,7 @@ import net.rim.device.api.ui.DrawStyle;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.Font;
 import net.rim.device.api.ui.Graphics;
+import net.rim.device.api.ui.Manager;
 import net.rim.device.api.ui.Ui;
 import net.rim.device.api.ui.UiApplication;
 import net.rim.device.api.ui.component.BitmapField;
@@ -30,6 +31,7 @@ import fi.bb.checkers.helpers.RuntimeStoreHelper;
 import fi.bb.checkers.logger.RemoteLogger;
 import fi.bb.checkers.ui.components.ColorButtonField;
 import fi.bb.checkers.ui.components.FeaturedItem;
+import fi.bb.checkers.ui.components.ImageButton;
 import fi.bb.checkers.ui.components.LabelField;
 import fi.bb.checkers.ui.screens.TutorialScreen;
 import fi.bb.checkers.ui.screens.ViewPagerScreen;
@@ -47,8 +49,22 @@ public class HomeFragment extends Fragment
 		super(VERTICAL_SCROLL | NO_HORIZONTAL_SCROLL);
 		RemoteLogger.log("DEBUG_HOME", "Here");
 		setBackground(BackgroundFactory.createSolidBackground(ResourceHelper.color_background_app));
+		
+		Font font = ResourceHelper.helveticaLight().getFont(Font.PLAIN, ResourceHelper.convert(24), Ui.UNITS_px);
+		
+		int bannerPaddingTop = ResourceHelper.convert(40);
+		int bannerPaddingLeft = ResourceHelper.convert(70) - font.getHeight();
+		bannerPaddingLeft /= 2;
+		
+		HorizontalFieldManager atTheTillBanner = new HorizontalFieldManager(USE_ALL_WIDTH|USE_ALL_HEIGHT);
+		atTheTillBanner.setPadding(bannerPaddingTop, bannerPaddingLeft, bannerPaddingTop, bannerPaddingLeft);
+		atTheTillBanner.add(new LabelField("AT THE TILL, TIME TO SAVE", ResourceHelper.color_white, -1, font));
+		
+		add(atTheTillBanner);
+		
+//		new ImageButton(imageUrl, imageUrlSelected, -1, style)
 
-		label_greeting = new WelcomeField();
+		/* label_greeting = new WelcomeField();
 		if (initial && RuntimeStoreHelper.getSessionID() != null && PersistentStoreHelper.isPreviousUser(PersistentStoreHelper.getUsername()))
 		{
 			label_greeting.setGreeting("Welcome back" + ((RuntimeStoreHelper.getUserData().getFirstname() != null) ? (", " + RuntimeStoreHelper.getUserData().getFirstname()) : ""));
@@ -80,7 +96,7 @@ public class HomeFragment extends Fragment
 
 		build();
 
-		initial = false;
+		initial = false; */
 	}
 
 	protected void onVisibilityChange(boolean visible)

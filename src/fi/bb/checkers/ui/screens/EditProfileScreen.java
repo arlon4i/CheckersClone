@@ -329,7 +329,6 @@ public class EditProfileScreen extends MainScreen implements FieldChangeListener
 			int choice = CustomDialog.doModal("Are you sure you want to sign out?", new String[]{"Cancel", "Yes"}, new int[]{Dialog.CANCEL, Dialog.YES});
 			if (choice == Dialog.YES)
 			{
-				PersistentStoreHelper.setPIN("");
 				RuntimeStoreHelper.setSessionID(null);
 
 				ViewPagerScreen.push();

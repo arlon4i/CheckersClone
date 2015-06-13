@@ -167,7 +167,7 @@ public class AccountValidationScreen extends MainScreen implements FieldChangeLi
 				user.setPin(pin_field.getPIN());
 				try
 				{
-					ServerHelper.login(user.getUsername(), pin_field.getPIN());
+					ServerHelper.login(user.getUsername());
 					ServerHelper.getUserDetails();
 					ServerHelper.getCouponList(PersistentStoreHelper.getSpecialsRegion().getId());
 
@@ -186,7 +186,6 @@ public class AccountValidationScreen extends MainScreen implements FieldChangeLi
 				} catch (Exception e)//was ioexception
 				{
 					RuntimeStoreHelper.setSessionID(null);
-					PersistentStoreHelper.setPIN("");
 					try
 					{
 						loading.close();
@@ -231,7 +230,6 @@ public class AccountValidationScreen extends MainScreen implements FieldChangeLi
 					synchronized (Application.getEventLock())
 					{
 						RuntimeStoreHelper.setSessionID(null);
-						PersistentStoreHelper.setPIN("");
 						//InfoDialog.doModal("Oops!", "Something went wrong.\nYou can try and log in with your Confirmation Code received.", "Okay");
 
 						Screen screen;

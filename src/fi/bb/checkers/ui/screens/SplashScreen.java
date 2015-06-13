@@ -51,7 +51,6 @@ public class SplashScreen extends MainScreen
 			{
 				InfoDialog.doModal("Error", (String) result, "Okay");
 				PersistentStoreHelper.setUsername("");
-				PersistentStoreHelper.setPIN("");
 
 				UiApplication.getUiApplication().invokeLater(new Runnable() {
 
@@ -222,7 +221,7 @@ public class SplashScreen extends MainScreen
 	private void tryLogin(String userName, String PIN)throws IOException, PINException
 	{
 		RemoteLogger.log("SplashScreen", "tryLogin");
-		String[] update_response = ServerHelper.login(userName, PIN);
+		String[] update_response = ServerHelper.login(userName);
 		RemoteLogger.log("SplashScreen", "update_response: " + update_response);
 
 		if (update_response != null)

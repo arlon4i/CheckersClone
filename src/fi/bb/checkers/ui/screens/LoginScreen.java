@@ -71,7 +71,7 @@ public class LoginScreen extends MainScreen implements FieldChangeListener
 
 		if (field == loginButton)
 		{
-			sendConfirmationCode();
+			login();
 		}
 		/*else if (field == forgotButton)
 		{
@@ -152,35 +152,40 @@ public class LoginScreen extends MainScreen implements FieldChangeListener
 		return vfm;
 	}
 
-	protected void login()
-	{
-
-		String error = "";
-
+//	protected void login()
+//	{
+//
+//		String error = "";
+//
+//		final String username = cellField.getText();
+//		//final String pin = pinField.getPIN();
+//
+//		if (username.equalsIgnoreCase(""))
+//		{
+//			error = "Please enter your Mobile Number\n";
+//		}
+//		/*else if (pin.length() != 4)
+//		{
+//			error = "Please enter your 4-digit Checkers App PIN\n";
+//		}*/
+//
+//		if (error.equals(""))
+//		{
+//			//new LoginTask().execute(new String[]{username, pin});
+//			UiApplication.getUiApplication().pushScreen(new ConfirmationScreen(username));
+//		}
+//		else
+//		{
+//			String title = "Error";
+//			String detail = error;
+//			String button = "Okay";
+//			InfoDialog.doModal(title, detail, button);
+//		}
+//	}
+	
+	protected void login() {
 		final String username = cellField.getText();
-		//final String pin = pinField.getPIN();
-
-		if (username.equalsIgnoreCase(""))
-		{
-			error = "Please enter your Mobile Number\n";
-		}
-		/*else if (pin.length() != 4)
-		{
-			error = "Please enter your 4-digit Checkers App PIN\n";
-		}*/
-
-		if (error.equals(""))
-		{
-			//new LoginTask().execute(new String[]{username, pin});
-			UiApplication.getUiApplication().pushScreen(new ConfirmationScreen(username));
-		}
-		else
-		{
-			String title = "Error";
-			String detail = error;
-			String button = "Okay";
-			InfoDialog.doModal(title, detail, button);
-		}
+		new LoginTask().execute(new String[] {username});
 	}
 	
 	protected void sendConfirmationCode()
@@ -255,7 +260,7 @@ public class LoginScreen extends MainScreen implements FieldChangeListener
 		{
 			try
 			{
-				ServerHelper.login((String) params[0], (String) params[1]);
+				ServerHelper.login((String) params[0]);
 				ServerHelper.getUserDetails();
 				
 				ServerHelper.getCouponList(PersistentStoreHelper.getSpecialsRegion().getId());//because you need it for myList
@@ -265,7 +270,6 @@ public class LoginScreen extends MainScreen implements FieldChangeListener
 			} catch (Exception e)
 			{
 				RuntimeStoreHelper.setSessionID(null);
-				PersistentStoreHelper.setPIN("");
 				return e.getMessage();
 			}
 			return "success";

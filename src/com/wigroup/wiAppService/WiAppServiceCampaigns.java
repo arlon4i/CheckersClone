@@ -79,7 +79,7 @@ public class WiAppServiceCampaigns
 		{
 			// session expired login user
 			response = new WiappGetTotalsavingsResponseHandler();
-			WiAppLoginResponseHandler loginResponse = WiAppServiceEssentials.login(PersistentStoreHelper.getUsername(), PersistentStoreHelper.getPIN());
+			WiAppLoginResponseHandler loginResponse = WiAppServiceEssentials.login(PersistentStoreHelper.getUsername());
 			// if user logged in successfully ... update session details and resend request
 			if (loginResponse.getResponseCode().equalsIgnoreCase("-1"))
 			{
@@ -168,7 +168,7 @@ public class WiAppServiceCampaigns
 		{
 			// session expired login user
 			response = new WiAppCampaignResponseHandler();
-			WiAppLoginResponseHandler loginResponse = WiAppServiceEssentials.login(PersistentStoreHelper.getUsername(), PersistentStoreHelper.getPIN());
+			WiAppLoginResponseHandler loginResponse = WiAppServiceEssentials.login(PersistentStoreHelper.getUsername());
 			// if user logged in successfully ... update session details and resend request
 			if (loginResponse.getResponseCode().equalsIgnoreCase("-1"))
 			{
@@ -230,7 +230,7 @@ public class WiAppServiceCampaigns
 		{
 			// session expired login user
 			response = new WiAppCampaignResponseHandler();
-			WiAppLoginResponseHandler loginResponse = WiAppServiceEssentials.login(PersistentStoreHelper.getUsername(), PersistentStoreHelper.getPIN());
+			WiAppLoginResponseHandler loginResponse = WiAppServiceEssentials.login(PersistentStoreHelper.getUsername());
 			// if user logged in successfully ... update session details and resend request
 			if (loginResponse.getResponseCode().equalsIgnoreCase("-1"))
 			{
@@ -278,7 +278,7 @@ public class WiAppServiceCampaigns
 		{
 			// session expired login user
 			response = new WiAppCampaignResponseHandler();
-			WiAppLoginResponseHandler loginResponse = WiAppServiceEssentials.login(PersistentStoreHelper.getUsername(), PersistentStoreHelper.getPIN());
+			WiAppLoginResponseHandler loginResponse = WiAppServiceEssentials.login(PersistentStoreHelper.getUsername());
 			// if user logged in successfully ... update session details and resend request
 			if (loginResponse.getResponseCode().equalsIgnoreCase("-1"))
 			{
@@ -330,7 +330,7 @@ public class WiAppServiceCampaigns
 		{
 			// session expired login user
 			response = new WiAppWiCodeResponseHandler();
-			WiAppLoginResponseHandler loginResponse = WiAppServiceEssentials.login(PersistentStoreHelper.getUsername(), PersistentStoreHelper.getPIN());
+			WiAppLoginResponseHandler loginResponse = WiAppServiceEssentials.login(PersistentStoreHelper.getUsername());
 			// if user logged in successfully ... update session details and resend request
 			if (loginResponse.getResponseCode().equalsIgnoreCase("-1"))
 			{
@@ -375,7 +375,7 @@ public class WiAppServiceCampaigns
 		{
 			// session expired login user
 			response = new WiAppWiCodeResponseHandler();
-			WiAppLoginResponseHandler loginResponse = WiAppServiceEssentials.login(PersistentStoreHelper.getUsername(), PersistentStoreHelper.getPIN());
+			WiAppLoginResponseHandler loginResponse = WiAppServiceEssentials.login(PersistentStoreHelper.getUsername());
 			// if user logged in successfully ... update session details and resend request
 			if (loginResponse.getResponseCode().equalsIgnoreCase("-1"))
 			{

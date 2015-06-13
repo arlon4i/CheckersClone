@@ -210,15 +210,15 @@ public class ServerHelper
 	 * @return
 	 * @throws IOException
 	 */
-	public static String[] login(String username, String pin) throws IOException
+	public static String[] login(String username) throws IOException
 	{
 		// user -1 to get a response with update data from server, and its impossible for it to be an actual user
-		WiAppLoginResponseHandler response = WiAppServiceEssentials.login(username == null ? "-1" : username, pin == null ? "-1" : pin);
+		WiAppLoginResponseHandler response = WiAppServiceEssentials.login(username == null ? "-1" : username);
 		
 		RemoteLogger.log("Response Code: ", response.getResponseCode());
 
 		// if user or pin are null, this call is just to check for updates. so ignore the response messages
-		if (username != null && pin != null)
+		if (username != null)
 		{
 			if (response == null || response.getResponseCode() == null)
 			{
@@ -228,7 +228,6 @@ public class ServerHelper
 			{
 				// incorrect pin. Will happen if a difference device resets pin or it expires
 				RuntimeStoreHelper.setSessionID(null);
-				PersistentStoreHelper.setPIN("");
 				throw new PINException("Confirmation Code invalid. Click on \"Resend Confirmation Code\" to receive a new confirmation code.");/*response.getResponseMessage()*/
 			}
 			else if (!response.getResponseCode().equalsIgnoreCase("-1"))
@@ -238,7 +237,6 @@ public class ServerHelper
 
 			PersistentStoreHelper.setUsername(username);
 			RuntimeStoreHelper.setSessionID(response.getSessionId());
-			PersistentStoreHelper.setPIN(pin);
 
 			logUserStatus();
 		}
@@ -266,7 +264,7 @@ public class ServerHelper
 	{
 		try
 		{
-			WiAppLoginResponseHandler response = WiAppServiceEssentials.login("-1", "-1");
+			WiAppLoginResponseHandler response = WiAppServiceEssentials.login("-1");
 
 			if (response.getVersion() != null && response.getVersion().compareTo(ApplicationDescriptor.currentApplicationDescriptor().getVersion()) > 0)
 			{

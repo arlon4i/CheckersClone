@@ -219,7 +219,7 @@ public class ConfirmationScreen extends MainScreen implements FieldChangeListene
 		{
 			try
 			{
-				ServerHelper.login((String) params[0], (String) params[1]);
+				ServerHelper.login((String) params[0]);
 				
 				RemoteLogger.log("Login: ", "Successful!");
 				
@@ -236,7 +236,6 @@ public class ConfirmationScreen extends MainScreen implements FieldChangeListene
 			{
 				RemoteLogger.log("Error Message: ", e.getMessage());
 				RuntimeStoreHelper.setSessionID(null);
-				PersistentStoreHelper.setPIN("");
 				return e.getMessage();
 			}
 			return "success";

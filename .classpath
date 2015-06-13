@@ -8,6 +8,5 @@
 	<classpathentry exported="true" kind="lib" path="libs/json-me.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/com.google.zxing.jar"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/BBMInterface"/>
-	<classpathentry exported="true" kind="lib" path="libs/AppMeasurement.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

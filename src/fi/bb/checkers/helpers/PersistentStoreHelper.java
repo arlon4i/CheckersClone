@@ -186,7 +186,7 @@ public class PersistentStoreHelper
 		return (String)thisAppPersistentStore.get(KEY_USER_PIN);
 	}
 
-	public static void setPIN(String PIN)
+	/* public static void setPIN(String PIN)
 	{
 		mylist = null;
 
@@ -198,7 +198,7 @@ public class PersistentStoreHelper
 		thisAppPersistentStore.put(KEY_USER_PIN, PIN);
 		//getUserData().setPIN(PIN);
 		saveUserData();
-	}
+	} */
 
 	public static String getUsername()
 	{

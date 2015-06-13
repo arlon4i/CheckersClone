@@ -38,13 +38,13 @@ public class WiAppServiceEssentials
 
 	static MainApplication app = (MainApplication) UiApplication.getUiApplication();
 
-	public static WiAppLoginResponseHandler login(String mobile, String pin)
+	public static WiAppLoginResponseHandler login(String mobile)
 	{
 		try
 		{
 
 		String request = "<wiapp ver=\"" + apiver + "\"" + " appid=\"" + appId + "\"" + " password=\"" + password + "\"" + " reqid=\"2\">" + "<loginrx>" + "<username>" + mobile + "</username>"
-				+ "<password>" + pin + "</password>" + "<mobilenum>" + mobile + "</mobilenum>" + "<subscribertype>GENERAL</subscribertype>" + "</loginrx>" + "</wiapp>";
+				+ "<mobilenum>" + mobile + "</mobilenum>" + "<subscribertype>GENERAL</subscribertype>" + "</loginrx>" + "</wiapp>";
 
 		WiAppLoginResponseHandler response = new WiAppLoginResponseHandler();
 
@@ -88,7 +88,7 @@ public class WiAppServiceEssentials
 		{
 			// session expired login user
 			response = new WiAppUserDetailResponseHandler();
-			WiAppLoginResponseHandler loginResponse = WiAppServiceEssentials.login(PersistentStoreHelper.getUsername(), PersistentStoreHelper.getPIN());
+			WiAppLoginResponseHandler loginResponse = WiAppServiceEssentials.login(PersistentStoreHelper.getUsername());
 			// if user logged in successfully ... update session details and re send request
 			if (loginResponse.getResponseCode().equalsIgnoreCase("-1"))
 			{
@@ -207,7 +207,7 @@ public class WiAppServiceEssentials
 		if (response.getResponseCode().equals("042"))
 		{
 			response = new WiAppUserDetailResponseHandler();
-			WiAppLoginResponseHandler loginResponse = WiAppServiceEssentials.login(PersistentStoreHelper.getUsername(), PersistentStoreHelper.getPIN());
+			WiAppLoginResponseHandler loginResponse = WiAppServiceEssentials.login(PersistentStoreHelper.getUsername());
 
 			if (loginResponse.getResponseCode().equalsIgnoreCase("-1"))
 			{
@@ -265,7 +265,7 @@ public class WiAppServiceEssentials
 		{
 			// session expired login user
 			response = new WiAppUserDetailResponseHandler();
-			WiAppLoginResponseHandler loginResponse = WiAppServiceEssentials.login(PersistentStoreHelper.getUsername(), PersistentStoreHelper.getPIN());
+			WiAppLoginResponseHandler loginResponse = WiAppServiceEssentials.login(PersistentStoreHelper.getUsername());
 			// if user logged in successfully ... update session details and resend request
 			if (loginResponse.getResponseCode().equalsIgnoreCase("-1"))
 			{
